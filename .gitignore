@@ -1,0 +1,18 @@
+# dependencias
+node_modules/
+# web generada
+dist/
+.astro/
+.vercel/
+# sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+# variables de entorno
+.env
+.env.*
+!.env.example
+# logs
+npm-debug.log*
