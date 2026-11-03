@@ -1,0 +1,39 @@
+/* =====================================================================
+   ESTILO BASE — cambia aquí colores, tipografías y tamaños
+   (no hace falta tocar los componentes)
+   ===================================================================== */
+:root {
+  /* ---- Colores ---- */
+  --color-fondo: #f4f1ec;        /* blanco roto */
+  --color-tinta: #0e0d0c;        /* negro tinta */
+  --color-gris: #6c6761;         /* textos secundarios */
+  --color-linea: #d9d4cc;        /* líneas finas */
+  --color-firma: #e5007e;        /* magenta de la firma */
+  --color-oscuro: #0e0d0c;       /* fondo de secciones oscuras */
+
+  /* Color de acento: cada caso lo sustituye por el suyo */
+  --accent: var(--color-firma);
+  --accent-texto: #ffffff;
+
+  /* ---- Tipografías ---- */
+  --font-sans: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-firma: 'Pinyon Script', 'Snell Roundhand', cursive;
+
+  /* ---- Tamaños de texto ---- */
+  --t-mini: 0.6875rem;   /* 11px — etiquetas, menú */
+  --t-peque: 0.8125rem;  /* 13px */
+  --t-base: 1.0625rem;   /* 17px — texto corrido */
+  --t-medio: clamp(1.4rem, 1rem + 1.6vw, 2.4rem);
+  --t-grande: clamp(2.4rem, 1.2rem + 5vw, 6rem);
+  --t-gigante: clamp(4rem, 15vw, 16rem);
+
+  /* ---- Espacios ---- */
+  --margen: clamp(1rem, 3vw, 2.75rem);   /* margen lateral */
+  --hueco: clamp(0.75rem, 1.4vw, 1.5rem); /* separación entre tarjetas */
+  --seccion: clamp(5rem, 14vh, 11rem);    /* aire entre secciones */
+  --cabecera: 5.5rem;                     /* alto de la cabecera fija */
+
+  /* ---- Movimiento ---- */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.7, 0, 0.2, 1);
+}

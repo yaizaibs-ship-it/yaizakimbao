@@ -1,0 +1,67 @@
+/**
+ * ESQUEMA DE LOS PROYECTOS
+ * ------------------------------------------------------------------
+ * Cada proyecto tiene un archivo .md por idioma, con el MISMO nombre:
+ *   src/content/proyectos/es/acero.md
+ *   src/content/proyectos/en/acero.md
+ *
+ * El nombre del archivo es el «slug» (la URL): /es/proyectos/acero/
+ *
+ * Los datos que NO cambian con el idioma (color, orden, año, disciplinas,
+ * galería…) se escriben SOLO en el archivo español. El inglés los hereda.
+ * En el archivo inglés solo van los textos traducidos.
+ *
+ * Los archivos que empiezan por «_» (como la plantilla) se ignoran.
+ */
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+export const DISCIPLINAS = ['branding', 'estrategia', 'motion', 'digital', 'moda'] as const;
+
+const enlace = z.object({
+  texto: z.string(),
+  url: z.string(),
+});
+
+const imagenGaleria = z.object({
+  /** Nombre del archivo sin extensión, p. ej. «galeria-01» */
+  archivo: z.string(),
+  /** Proporción: «16:9», «4:5», «1:1», «3:4», «4:3»… */
+  proporcion: z.string().default('4:5'),
+  /** Texto alternativo (descripción de la foto para lectores de pantalla) */
+  alt: z.string().default(''),
+  /** «ancha» ocupa todo el ancho de la galería */
+  ancha: z.boolean().optional(),
+});
+
+const proyectos = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/proyectos' }),
+  schema: z.object({
+    // ---- Textos (en cada idioma) ----
+    titulo: z.string(),
+    descripcion: z.string(),
+    cliente: z.string().optional(),
+    rol: z.string().optional(),
+    portadaAlt: z.string().optional(),
+    /** Textos alternativos traducidos de la galería, en el mismo orden */
+    galeriaAlt: z.array(z.string()).optional(),
+    /** Enlaces (el texto se puede traducir; si falta, se usan los del español) */
+    enlaces: z.array(enlace).optional(),
+
+    // ---- Datos compartidos (solo en el archivo español) ----
+    anio: z.union([z.string(), z.number()]).optional(),
+    disciplinas: z.array(z.enum(DISCIPLINAS)).optional(),
+    /** Color de acento del caso (fondo de la cabecera y placeholders) */
+    color: z.string().optional(),
+    /** Color del texto encima del acento: normalmente #ffffff o #0e0d0c */
+    colorTexto: z.string().optional(),
+    orden: z.number().optional(),
+    destacado: z.boolean().optional(),
+    /** Tarjeta vertical (más alta) en el carrusel de la home */
+    vertical: z.boolean().optional(),
+    galeria: z.array(imagenGaleria).optional(),
+  }),
+});
+
+export const collections = { proyectos };
