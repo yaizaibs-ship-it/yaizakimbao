@@ -76,6 +76,31 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
     </div>
 
     {
+      p.videos.length > 0 && (
+        <section class="videos margen" aria-label={tx.ui.videos}>
+          {p.videos.map((v) => (
+            <figure class:list={['video', { 'video--vertical': v.vertical }]} data-reveal>
+              <div class="video-marco">
+                <iframe
+                  src={v.embed}
+                  title={v.titulo ?? `${p.titulo} — ${v.plataforma}`}
+                  loading="lazy"
+                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                  allowfullscreen
+                  referrerpolicy="strict-origin-when-cross-origin"
+                ></iframe>
+              </div>
+              <figcaption class="video-pie">
+                {v.titulo && <span class="video-titulo">{v.titulo}</span>}
+                <a class="enlace-color" href={v.url} target="_blank" rel="noopener">{tx.ui.verEn} {v.plataforma} ↗</a>
+              </figcaption>
+            </figure>
+          ))}
+        </section>
+      )
+    }
+
+    {
       primera && (
         <section class="galeria" aria-label={tx.ui.galeria}>
           <div class="crece" data-crece>
@@ -176,6 +201,16 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
   .caso-cuerpo :global(li::before) { content: '—'; position: absolute; left: 0; color: var(--accent); }
   .caso-cuerpo :global(strong) { font-weight: 600; }
   .caso-cuerpo :global(a) { text-decoration: underline; text-underline-offset: 0.15em; }
+
+  /* ---- Vídeos de redes ---- */
+  .videos { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; padding-top: var(--seccion); }
+  .video { width: min(100%, 60rem); }
+  .video--vertical { width: min(100%, 23rem); }
+  .video-marco { position: relative; aspect-ratio: 16 / 9; background: var(--accent); border-radius: 0.5rem; overflow: hidden; }
+  .video--vertical .video-marco { aspect-ratio: 9 / 16; }
+  .video-marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-pie { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-top: 0.8rem; }
+  .video-titulo { font-size: 0.95rem; letter-spacing: -0.01em; }
 
   /* ---- Galería ---- */
   .galeria { padding-top: var(--seccion); }

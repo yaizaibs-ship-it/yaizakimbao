@@ -38,6 +38,8 @@ const en: Textos = {
     },
     ficha: { anio: 'Year', cliente: 'Client', rol: 'Role', disciplinas: 'Disciplines', enlaces: 'Links' },
     galeria: 'Gallery',
+    videos: 'Videos',
+    verEn: 'Watch on',
     siguiente: 'Next project',
     descargarCV: 'Download CV (PDF)',
     volverArriba: 'Back to top',

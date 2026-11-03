@@ -28,6 +28,18 @@ export interface Proyecto {
   vertical: boolean;
   enlaces: { texto: string; url: string }[];
   galeria: { archivo: string; proporcion: string; alt: string; ancha?: boolean }[];
+  videos: { url: string; embed: string; plataforma: string; vertical: boolean; titulo?: string }[];
+}
+
+/** Convierte el enlace de un vídeo en la dirección de su reproductor integrable */
+function videoEmbed(url: string) {
+  const tiktok = url.match(/tiktok\.com\/.*\/video\/(\d+)/);
+  if (tiktok) return { plataforma: 'TikTok', vertical: true, embed: `https://www.tiktok.com/player/v1/${tiktok[1]}?description=1&music_info=1&rel=0` };
+  const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([\w-]{6,})/);
+  if (yt) return { plataforma: 'YouTube', vertical: url.includes('/shorts/'), embed: `https://www.youtube-nocookie.com/embed/${yt[1]}` };
+  const vimeo = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeo) return { plataforma: 'Vimeo', vertical: false, embed: `https://player.vimeo.com/video/${vimeo[1]}?dnt=1` };
+  return null;
 }
 
 function separa(id: string) {
@@ -72,6 +84,11 @@ export async function getProyectos(lang: Idioma): Promise<Proyecto[]> {
       vertical: d.vertical ?? false,
       enlaces: tx.enlaces ?? d.enlaces ?? [],
       galeria,
+      videos: (d.videos ?? []).flatMap((v, i) => {
+        const e = videoEmbed(v.url);
+        if (!e) return [];
+        return [{ url: v.url, ...e, titulo: (lang !== 'es' && tx.videosTitulo?.[i]) || v.titulo }];
+      }),
     });
   }
   return lista.sort((a, b) => a.orden - b.orden);

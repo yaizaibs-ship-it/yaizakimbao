@@ -37,6 +37,8 @@ const es = {
     },
     ficha: { anio: 'Año', cliente: 'Cliente', rol: 'Rol', disciplinas: 'Disciplinas', enlaces: 'Enlaces' },
     galeria: 'Galería',
+    videos: 'Vídeos',
+    verEn: 'Ver en',
     siguiente: 'Siguiente proyecto',
     descargarCV: 'Descargar CV (PDF)',
     volverArriba: 'Volver arriba',

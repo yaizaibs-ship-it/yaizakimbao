@@ -5,6 +5,8 @@ descripcion: "Upcycling, fashion and sewing. Featured piece: a bag made from a r
 cliente: "Own brand"
 rol: "Founder · design & making"
 portadaAlt: "KIMBAO 999 bag made from a Doritos packet"
+videosTitulo:
+  - "The process, on TikTok"
 galeriaAlt:
   - "Doritos bag and FC Barcelona shirt on black"
   - "Finished bag, front view"

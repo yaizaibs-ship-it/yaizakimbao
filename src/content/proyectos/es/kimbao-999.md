@@ -14,6 +14,9 @@ colorTexto: "#0e0d0c"
 orden: 8
 destacado: true  # true = aparece en el carrusel de la home
 vertical: true  # true = tarjeta alta en el carrusel
+videos:
+  - url: "https://www.tiktok.com/@yaizakimbao/video/7579956290818952470"
+    titulo: "El proceso, en TikTok"
 galeria:
   - archivo: "galeria-01"
     proporcion: "16:9"

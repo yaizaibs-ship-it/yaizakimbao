@@ -35,6 +35,14 @@ const imagenGaleria = z.object({
   ancha: z.boolean().optional(),
 });
 
+/** Vídeos de redes integrados en el caso (TikTok, YouTube o Vimeo) */
+const video = z.object({
+  /** Pega aquí el enlace completo del vídeo */
+  url: z.url(),
+  /** Texto que acompaña al vídeo (opcional) */
+  titulo: z.string().optional(),
+});
+
 const proyectos = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/proyectos' }),
   schema: z.object({
@@ -61,6 +69,9 @@ const proyectos = defineCollection({
     /** Tarjeta vertical (más alta) en el carrusel de la home */
     vertical: z.boolean().optional(),
     galeria: z.array(imagenGaleria).optional(),
+    videos: z.array(video).optional(),
+    /** Textos traducidos de los vídeos, en el mismo orden (solo en el archivo inglés) */
+    videosTitulo: z.array(z.string()).optional(),
   }),
 });
 

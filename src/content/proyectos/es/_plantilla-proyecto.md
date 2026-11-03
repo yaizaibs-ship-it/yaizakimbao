@@ -27,6 +27,9 @@ colorTexto: "#ffffff"       # color del texto sobre el acento (#ffffff o #0e0d0c
 orden: 9                    # posición en las listas (1 = primero)
 destacado: false            # true = sale en el carrusel de la home
 vertical: false             # true = tarjeta alta en el carrusel
+videos:                     # opcional: pega el enlace de TikTok, YouTube o Vimeo
+  - url: "https://www.tiktok.com/@usuario/video/123"
+    titulo: "Texto bajo el vídeo"
 galeria:
   # La primera foto se expande a pantalla completa al hacer scroll.
   - archivo: "galeria-01"   # = src/assets/proyectos/mi-proyecto/galeria-01.jpg
