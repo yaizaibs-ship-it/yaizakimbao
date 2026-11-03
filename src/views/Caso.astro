@@ -17,6 +17,11 @@ const { Content } = await render(p.entrada);
 const carpeta = `proyectos/${p.slug}`;
 const [primera, ...resto] = p.galeria;
 const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
+/** Las imágenes muy verticales (stories 9:16) van de tres en tres */
+const esEstrecha = (pr: string) => {
+  const [a, b] = pr.split(':').map(Number);
+  return a > 0 && b > 0 && a / b < 0.7;
+};
 ---
 
 <Base
@@ -120,7 +125,7 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
           </div>
           <div class="rejilla margen">
             {resto.map((g, n) => (
-              <figure class:list={['rejilla-item', { ancha: g.ancha }]} data-reveal>
+              <figure class:list={['rejilla-item', { ancha: g.ancha, estrecha: esEstrecha(g.proporcion) }]} data-reveal>
                 <Foto
                   carpeta={carpeta}
                   archivo={g.archivo}
@@ -217,9 +222,11 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
   .crece { position: relative; height: 100vh; height: 100svh; }
   .crece-media { position: absolute; inset: 0; }
   .crece-pie { position: absolute; left: 50%; bottom: 1.5rem; transform: translateX(-50%); }
-  .rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: var(--hueco); padding-top: var(--hueco); align-items: start; }
+  .rejilla { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--hueco); padding-top: var(--hueco); align-items: start; }
+  .rejilla-item { grid-column: span 3; }
   .rejilla-item.ancha { grid-column: 1 / -1; }
-  .rejilla-item:nth-child(4n + 2):not(.ancha) { margin-top: 18vh; }
+  .rejilla-item.estrecha { grid-column: span 2; }
+  .rejilla-item:nth-child(4n + 2):not(.ancha):not(.estrecha) { margin-top: 18vh; }
 
   /* ---- Siguiente proyecto ---- */
   .siguiente { margin-top: var(--seccion); }
@@ -241,7 +248,9 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
     .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
     .caso-cuerpo :global(h2) { grid-template-columns: 1fr; gap: 0.6rem; }
     .caso-cuerpo :global(p), .caso-cuerpo :global(ul) { margin-left: 0; }
-    .rejilla { grid-template-columns: 1fr; }
-    .rejilla-item:nth-child(4n + 2):not(.ancha) { margin-top: 0; }
+    .rejilla { grid-template-columns: 1fr 1fr; }
+    .rejilla-item, .rejilla-item.ancha { grid-column: 1 / -1; }
+    .rejilla-item.estrecha { grid-column: span 1; }
+    .rejilla-item:nth-child(4n + 2):not(.ancha):not(.estrecha) { margin-top: 0; }
   }
 </style>
