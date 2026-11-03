@@ -442,8 +442,6 @@ function animaciones(esMovil: boolean) {
       gsap.to(contenido, { y: () => -subida(), ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + subida(), scrub: true, invalidateOnRefresh: true } });
       gsap.to(titulo, { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + subida() * 0.9, scrub: true, invalidateOnRefresh: true } });
     }
-    const tarjetas = $$<HTMLElement>('.h-item', pista);
-    const inclina = gsap.quickTo(tarjetas, 'skewX', { duration: 0.6, ease: 'power3' });
     const barra = sec.querySelector<HTMLElement>('[data-horizontal-progreso]');
     const mueve = gsap.to(pista, {
       x: () => -recorrido(),
@@ -455,12 +453,8 @@ function animaciones(esMovil: boolean) {
         scrub: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          // las tarjetas se inclinan según la velocidad del scroll
-          inclina(gsap.utils.clamp(-5, 5, self.getVelocity() / -300));
           if (barra) barra.style.transform = `scaleX(${self.progress})`;
         },
-        onLeave: () => inclina(0),
-        onLeaveBack: () => inclina(0),
       },
     });
     for (const img of $$<HTMLElement>('[data-parallax-img]', pista)) {
