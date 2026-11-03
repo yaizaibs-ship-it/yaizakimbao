@@ -34,6 +34,32 @@ let mm: gsap.MatchMedia | null = null;
 let control: AbortController | null = null;
 let tickerFn: ((time: number) => void) | null = null;
 
+/* ------------------------------------------------------------------ */
+/* Cada página nueva empieza arriba del todo                           */
+/* (salvo al volver con «atrás» o si el enlace lleva un #ancla)        */
+/* ------------------------------------------------------------------ */
+let ultimaNavegacion = '';
+if (typeof document !== 'undefined') {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  document.addEventListener('astro:before-preparation', (e) => {
+    ultimaNavegacion = (e as Event & { navigationType?: string }).navigationType || '';
+  });
+}
+function esVueltaAtras() {
+  if (ultimaNavegacion) return ultimaNavegacion === 'traverse';
+  const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+  return nav?.type === 'back_forward';
+}
+function alPrincipio() {
+  if (location.hash || esVueltaAtras()) return;
+  window.scrollTo(0, 0);
+  lenis?.scrollTo(0, { immediate: true, force: true });
+  // Si la web está dentro de un visor (iframe), sube también el visor
+  if (window.top !== window) {
+    try { document.getElementById('top')?.scrollIntoView({ block: 'start' }); } catch {}
+  }
+}
+
 const $$ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) =>
   Array.from(root.querySelectorAll<T & Element>(sel)) as unknown as T[];
 
@@ -476,6 +502,7 @@ function animaciones(esMovil: boolean) {
 export async function iniciar() {
   detener();
   control = new AbortController();
+  alPrincipio();
   interacciones(control.signal);
 
   const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -497,6 +524,8 @@ export async function iniciar() {
 
   if (reducir) {
     document.documentElement.classList.remove('con-intro');
+    alPrincipio();
+    ultimaNavegacion = '';
     return;
   }
   cursor(control.signal);
@@ -520,6 +549,8 @@ export async function iniciar() {
   }
   ScrollTrigger.sort();
   ScrollTrigger.refresh();
+  alPrincipio();
+  ultimaNavegacion = '';
 }
 
 export function detener() {
