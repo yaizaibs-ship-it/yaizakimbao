@@ -109,7 +109,7 @@ function interacciones(signal: AbortSignal) {
       (e) => {
         e.preventDefault();
         lenis ? lenis.scrollTo(0) : window.scrollTo({ top: 0 });
-        document.querySelector<HTMLElement>('.logo')?.focus({ preventScroll: true });
+        document.querySelector<HTMLElement>('.sello')?.focus({ preventScroll: true });
       },
       { signal },
     );
@@ -327,8 +327,8 @@ function animaciones(esMovil: boolean) {
   for (const el of $$<HTMLElement>('[data-peso]')) {
     gsap.fromTo(
       el,
-      { '--wght': 150, '--wdth': 70 },
-      { '--wght': 900, '--wdth': 125, ease: 'none', scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 35%', scrub: true } },
+      { '--wght': 200 },
+      { '--wght': 600, ease: 'none', scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 35%', scrub: true } },
     );
   }
 
@@ -373,18 +373,19 @@ function animaciones(esMovil: boolean) {
         start: 'top top',
         end: 'bottom bottom',
         scrub: true,
-        onUpdate: (self) => {
-          if (contador) contador.textContent = String(Math.min(n, Math.floor(self.progress * n) + 1)).padStart(2, '0');
-        },
+      },
+      onUpdate: () => {
+        // cada palabra ocupa 3 unidades de la línea de tiempo
+        if (contador) contador.textContent = String(Math.min(n, Math.floor(tl.time() / 3) + 1)).padStart(2, '0');
       },
     });
     palabras.forEach((p, i) => {
       const t0 = i * 3;
       // entra (0.9) → se queda legible (1.5) → sale (0.6)
-      tl.fromTo(p, { autoAlpha: 0, yPercent: 35, '--wght': 120, '--wdth': 62 }, { autoAlpha: 1, yPercent: 0, '--wght': 900, '--wdth': 125, duration: 0.9 }, t0)
+      tl.fromTo(p, { autoAlpha: 0, yPercent: 35, scale: 0.85, '--wght': 150 }, { autoAlpha: 1, yPercent: 0, scale: 1, '--wght': 550, duration: 0.9 }, t0)
         .to(textos[i], { autoAlpha: 1, y: 0, duration: 0.4 }, t0 + 0.5);
       if (i < n - 1) {
-        tl.to(p, { autoAlpha: 0, yPercent: -35, '--wght': 120, '--wdth': 62, duration: 0.6 }, t0 + 2.4)
+        tl.to(p, { autoAlpha: 0, yPercent: -35, scale: 1.08, '--wght': 150, duration: 0.6 }, t0 + 2.4)
           .to(textos[i], { autoAlpha: 0, y: -20, duration: 0.4 }, t0 + 2.4);
       } else {
         tl.to({}, { duration: 1 }); // pausa final
@@ -446,7 +447,9 @@ function animaciones(esMovil: boolean) {
       defaults: { ease: 'none' },
       scrollTrigger: { trigger: el, start: 'top top', end: '+=120%', pin: true, scrub: true },
     });
-    tl.fromTo(media, { clipPath: esMovil ? 'inset(28% 18% 28% 18%)' : 'inset(26% 34% 26% 34%)' }, { clipPath: 'inset(0% 0% 0% 0%)' }, 0);
+    // data-crece-desde="8% 6% 8% 6%" permite empezar desde otro tamaño
+    const desde = (esMovil ? el.dataset.creceDesdeMovil : el.dataset.creceDesde) || (esMovil ? '28% 18% 28% 18%' : '26% 34% 26% 34%');
+    tl.fromTo(media, { clipPath: `inset(${desde})` }, { clipPath: 'inset(0% 0% 0% 0%)' }, 0);
     if (pie) tl.fromTo(pie, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.3 }, 0);
   }
 
@@ -473,8 +476,7 @@ export async function iniciar() {
   // Cargar las tipografías antes de medir los titulares
   try {
     await Promise.all([
-      document.fonts.load('900 100px "Archivo Variable"', 'AZ'),
-      document.fonts.load('100px "Pinyon Script"', 'Yk'),
+      document.fonts.load('500 100px "Geist Variable"', 'AZ'),
     ]);
     await document.fonts.ready;
   } catch {}

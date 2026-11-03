@@ -13,7 +13,7 @@ const proyectos = await getProyectos(lang);
 
 <Base lang={lang} actual="trabajo" urlOtroIdioma={url(otroIdioma(lang), 'trabajo')} titulo={tx.ui.nav.trabajo}>
   <section class="cab margen">
-    <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.ui.nav.trabajo}</span></h1>
+    <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.ui.nav.trabajo}.</span></h1>
     <div class="cab-fila">
       <span class="mini"><span data-cuenta>{String(proyectos.length).padStart(2, '0')}</span> {tx.ui.proyectos}</span>
       <div class="filtros" data-filtros role="group" aria-label={tx.ui.filtrar}>
@@ -90,15 +90,13 @@ const proyectos = await getProyectos(lang);
   }
   .fila-titulo {
     font-size: clamp(1.9rem, 4.6vw, 4.8rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
-    font-variation-settings: 'wdth' var(--wdth, 100);
-    transition: font-variation-settings 0.6s var(--ease), color 0.3s;
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 0.92;
+    transition: color 0.3s, transform 0.6s var(--ease);
   }
-  .fila-a:hover .fila-titulo, .fila-a:focus-visible .fila-titulo { --wdth: 125; color: var(--accent); }
-  .fila-a:hover { padding-left: 1rem; }
+  .fila-a:hover .fila-titulo, .fila-a:focus-visible .fila-titulo { color: var(--accent); transform: translateX(0.6rem); }
+  
   .fila-desc { text-transform: none; font-size: 0.8125rem; letter-spacing: 0; }
   .fila-anio { text-align: right; }
   .fila-img { display: none; }

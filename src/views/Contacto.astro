@@ -11,7 +11,7 @@ const tx = t(lang);
 
 <Base lang={lang} actual="contacto" urlOtroIdioma={url(otroIdioma(lang), 'contacto')} titulo={tx.contacto.titulo} descripcion={tx.contacto.texto}>
   <section class="cont margen">
-    <h1 class="titular cont-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.contacto.titulo}</span></h1>
+    <h1 class="titular cont-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.contacto.titulo}.</span></h1>
 
     <div class="cont-grid">
       <div class="cont-foto" data-speed="0.2">
@@ -42,10 +42,9 @@ const tx = t(lang);
   .cont-intro { font-size: var(--t-medio); line-height: 1.12; letter-spacing: -0.02em; font-weight: 500; max-width: 26ch; }
   .cont-email {
     display: block;
-    font-weight: 900;
-    letter-spacing: -0.045em;
+    font-weight: 500;
+    letter-spacing: -0.055em;
     line-height: 1;
-    text-transform: uppercase;
     transition: color 0.3s;
   }
   .cont-email:hover { color: var(--color-firma); }
@@ -56,9 +55,8 @@ const tx = t(lang);
     justify-content: space-between;
     padding-block: 0.9rem;
     font-size: var(--t-medio);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
+    font-weight: 500;
+    letter-spacing: -0.03em;
     transition: padding 0.4s var(--ease), color 0.3s;
   }
   .cont-redes a:hover { padding-inline: 0.8rem; color: var(--color-firma); }

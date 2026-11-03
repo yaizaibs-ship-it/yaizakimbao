@@ -23,6 +23,7 @@ const en: Textos = {
     cambiarIdioma: 'View this page in English',
     scroll: 'Keep scrolling',
     ver: 'View',
+    indice: 'Index',
     verProyecto: 'View project',
     verTodo: 'All work',
     proyectos: 'projects',
@@ -60,7 +61,13 @@ const en: Textos = {
         texto: 'Motion, video, photography and AI so the brand never sits still on screen.',
       },
     ],
-    trabajoTitulo: 'Work',
+    trabajoTitulo: 'Selected work',
+    queHago: 'What I do',
+    indice: [
+      { clave: 'trabajo', titulo: 'Work', enlace: 'See all projects' },
+      { clave: 'sobre', titulo: 'About', enlace: 'Find out more about me' },
+      { clave: 'contacto', titulo: 'Contact', enlace: 'Let’s talk' },
+    ],
     perfil: {
       izquierda: 'Agency rigour',
       derecha: 'A point of view',
@@ -136,6 +143,9 @@ const en: Textos = {
       ['Say', 'hello!'],
     ],
     lugar: 'Barcelona — Utiel-Requena, Spain',
+    frase: 'Brand design, strategy and content for brands that want to move.',
+    escribeme: 'Write to me',
+    descarga: 'Download',
   },
 };
 

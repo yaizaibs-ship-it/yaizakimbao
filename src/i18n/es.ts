@@ -22,6 +22,7 @@ const es = {
     cambiarIdioma: 'Ver esta página en español',
     scroll: 'Sigue bajando',
     ver: 'Ver',
+    indice: 'Índice',
     verProyecto: 'Ver proyecto',
     verTodo: 'Todo el trabajo',
     proyectos: 'proyectos',
@@ -59,7 +60,13 @@ const es = {
         texto: 'Motion, vídeo, foto e IA para que la marca no se quede quieta en la pantalla.',
       },
     ],
-    trabajoTitulo: 'Trabajo',
+    trabajoTitulo: 'Trabajo seleccionado',
+    queHago: 'Qué hago',
+    indice: [
+      { clave: 'trabajo', titulo: 'Trabajo', enlace: 'Ver todos los proyectos' },
+      { clave: 'sobre', titulo: 'Sobre mí', enlace: 'Descubre más sobre mí' },
+      { clave: 'contacto', titulo: 'Contacto', enlace: 'Hablemos' },
+    ],
     perfil: {
       izquierda: 'Rigor de agencia',
       derecha: 'Mirada propia',
@@ -135,6 +142,9 @@ const es = {
       ['Say', 'hello!'],
     ],
     lugar: 'Barcelona — Utiel-Requena',
+    frase: 'Diseño de marca, estrategia y contenido para marcas que quieren moverse.',
+    escribeme: 'Escríbeme',
+    descarga: 'Descargar',
   },
 };
 

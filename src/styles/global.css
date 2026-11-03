@@ -14,7 +14,8 @@ body {
   font-family: var(--font-sans);
   font-size: var(--t-base);
   line-height: 1.45;
-  font-variation-settings: 'wdth' 100;
+  font-weight: var(--peso-texto);
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
@@ -58,10 +59,10 @@ html.con-intro .intro {
   animation: intro-salida 0.6s ease 4.5s forwards;
 }
 html.con-intro body { overflow: hidden; }
-.intro-firma { font-size: clamp(3.5rem, 13vw, 12rem); color: var(--color-firma); line-height: 1.2; padding: 0 0.15em; }
+.intro-firma { font-size: clamp(3.5rem, 15vw, 15rem); font-weight: 500; letter-spacing: -0.055em; line-height: 0.9; padding: 0 0.05em; }
 .intro-num {
   position: absolute; right: var(--margen); bottom: 1.2rem;
-  font-size: clamp(3rem, 10vw, 9rem); font-weight: 900; letter-spacing: -0.05em; line-height: 0.85;
+  font-size: clamp(2.5rem, 7vw, 6rem); font-weight: 500; letter-spacing: -0.05em; color: var(--color-firma); line-height: 0.85;
   font-variant-numeric: tabular-nums;
 }
 .intro-txt { position: absolute; left: var(--margen); bottom: 1.6rem; }
@@ -81,7 +82,7 @@ html.con-intro body { overflow: hidden; }
 .cursor.visible { opacity: 1; }
 .cursor.enlace { width: 40px; height: 40px; margin: -20px 0 0 -20px; background: rgb(229 0 126 / 0.25); }
 .cursor.grande { width: 96px; height: 96px; margin: -48px 0 0 -48px; }
-.cursor span { color: #fff; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.3s; }
+.cursor span { color: #fff; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.3s; }
 .cursor.grande span { opacity: 1; }
 html.cursor-propio, html.cursor-propio * { cursor: none !important; }
 
@@ -120,21 +121,27 @@ html.lenis, html.lenis body { height: auto; }
 }
 .gris { color: var(--color-gris); }
 .firma {
-  font-family: var(--font-firma);
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
+  font-weight: var(--peso-display);
+  letter-spacing: -0.03em;
 }
 /* Titulares enormes: el tamaño exacto lo calcula JS (data-fit) para ocupar todo el ancho */
 .titular {
-  --wght: 900;
-  --wdth: 100;
-  font-weight: 900;
-  font-variation-settings: 'wght' var(--wght), 'wdth' var(--wdth);
-  line-height: 0.82;
-  letter-spacing: -0.045em;
-  text-transform: uppercase;
+  --wght: 500;
+  font-weight: 500;
+  font-variation-settings: 'wght' var(--wght);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
 }
+/* Enlace pequeño de color con flecha, como en Fuego («VER PROYECTOS →») */
+.enlace-color {
+  color: var(--color-firma);
+  font-size: var(--t-mini);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+.enlace-color:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 [data-fit] { white-space: nowrap; display: inline-block; width: max-content; transition: none; }
 
 /* Subrayado que se dibuja al pasar el ratón */

@@ -14,7 +14,7 @@ const cinta = tx.pie.cinta;
     <div class="cinta-pista" data-cinta>
       {
         [0, 1].map(() => (
-          <span class="cinta-grupo" aria-hidden="true">
+          <span class="cinta-grupo">
             {cinta.map(([a, b]) => (
               <>
                 <span class="gris-claro">{a}</span> <span>{b}</span>{' '}
@@ -26,21 +26,28 @@ const cinta = tx.pie.cinta;
     </div>
   </div>
 
-  <a class="cta" href={`mailto:${CONTACTO.email}`}>
-    <span class="cta-caja">{CONTACTO.email}</span>
-    <span class="cta-circulo" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"></path></svg>
-    </span>
-  </a>
+  <div class="pie-cuerpo margen">
+    <p class="pie-frase" data-split="palabras">{tx.pie.frase}</p>
+    <ul class="pie-lista">
+      <li>
+        <a href={`mailto:${CONTACTO.email}`}>{CONTACTO.email}</a>
+        <span class="enlace-color">{tx.pie.escribeme} ↗</span>
+      </li>
+      <li>
+        <a href={CONTACTO.instagram} target="_blank" rel="noopener">Instagram</a>
+        <a href={CONTACTO.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      </li>
+      <li>
+        <a href={CONTACTO.cv[lang]} download>CV (PDF)</a>
+        <span class="enlace-color">{tx.pie.descarga} ↓</span>
+      </li>
+      <li class="gris">{tx.pie.lugar}</li>
+    </ul>
+  </div>
 
   <div class="pie-filas mini margen">
-    <span>© {new Date().getFullYear()} {CONTACTO.nombre} · <span class="firma pie-firma" aria-hidden="true">{CONTACTO.firma}</span></span>
-    <span class="gris">{tx.pie.lugar}</span>
-    <ul class="pie-redes">
-      <li><a class="enlace" href={CONTACTO.instagram} rel="noopener" target="_blank">Instagram</a></li>
-      <li><a class="enlace" href={CONTACTO.linkedin} rel="noopener" target="_blank">LinkedIn</a></li>
-      <li><a class="enlace" href={url(lang, 'contacto')}>{tx.ui.nav.contacto}</a></li>
-    </ul>
+    <span>© {new Date().getFullYear()} {CONTACTO.nombre} — {CONTACTO.firma}</span>
+    <a class="enlace" href={url(lang, 'contacto')}>{tx.ui.nav.contacto}</a>
     <a class="enlace" href="#top" data-arriba>{tx.ui.volverArriba} ↑</a>
   </div>
 </footer>
@@ -57,47 +64,35 @@ const cinta = tx.pie.cinta;
   .cinta-grupo {
     flex: none;
     padding-right: 0.25em;
-    font-size: clamp(4.5rem, 12vw, 13rem);
-    font-weight: 900;
+    font-size: clamp(4.5rem, 13vw, 14rem);
+    font-weight: 500;
     line-height: 1;
-    letter-spacing: -0.045em;
-    text-transform: uppercase;
+    letter-spacing: -0.055em;
     white-space: nowrap;
   }
   .gris-claro { color: var(--color-gris); opacity: 0.6; }
   @keyframes cinta { to { transform: translateX(-50%); } }
 
-  .cta {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.9rem;
-    margin: clamp(2.5rem, 8vh, 5rem) var(--margen) 0;
-    flex-wrap: wrap;
+  .pie-cuerpo { padding-top: clamp(3rem, 10vh, 7rem); }
+  .pie-frase {
+    max-width: 18ch;
+    font-size: clamp(2.2rem, 1rem + 4vw, 5.6rem);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.05em;
   }
-  .cta-caja {
-    border: 2px solid var(--color-tinta);
-    padding: 1.1rem 2rem;
-    font-weight: 900;
-    font-size: clamp(1rem, 2.3vw, 2rem);
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    background: linear-gradient(var(--color-tinta), var(--color-tinta)) no-repeat left / 0 100%;
-    transition: background-size 0.5s var(--ease-in-out), color 0.5s var(--ease-in-out);
-  }
-  .cta:hover .cta-caja, .cta:focus-visible .cta-caja { background-size: 100% 100%; color: var(--color-fondo); }
-  .cta-circulo {
+  .pie-lista {
     display: grid;
-    place-items: center;
-    width: clamp(3.4rem, 5.4vw, 5rem);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--color-firma);
-    color: #fff;
-    transition: transform 0.5s var(--ease-in-out);
+    gap: 0.5rem;
+    margin-top: clamp(2.5rem, 7vh, 4.5rem);
+    font-size: clamp(1.25rem, 0.9rem + 1.2vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
   }
-  .cta-circulo svg { width: 40%; }
-  .cta:hover .cta-circulo { transform: rotate(-45deg); }
+  .pie-lista li { display: flex; align-items: flex-end; gap: 1.2rem; flex-wrap: wrap; }
+  .pie-lista a:hover { color: var(--color-firma); }
+  .pie-lista .enlace-color { padding-bottom: 0.25em; }
 
   .pie-filas {
     display: flex;
@@ -108,11 +103,8 @@ const cinta = tx.pie.cinta;
     padding-top: clamp(4rem, 12vh, 8rem);
     padding-bottom: 1.4rem;
   }
-  .pie-firma { font-size: 1.35em; color: var(--color-firma); }
-  .pie-redes { display: flex; gap: 1.2rem; }
 
   @media (max-width: 640px) {
     .pie-filas { flex-direction: column; align-items: flex-start; }
-    .cta-caja { padding: 0.9rem 1.2rem; }
   }
 </style>

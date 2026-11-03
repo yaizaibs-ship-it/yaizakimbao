@@ -8,7 +8,7 @@
   --color-tinta: #0e0d0c;        /* negro tinta */
   --color-gris: #6c6761;         /* textos secundarios */
   --color-linea: #d9d4cc;        /* líneas finas */
-  --color-firma: #e5007e;        /* magenta de la firma */
+  --color-firma: #e5007e;        /* magenta: enlaces pequeños, cursor, detalles */
   --color-oscuro: #0e0d0c;       /* fondo de secciones oscuras */
 
   /* Color de acento: cada caso lo sustituye por el suyo */
@@ -16,8 +16,11 @@
   --accent-texto: #ffffff;
 
   /* ---- Tipografías ---- */
-  --font-sans: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  --font-firma: 'Pinyon Script', 'Snell Roundhand', cursive;
+  /* Una sola familia, como en Fuego. Geist es gratuita y muy parecida a Roobert.
+     Si compras la licencia de Roobert, pon aquí su nombre y cárgala en Base.astro. */
+  --font-sans: 'Geist Variable', 'Geist', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --peso-display: 500;   /* peso de titulares y textos grandes */
+  --peso-texto: 450;     /* peso del texto corrido */
 
   /* ---- Tamaños de texto ---- */
   --t-mini: 0.6875rem;   /* 11px — etiquetas, menú */
