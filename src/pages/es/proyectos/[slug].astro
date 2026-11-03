@@ -1,0 +1,13 @@
+---
+// Página de cada caso (es). El diseño está en src/views/Caso.astro
+import Caso from '../../../views/Caso.astro';
+import { getProyectos } from '../../../lib/proyectos';
+
+export async function getStaticPaths() {
+  const lista = await getProyectos('es');
+  return lista.map((p) => ({ params: { slug: p.slug } }));
+}
+const { slug } = Astro.params;
+---
+
+<Caso lang="es" slug={slug} />

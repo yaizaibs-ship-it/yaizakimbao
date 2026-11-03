@@ -1,0 +1,267 @@
+---
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import Tarjeta from '../components/Tarjeta.astro';
+import { t, url, otroIdioma, type Idioma } from '../i18n';
+import { CONTACTO } from '../i18n/comun';
+import { getProyectos } from '../lib/proyectos';
+
+interface Props { lang: Idioma }
+const { lang } = Astro.props;
+const tx = t(lang);
+const proyectos = await getProyectos(lang);
+const destacados = proyectos.filter((p) => p.destacado);
+const [kimbao, bayer] = [proyectos.find((p) => p.slug === 'kimbao-999'), proyectos.find((p) => p.slug === 'club-bayer')];
+const e = tx.inicio.etiquetas;
+---
+
+<Base lang={lang} actual="inicio" urlOtroIdioma={url(otroIdioma(lang), 'inicio')}>
+  <!-- 1 · PORTADA: flores a sangre + firma -->
+  <section class="hero" data-hero>
+    <div class="hero-sticky">
+      <div class="hero-media" data-hero-media>
+        <div class="hero-img" data-hero-img>
+          <Foto carpeta="personal" archivo="portada-flores" etiqueta="Portada home · flores" arte="flores" alt="" carga="eager" sizes="100vw" ancho={2600} />
+        </div>
+      </div>
+      <h1 class="hero-titulo">
+        <span class="firma hero-firma" data-hero-firma><span data-fit="0.94" data-fit-max="42vh">{CONTACTO.firma}</span></span>
+        <span class="sr-only"> — {e[0]} · {e[1]}</span>
+      </h1>
+      <span class="mini hero-et et-1" data-hero-etiqueta>{e[0]}<br />{e[1]}</span>
+      <span class="mini hero-et et-2" data-hero-etiqueta>{e[2]}</span>
+      <span class="mini hero-et et-3" data-hero-etiqueta>{e[3]}</span>
+      <span class="mini hero-et et-4" data-hero-etiqueta>{tx.ui.scroll} ↓</span>
+    </div>
+  </section>
+
+  <!-- 2 · STATEMENT fijado: Marca / Estrategia / Movimiento -->
+  <section class="statement" data-statement aria-label={tx.inicio.statementIntro}>
+    <div class="st-sticky margen">
+      <p class="st-intro">{tx.inicio.statementIntro}</p>
+      <span class="mini st-contador" aria-hidden="true"><span data-contador>01</span> / {String(tx.inicio.palabras.length).padStart(2, '0')}</span>
+      <div class="st-palabras">
+        {
+          tx.inicio.palabras.map((w) => (
+            <div class="st-item">
+              <h2 class="titular st-palabra" data-palabra data-fit="1" data-fit-max="46vh" data-fit-medir="900,125">{w.palabra}</h2>
+              <p class="st-texto" data-palabra-texto>{w.texto}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · TRABAJO: carrusel horizontal fijado -->
+  <section class="destacados" data-horizontal aria-labelledby="titulo-trabajo">
+    <div class="h-pin" data-horizontal-pin>
+      <div class="h-contenido" data-horizontal-contenido>
+        <div class="h-titulo" data-horizontal-titulo>
+          <h2 id="titulo-trabajo" class="titular h-h2"><span data-fit="0.72" data-fit-max="36vh">{tx.inicio.trabajoTitulo}</span></h2>
+          <p class="mini h-scroll">{tx.ui.scroll}</p>
+        </div>
+        <ul class="h-pista" data-horizontal-pista>
+          {
+            destacados.map((p, i) => (
+              <li class:list={['h-item', { 'h-item--vertical': p.vertical }]}>
+                <Tarjeta p={p} lang={lang} indice={i} />
+              </li>
+            ))
+          }
+          <li class="h-item h-final">
+            <a href={url(lang, 'trabajo')} class="h-todo">
+              <span class="mini gris">{String(proyectos.length).padStart(2, '0')} {tx.ui.proyectos}</span>
+              <span class="h-todo-txt">{tx.ui.verTodo}</span>
+              <span class="h-flecha" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · DOBLE PERFIL -->
+  <section class="perfil">
+    <div class="perfil-capas" aria-hidden="true">
+      <div class="capa capa-1" data-speed="0.5">
+        <Foto carpeta="personal" archivo="flores-02" proporcion="4:5" etiqueta="Flores 2" arte="flores" alt="" sizes="20vw" />
+      </div>
+      {bayer && (
+        <div class="capa capa-2" data-speed="-0.35">
+          <Foto carpeta={`proyectos/${bayer.slug}`} archivo="portada" proporcion="1:1" etiqueta={`Portada ${bayer.titulo}`} alt="" color={bayer.color} colorTexto={bayer.colorTexto} sizes="18vw" />
+        </div>
+      )}
+      {kimbao && (
+        <div class="capa capa-3" data-speed="0.25">
+          <Foto carpeta={`proyectos/${kimbao.slug}`} archivo="portada" proporcion="3:4" etiqueta={`Portada ${kimbao.titulo}`} alt="" color={kimbao.color} colorTexto={kimbao.colorTexto} sizes="16vw" />
+        </div>
+      )}
+    </div>
+
+    <div class="perfil-linea margen">
+      <h2 class="titular perfil-h" data-desliza="1"><span data-fit="0.86" data-fit-max="22vh">{tx.inicio.perfil.izquierda}</span></h2>
+    </div>
+    <div class="perfil-y firma" aria-hidden="true">&amp;</div>
+    <div class="perfil-linea perfil-linea--der margen">
+      <p class="titular perfil-h" data-desliza="-1"><span data-fit="0.86" data-fit-max="22vh">{tx.inicio.perfil.derecha}</span></p>
+    </div>
+
+    <div class="perfil-cols margen">
+      <ul class="mini" data-reveal>{tx.inicio.perfil.listaIzquierda.map((x) => <li>{x}</li>)}</ul>
+      <p class="perfil-texto" data-reveal>{tx.inicio.perfil.texto}</p>
+      <ul class="mini perfil-der" data-reveal>{tx.inicio.perfil.listaDerecha.map((x) => <li>{x}</li>)}</ul>
+    </div>
+    <div class="perfil-mas margen" data-reveal>
+      <a class="mini enlace" href={url(lang, 'sobre')}>{tx.ui.nav.sobre} →</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- 1 · Portada ---------- */
+  .hero { position: relative; height: 230vh; }
+  .hero-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+  }
+  .hero-media { position: absolute; inset: 0; will-change: clip-path; }
+  .hero-img { position: absolute; inset: 0; transform-origin: 50% 50%; }
+  .hero-titulo {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    pointer-events: none;
+    font-weight: 400;
+  }
+  .hero-firma {
+    display: block;
+    width: 100%;
+    padding-inline: var(--margen);
+    text-align: center;
+    color: var(--color-firma);
+    line-height: 1.1;
+    transform-origin: 50% 50%;
+    text-shadow: 0 0.02em 0.25em rgb(0 0 0 / 0.08);
+  }
+  .hero-firma [data-fit] { padding: 0.08em 0.12em; }
+  .hero-et { position: absolute; color: #fff; mix-blend-mode: difference; }
+  .et-1 { left: var(--margen); bottom: 1.4rem; }
+  .et-2 { left: 50%; bottom: 1.4rem; transform: translateX(-50%); }
+  .et-3 { right: var(--margen); bottom: 1.4rem; text-align: right; }
+  .et-4 { right: var(--margen); top: 50%; writing-mode: vertical-rl; display: none; }
+
+  /* ---------- 2 · Statement ---------- */
+  .st-sticky { position: relative; padding-block: var(--seccion); }
+  .st-intro { max-width: 28ch; font-size: var(--t-medio); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; }
+  .st-contador { position: absolute; right: var(--margen); top: var(--seccion); }
+  .st-item { margin-top: 3rem; }
+  .st-palabra { color: var(--color-tinta); }
+  .st-item:nth-child(2) .st-palabra { color: var(--color-firma); }
+  .st-texto { max-width: 34ch; margin-top: 1rem; font-size: var(--t-base); }
+
+  :global(html.con-movimiento) .statement { height: 360vh; }
+  :global(html.con-movimiento) .st-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    padding-block: calc(var(--cabecera) + 1.5rem) 2rem;
+    overflow: hidden;
+  }
+  :global(html.con-movimiento) .st-palabras { position: absolute; inset: 0; padding-inline: var(--margen); }
+  :global(html.con-movimiento) .st-item {
+    position: absolute;
+    inset: 0 var(--margen);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  :global(html.con-movimiento) .st-texto { position: absolute; right: 0; bottom: 2rem; text-align: right; }
+
+  /* ---------- 3 · Carrusel horizontal ---------- */
+  .destacados { position: relative; }
+  .h-pin { overflow: hidden; }
+  :global(html.con-movimiento) .h-pin { height: 100vh; height: 100svh; }
+  .h-titulo { padding-top: calc(var(--cabecera) + 4vh); padding-bottom: 5vh; text-align: center; }
+  .h-h2 { display: flex; justify-content: center; }
+  .h-scroll { margin-top: 2vh; font-weight: 800; }
+  .h-pista {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--hueco);
+    padding: 0 var(--margen) 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .h-pista > li { scroll-snap-align: start; }
+  :global(.destacados.activo) .h-pista { overflow: visible; width: max-content; }
+  .h-item { flex: none; width: min(25vw, 64vh); }
+  .h-item--vertical { width: min(26vw, 48vh); }
+  .h-final { align-self: stretch; display: flex; }
+  .h-todo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    min-height: min(19vw, 48vh);
+    padding: 1.2rem;
+    border: 2px solid var(--color-tinta);
+    transition: background 0.4s, color 0.4s;
+  }
+  .h-todo:hover { background: var(--color-tinta); color: var(--color-fondo); }
+  .h-todo-txt { font-size: var(--t-medio); font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.03em; }
+  .h-flecha { font-size: 2.4rem; align-self: flex-end; transition: transform 0.4s var(--ease); }
+  .h-todo:hover .h-flecha { transform: translateX(0.4rem); }
+
+  /* ---------- 4 · Doble perfil ---------- */
+  .perfil { position: relative; padding-block: var(--seccion); overflow: hidden; }
+  .perfil-capas { position: absolute; inset: 0; pointer-events: none; }
+  .capa { position: absolute; }
+  .capa-1 { width: 15vw; right: 6vw; top: 2%; }
+  .capa-2 { width: 12vw; left: 4vw; top: 30%; }
+  .capa-3 { width: 11vw; right: 12vw; top: 46%; }
+  .perfil-linea { position: relative; }
+  .perfil-h { position: relative; z-index: 1; }
+  .perfil-linea--der { text-align: right; }
+  .perfil-y {
+    position: relative;
+    text-align: center;
+    font-size: clamp(5rem, 16vw, 16rem);
+    line-height: 0.6;
+    color: var(--color-firma);
+    margin-block: 0.15em 0.05em;
+  }
+  .perfil-cols {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 2rem;
+    margin-top: clamp(3rem, 10vh, 7rem);
+    align-items: start;
+  }
+  .perfil-texto { font-size: var(--t-medio); line-height: 1.15; letter-spacing: -0.015em; font-weight: 500; }
+  .perfil-der { text-align: right; }
+  .perfil-mas { position: relative; margin-top: 3rem; text-align: center; }
+
+  @media (max-width: 860px) {
+    .hero { height: 180vh; }
+    .et-2, .et-3 { display: none; }
+    .st-intro { padding-right: 3.5rem; }
+    .h-item { width: 72vw; }
+    .h-item--vertical { width: 62vw; }
+    .h-todo { min-height: 50vw; }
+    .capa-1 { width: 34vw; right: -4vw; }
+    .capa-2 { width: 28vw; left: -4vw; }
+    .capa-2, .capa-3 { display: none; }
+    .capa-1 { top: 0; width: 30vw; }
+    .perfil-cols { grid-template-columns: 1fr 1fr; }
+    .perfil-texto { grid-column: 1 / -1; grid-row: 1; }
+  }
+</style>

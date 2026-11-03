@@ -1,0 +1,91 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/pinyon-script/400.css';
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Cabecera from '../components/Cabecera.astro';
+import Pie from '../components/Pie.astro';
+import { t, otroIdioma, type Idioma, type ClaveRuta } from '../i18n';
+import { CONTACTO } from '../i18n/comun';
+
+interface Props {
+  lang: Idioma;
+  actual: ClaveRuta;
+  /** URL de esta página en el otro idioma (para el selector ES/EN y hreflang) */
+  urlOtroIdioma: string;
+  titulo?: string;
+  descripcion?: string;
+  imagenOG?: ImageMetadata;
+  acento?: string;
+  acentoTexto?: string;
+}
+
+const { lang, actual, urlOtroIdioma, titulo, descripcion, imagenOG, acento, acentoTexto } = Astro.props;
+const tx = t(lang);
+const otro = otroIdioma(lang);
+const tituloFinal = titulo ? `${titulo} — ${CONTACTO.firma}` : tx.meta.tituloSitio;
+const descFinal = descripcion ?? tx.meta.descripcion;
+const site = Astro.site ?? new URL('https://example.com');
+const canonica = new URL(Astro.url.pathname, site).href;
+const alterna = new URL(urlOtroIdioma, site).href;
+const urlEs = lang === 'es' ? canonica : alterna;
+const urlEn = lang === 'en' ? canonica : alterna;
+
+let og = new URL('/og-default.png', site).href;
+if (imagenOG) {
+  const img = await getImage({ src: imagenOG, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+  og = new URL(img.src, site).href;
+}
+const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?? '#fff'}` : undefined;
+---
+
+<!doctype html>
+<html lang={lang} data-lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloFinal}</title>
+    <meta name="description" content={descFinal} />
+    <link rel="canonical" href={canonica} />
+    <link rel="alternate" hreflang="es" href={urlEs} />
+    <link rel="alternate" hreflang="en" href={urlEn} />
+    <link rel="alternate" hreflang="x-default" href={urlEs} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#f4f1ec" />
+
+    <!-- Open Graph / redes -->
+    <meta property="og:type" content={actual === 'proyecto' ? 'article' : 'website'} />
+    <meta property="og:site_name" content={CONTACTO.firma} />
+    <meta property="og:title" content={tituloFinal} />
+    <meta property="og:description" content={descFinal} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:image" content={og} />
+    <meta property="og:locale" content={tx.meta.locale} />
+    <meta property="og:locale:alternate" content={t(otro).meta.locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Si el visitante elige idioma, se recuerda para la próxima visita -->
+    <script is:inline define:vars={{ lang }}>
+      try { localStorage.setItem('idioma', lang); } catch (e) {}
+      document.documentElement.classList.add('js');
+    </script>
+    <ClientRouter fallback="swap" />
+  </head>
+  <body style={estiloAcento} data-pagina={actual}>
+    <a class="saltar" href="#contenido">{tx.ui.saltar}</a>
+    <span id="top"></span>
+    <Cabecera lang={lang} actual={actual} urlOtroIdioma={urlOtroIdioma} />
+    <main id="contenido" tabindex="-1">
+      <slot />
+    </main>
+    <Pie lang={lang} />
+    <script>
+      import { iniciar, detener } from '../scripts/movimiento';
+      document.addEventListener('astro:page-load', iniciar);
+      document.addEventListener('astro:before-swap', detener);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+---
+import { t, url, otroIdioma, type Idioma, type ClaveRuta } from '../i18n';
+import { CONTACTO } from '../i18n/comun';
+
+interface Props {
+  lang: Idioma;
+  actual: ClaveRuta;
+  /** URL de esta misma página en el otro idioma */
+  urlOtroIdioma: string;
+}
+const { lang, actual, urlOtroIdioma } = Astro.props;
+const tx = t(lang);
+const otro = otroIdioma(lang);
+const nav: { clave: ClaveRuta; texto: string }[] = [
+  { clave: 'inicio', texto: tx.ui.nav.inicio },
+  { clave: 'trabajo', texto: tx.ui.nav.trabajo },
+  { clave: 'sobre', texto: tx.ui.nav.sobre },
+  { clave: 'contacto', texto: tx.ui.nav.contacto },
+];
+const esActual = (c: ClaveRuta) => c === actual || (actual === 'proyecto' && c === 'trabajo');
+const urlEs = lang === 'es' ? Astro.url.pathname : urlOtroIdioma;
+const urlEn = lang === 'en' ? Astro.url.pathname : urlOtroIdioma;
+---
+
+<header class="cabecera" data-cabecera>
+  <a href={url(lang, 'inicio')} class="logo firma" aria-label={`${CONTACTO.firma} — ${tx.ui.nav.inicio}`}>
+    {CONTACTO.firma}
+  </a>
+
+  <nav class="nav mini" aria-label="Principal">
+    <ul>
+      {
+        nav.map((n) => (
+          <li>
+            <a href={url(lang, n.clave)} class="enlace" aria-current={esActual(n.clave) ? 'page' : undefined}>
+              {n.texto}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <div class="idiomas mini" role="group" aria-label={tx.ui.idioma}>
+    <a href={urlEs} hreflang="es" lang="es" data-cambiar-idioma="es" data-astro-reload aria-current={lang === 'es' ? 'true' : undefined}>ES</a>
+    <a href={urlEn} hreflang="en" lang="en" data-cambiar-idioma="en" data-astro-reload aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+  </div>
+
+  <div class="derecha mini">
+    <span class="gris">{tx.ui.disponible}</span>
+    <a class="enlace" href={`mailto:${CONTACTO.email}`}>{CONTACTO.email}</a>
+  </div>
+
+  <button class="boton-menu mini" type="button" aria-expanded="false" aria-controls="menu-movil" data-abrir-menu>
+    <span data-texto-abrir>{tx.ui.menu}</span>
+    <span data-texto-cerrar hidden>{tx.ui.cerrar}</span>
+  </button>
+</header>
+
+<div class="menu-movil" id="menu-movil" data-menu-movil hidden>
+  <nav aria-label="Principal (móvil)">
+    <ul>
+      {
+        nav.map((n, i) => (
+          <li>
+            <a href={url(lang, n.clave)} aria-current={esActual(n.clave) ? 'page' : undefined}>
+              <span class="mini gris">0{i + 1}</span>
+              {n.texto}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <div class="menu-pie">
+    <div class="idiomas idiomas--grande" role="group" aria-label={tx.ui.idioma}>
+      <a href={urlEs} hreflang="es" lang="es" data-cambiar-idioma="es" data-astro-reload aria-current={lang === 'es' ? 'true' : undefined}>ES</a>
+      <a href={urlEn} hreflang="en" lang="en" data-cambiar-idioma="en" data-astro-reload aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+    </div>
+    <a class="mini" href={`mailto:${CONTACTO.email}`}>{CONTACTO.email}</a>
+  </div>
+</div>
+
+<style>
+  .cabecera {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr auto 1fr;
+    align-items: start;
+    gap: 1.5rem;
+    padding: 1.1rem var(--margen) 0;
+    color: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+  }
+  .cabecera > * { pointer-events: auto; }
+  .logo {
+    font-size: 2.1rem;
+    line-height: 0.9;
+    width: max-content;
+    margin-top: -0.25rem;
+  }
+  .nav ul { display: flex; flex-direction: column; }
+  .nav li:nth-child(2n) { padding-left: 1.6em; }
+  .nav a { display: inline-block; }
+  .idiomas {
+    display: flex;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .idiomas a {
+    padding: 0.3rem 0.65rem;
+    transition: background 0.3s, color 0.3s;
+  }
+  .idiomas a[aria-current='true'] { background: #fff; color: #000; }
+  .idiomas a:not([aria-current='true']):hover { background: rgb(255 255 255 / 0.18); }
+  .derecha {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .derecha .gris { color: #9a9a9a; }
+  .boton-menu { display: none; }
+
+  /* ---- Menú móvil ---- */
+  .menu-movil {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--color-tinta);
+    color: var(--color-fondo);
+    padding: 7rem var(--margen) 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .menu-movil[hidden] { display: none; }
+  .menu-movil ul { display: flex; flex-direction: column; gap: 0.4rem; }
+  .menu-movil li a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    font-size: clamp(2.6rem, 13vw, 5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+  .menu-movil li a[aria-current='page'] { color: var(--color-firma); }
+  .menu-pie { display: flex; justify-content: space-between; align-items: center; }
+  .idiomas--grande { font-size: 1rem; font-weight: 700; color: var(--color-fondo); }
+  .idiomas--grande a { padding: 0.5rem 1rem; }
+
+  @media (max-width: 860px) {
+    .cabecera { grid-template-columns: 1fr auto auto; gap: 0.75rem; }
+    .nav, .derecha { display: none; }
+    .logo { font-size: 1.8rem; }
+    .boton-menu {
+      display: block;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+    }
+  }
+</style>

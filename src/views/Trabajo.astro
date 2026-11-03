@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import { t, url, otroIdioma, type Idioma } from '../i18n';
+import { DISCIPLINAS } from '../content.config';
+import { getProyectos } from '../lib/proyectos';
+
+interface Props { lang: Idioma }
+const { lang } = Astro.props;
+const tx = t(lang);
+const proyectos = await getProyectos(lang);
+---
+
+<Base lang={lang} actual="trabajo" urlOtroIdioma={url(otroIdioma(lang), 'trabajo')} titulo={tx.ui.nav.trabajo}>
+  <section class="cab margen">
+    <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh">{tx.ui.nav.trabajo}</span></h1>
+    <div class="cab-fila">
+      <span class="mini"><span data-cuenta>{String(proyectos.length).padStart(2, '0')}</span> {tx.ui.proyectos}</span>
+      <div class="filtros" data-filtros role="group" aria-label={tx.ui.filtrar}>
+        <button type="button" class="mini filtro" data-filtro="todo" aria-pressed="true">{tx.ui.todo}</button>
+        {DISCIPLINAS.map((d) => <button type="button" class="mini filtro" data-filtro={d} aria-pressed="false">{tx.ui.disciplinas[d]}</button>)}
+      </div>
+    </div>
+  </section>
+
+  <ol class="lista margen" data-lista-trabajo>
+    {
+      proyectos.map((p, i) => (
+        <li class="fila" data-fila data-disciplinas={p.disciplinas.join(' ')} style={`--accent:${p.color}`} data-reveal>
+          <a href={url(lang, 'proyecto', p.slug)} class="fila-a">
+            <span class="mini gris fila-n">{String(i + 1).padStart(2, '0')}</span>
+            <span class="fila-titulo">{p.titulo}</span>
+            <span class="mini fila-desc">{p.descripcion}</span>
+            <span class="mini gris fila-disc">{p.disciplinas.map((d) => tx.ui.disciplinas[d]).join(' · ')}</span>
+            <span class="mini fila-anio">{p.anio ?? ''}</span>
+            <span class="fila-img" data-fila-img>
+              <Foto
+                carpeta={`proyectos/${p.slug}`}
+                archivo="portada"
+                proporcion="4:3"
+                etiqueta={`Portada ${p.titulo}`}
+                alt={p.portadaAlt}
+                color={p.color}
+                colorTexto={p.colorTexto}
+                sizes="(min-width: 861px) 24vw, 40vw"
+                transitionName={`portada-${p.slug}`}
+              />
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+  <div class="preview" data-preview aria-hidden="true"></div>
+</Base>
+
+<style>
+  .cab { padding-top: calc(var(--cabecera) + 6vh); }
+  .cab-h { display: block; line-height: 0.8; }
+  .cab-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-tinta);
+  }
+  .filtros { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .filtro {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--color-tinta);
+    border-radius: 999px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .filtro:hover { background: rgb(0 0 0 / 0.06); }
+  .filtro[aria-pressed='true'] { background: var(--color-tinta); color: var(--color-fondo); }
+
+  .lista { counter-reset: n; }
+  .fila { border-bottom: 1px solid var(--color-linea); }
+  .fila[hidden] { display: none; }
+  .fila-a {
+    display: grid;
+    grid-template-columns: 3rem 1fr 18rem 10rem 4rem;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 1.3rem;
+    transition: color 0.3s, padding 0.5s var(--ease);
+  }
+  .fila-titulo {
+    font-size: clamp(1.9rem, 4.6vw, 4.8rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    font-variation-settings: 'wdth' var(--wdth, 100);
+    transition: font-variation-settings 0.6s var(--ease), color 0.3s;
+  }
+  .fila-a:hover .fila-titulo, .fila-a:focus-visible .fila-titulo { --wdth: 125; color: var(--accent); }
+  .fila-a:hover { padding-left: 1rem; }
+  .fila-desc { text-transform: none; font-size: 0.8125rem; letter-spacing: 0; }
+  .fila-anio { text-align: right; }
+  .fila-img { display: none; }
+
+  .preview {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 60;
+    width: min(24vw, 380px);
+    pointer-events: none;
+    translate: -50% -50%;
+    opacity: 0;
+    scale: 0.85;
+    transition: opacity 0.35s, scale 0.5s var(--ease);
+  }
+  .preview:global(.visible) { opacity: 1; scale: 1; }
+
+  @media (max-width: 1100px) {
+    .fila-a { grid-template-columns: 2.4rem 1fr 9rem 3rem; }
+    .fila-desc { display: none; }
+  }
+  @media (max-width: 860px) {
+    .fila-a { grid-template-columns: 2rem 1fr 34vw; grid-template-rows: auto auto; row-gap: 0.4rem; }
+    .fila-n { grid-row: 1; }
+    .fila-titulo { grid-column: 2; font-size: 8vw; }
+    .fila-disc { grid-column: 2; }
+    .fila-anio { display: none; }
+    .fila-img { display: block; grid-column: 3; grid-row: 1 / span 2; }
+    .fila-a:hover { padding-left: 0; }
+    .preview { display: none; }
+  }
+</style>

@@ -1,0 +1,128 @@
+---
+/**
+ * <Foto> — muestra una imagen de src/assets/… y, si todavía no existe,
+ * un placeholder del color del proyecto que dice qué foto va ahí.
+ *
+ * Para poner la foto real basta con guardar el archivo con el nombre indicado
+ * (jpg, png, webp o avif) en su carpeta. No hay que tocar código.
+ */
+import { Image } from 'astro:assets';
+import { buscaImagen } from '../lib/imagenes';
+
+interface Props {
+  /** Carpeta dentro de src/assets: «proyectos/acero» o «personal» */
+  carpeta: string;
+  /** Nombre del archivo sin extensión: «portada», «galeria-01»… */
+  archivo: string;
+  /** Proporción «16:9», «4:5»… Si no se indica, la foto rellena su contenedor */
+  proporcion?: string;
+  /** Lo que se lee en el placeholder: «Portada ACEROº» */
+  etiqueta: string;
+  alt: string;
+  color?: string;
+  colorTexto?: string;
+  sizes?: string;
+  ancho?: number;
+  carga?: 'lazy' | 'eager';
+  /** Añade una capa interior para el efecto parallax */
+  parallax?: boolean;
+  /** Estilo del placeholder: liso o «flores» */
+  arte?: 'liso' | 'flores';
+  class?: string;
+  transitionName?: string;
+}
+
+const {
+  carpeta,
+  archivo,
+  proporcion,
+  etiqueta,
+  alt,
+  color,
+  colorTexto = '#ffffff',
+  sizes = '(min-width: 900px) 50vw, 100vw',
+  ancho = 2000,
+  carga = 'lazy',
+  parallax = false,
+  arte = 'liso',
+  class: clase = '',
+  transitionName,
+} = Astro.props;
+
+const imagen = buscaImagen(carpeta, archivo);
+
+const ratio = proporcion ? proporcion.replace(':', ' / ') : undefined;
+const estilo = [
+  ratio ? `aspect-ratio:${ratio}` : 'height:100%',
+  color ? `--ph:${color}` : '',
+  `--ph-texto:${colorTexto}`,
+].filter(Boolean).join(';');
+const ruta = `src/assets/${carpeta}/${archivo}.jpg`;
+---
+
+<div class:list={['foto', clase, { 'foto--ph': !imagen }]} style={estilo} transition:name={transitionName}>
+  <div class={parallax ? 'foto-capa' : 'foto-plano'} data-parallax-img={parallax ? '' : undefined}>
+    {
+      imagen ? (
+        <Image src={imagen} alt={alt} widths={[640, 1024, 1600, ancho]} sizes={sizes} loading={carga} decoding="async" />
+      ) : (
+        <div class:list={['ph-arte', `ph-${arte}`]} role="img" aria-label={alt}>
+          <span class="ph-etiqueta" aria-hidden="true">
+            <b>{etiqueta}{proporcion && ` — ${proporcion}`}</b>
+            <span>{ruta}</span>
+          </span>
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .foto-plano { position: absolute; inset: 0; }
+  .foto-capa { inset: -8% 0; }
+  .ph-arte {
+    background-color: var(--ph, var(--accent));
+    background-image:
+      linear-gradient(135deg, rgb(255 255 255 / 0.10), rgb(0 0 0 / 0.14)),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+    color: var(--ph-texto);
+  }
+  .ph-flores {
+    background-color: #2f4a2a;
+    background-image:
+      radial-gradient(18% 22% at 22% 30%, #ff4fa8 0 40%, transparent 70%),
+      radial-gradient(14% 18% at 34% 62%, #e5007e 0 40%, transparent 70%),
+      radial-gradient(20% 24% at 70% 26%, #c86fd8 0 35%, transparent 70%),
+      radial-gradient(16% 20% at 82% 66%, #ff9ccf 0 35%, transparent 70%),
+      radial-gradient(12% 15% at 52% 44%, #f6e1ec 0 30%, transparent 70%),
+      radial-gradient(22% 26% at 58% 82%, #6f9a4a 0 45%, transparent 75%),
+      radial-gradient(24% 26% at 10% 86%, #8db35b 0 40%, transparent 75%),
+      radial-gradient(20% 20% at 92% 10%, #7a9c52 0 40%, transparent 75%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+    color: #fff;
+  }
+  .ph-etiqueta {
+    position: absolute;
+    left: 0.9rem;
+    bottom: 0.8rem;
+    right: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-size: 0.625rem;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .ph-etiqueta span {
+    text-transform: none;
+    opacity: 0.7;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .foto-capa .ph-etiqueta { bottom: calc(0.8rem + 8%); }
+</style>

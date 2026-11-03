@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yaizakimbao.vercel.app/sitemap-index.xml

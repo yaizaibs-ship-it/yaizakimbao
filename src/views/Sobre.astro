@@ -1,0 +1,161 @@
+---
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import { t, url, otroIdioma, type Idioma } from '../i18n';
+import { CONTACTO } from '../i18n/comun';
+
+interface Props { lang: Idioma }
+const { lang } = Astro.props;
+const tx = t(lang);
+const s = tx.sobre;
+---
+
+<Base lang={lang} actual="sobre" urlOtroIdioma={url(otroIdioma(lang), 'sobre')} titulo={s.titulo} descripcion={s.entradilla}>
+  <!-- Cabecera: título enorme + retrato -->
+  <section class="cab margen">
+    <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh">{s.titulo}</span></h1>
+    <div class="cab-grid">
+      <p class="entradilla" data-reveal>{s.entradilla}</p>
+      <div class="retrato" data-speed="0.18">
+        <Foto carpeta="personal" archivo="retrato" proporcion="4:5" etiqueta="Retrato Yaiza" alt={CONTACTO.nombre} color="#d9d4cc" colorTexto="#0e0d0c" sizes="(min-width: 861px) 30vw, 80vw" parallax />
+      </div>
+      <span class="firma firma-grande" data-speed="-0.25" aria-hidden="true">{CONTACTO.firma}</span>
+    </div>
+  </section>
+
+  <!-- Bio -->
+  <section class="bio margen">
+    <span class="mini gris">(01)</span>
+    <div class="bio-txt">
+      {s.bio.map((parrafo) => <p data-reveal>{parrafo}</p>)}
+      <a class="cv" href={CONTACTO.cv[lang]} download data-reveal>
+        <span>{tx.ui.descargarCV}</span>
+        <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Trayectoria -->
+  <section class="tray margen" aria-labelledby="h-tray">
+    <div class="tray-cab">
+      <span class="mini gris">(02)</span>
+      <h2 id="h-tray" class="titular h2" data-peso>{s.trayectoriaTitulo}</h2>
+    </div>
+    <ol class="tray-lista">
+      {
+        s.trayectoria.map((x) => (
+          <li class="tray-item" data-reveal>
+            <span class="mini gris">{x.fecha}</span>
+            <span class="tray-puesto">{x.puesto}</span>
+            <span class="tray-lugar">{x.lugar}</span>
+            <span class="tray-texto">{x.texto}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <!-- Herramientas + idiomas -->
+  <section class="dos margen">
+    <div>
+      <div class="tray-cab">
+        <span class="mini gris">(03)</span>
+        <h2 class="titular h2" data-peso>{s.herramientasTitulo}</h2>
+      </div>
+      <ul class="chips" data-reveal>{s.herramientas.map((h) => <li>{h}</li>)}</ul>
+    </div>
+    <div>
+      <div class="tray-cab">
+        <span class="mini gris">(04)</span>
+        <h2 class="titular h2" data-peso>{s.idiomasTitulo}</h2>
+      </div>
+      <ul class="idiomas-lista" data-reveal>
+        {s.idiomas.map((i) => <li><span>{i.idioma}</span><span class="mini">{i.nivel}</span></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cab { padding-top: calc(var(--cabecera) + 6vh); }
+  .cab-h { display: block; }
+  .cab-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+  .entradilla { font-size: clamp(1.7rem, 0.9rem + 2.7vw, 3.8rem); font-weight: 500; line-height: 1.02; letter-spacing: -0.03em; max-width: 22ch; }
+  .retrato { width: 100%; max-width: 34rem; justify-self: end; }
+  .firma-grande {
+    position: absolute;
+    left: 34%;
+    bottom: -4rem;
+    font-size: clamp(4rem, 11vw, 11rem);
+    color: var(--color-firma);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  .bio { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; padding-block: var(--seccion); }
+  .bio-txt { display: grid; gap: 1.2rem; font-size: var(--t-medio); line-height: 1.2; letter-spacing: -0.01em; max-width: 46ch; }
+  .cv {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    width: max-content;
+    margin-top: 1rem;
+    padding: 0.9rem 1.2rem;
+    background: var(--color-tinta);
+    color: var(--color-fondo);
+    font-size: var(--t-mini);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: background 0.3s;
+  }
+  .cv:hover { background: var(--color-firma); }
+
+  .tray-cab { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; }
+  .h2 { font-size: clamp(2.6rem, 8vw, 8rem); }
+  .tray-lista { border-top: 1px solid var(--color-tinta); }
+  .tray-item {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1.2fr 2fr;
+    gap: 1.2rem;
+    padding-block: 1.4rem;
+    border-bottom: 1px solid var(--color-linea);
+    align-items: baseline;
+  }
+  .tray-puesto { font-weight: 800; text-transform: uppercase; font-size: 0.95rem; letter-spacing: -0.005em; }
+  .tray-lugar { color: var(--color-firma); font-weight: 600; }
+  .tray-texto { font-size: 0.95rem; }
+
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding-block: var(--seccion) 0; }
+  .dos > div { min-width: 0; }
+  .dos .h2 { font-size: clamp(2.2rem, 4.6vw, 5rem); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .chips li { padding: 0.5rem 0.9rem; border: 1px solid var(--color-tinta); border-radius: 999px; font-size: 0.9rem; }
+  .idiomas-lista li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-block: 0.8rem;
+    border-bottom: 1px solid var(--color-linea);
+    font-size: var(--t-medio);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  @media (max-width: 860px) {
+    .cab-grid, .bio, .dos { grid-template-columns: 1fr; }
+    .retrato { justify-self: stretch; max-width: none; }
+    .firma-grande { left: 0; bottom: 30%; }
+    .tray-item { grid-template-columns: 1fr; gap: 0.3rem; }
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+import Foto from './Foto.astro';
+import { t, url, type Idioma } from '../i18n';
+import type { Proyecto } from '../lib/proyectos';
+
+interface Props {
+  p: Proyecto;
+  lang: Idioma;
+  indice: number;
+}
+const { p, lang, indice } = Astro.props;
+const tx = t(lang);
+---
+
+<a class:list={['tarjeta', { 'tarjeta--vertical': p.vertical }]} href={url(lang, 'proyecto', p.slug)} style={`--accent:${p.color}`}>
+  <Foto
+    carpeta={`proyectos/${p.slug}`}
+    archivo="portada"
+    proporcion={p.vertical ? '3:4' : '4:3'}
+    etiqueta={`Portada ${p.titulo}`}
+    alt={p.portadaAlt}
+    color={p.color}
+    colorTexto={p.colorTexto}
+    sizes="(min-width: 861px) 26vw, 72vw"
+    parallax
+    transitionName={`portada-${p.slug}`}
+  />
+  <span class="tarjeta-pie">
+    <span class="mini gris">{String(indice + 1).padStart(2, '0')}</span>
+    <span class="tarjeta-titulo">{p.titulo}</span>
+    <span class="mini gris tarjeta-disc">{p.disciplinas.map((d) => tx.ui.disciplinas[d]).join(' · ')}</span>
+  </span>
+</a>
+
+<style>
+  .tarjeta { display: block; }
+  .tarjeta :global(.foto) { transition: transform 0.9s var(--ease); }
+  .tarjeta :global(.foto img), .tarjeta :global(.ph-arte) { transition: transform 1.1s var(--ease); }
+  .tarjeta:hover :global(.foto img), .tarjeta:hover :global(.ph-arte) { transform: scale(1.06); }
+  .tarjeta-pie {
+    display: grid;
+    grid-template-columns: 2.2em 1fr;
+    column-gap: 0.4rem;
+    margin-top: 0.75rem;
+    align-items: baseline;
+  }
+  .tarjeta-titulo {
+    font-size: 0.8125rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+  }
+  .tarjeta-disc {
+    grid-column: 2;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .tarjeta:hover .tarjeta-disc, .tarjeta:focus-visible .tarjeta-disc { opacity: 1; transform: none; }
+  @media (hover: none) { .tarjeta-disc { opacity: 1; transform: none; } }
+</style>

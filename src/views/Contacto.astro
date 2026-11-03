@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import { t, url, otroIdioma, type Idioma } from '../i18n';
+import { CONTACTO } from '../i18n/comun';
+
+interface Props { lang: Idioma }
+const { lang } = Astro.props;
+const tx = t(lang);
+---
+
+<Base lang={lang} actual="contacto" urlOtroIdioma={url(otroIdioma(lang), 'contacto')} titulo={tx.contacto.titulo} descripcion={tx.contacto.texto}>
+  <section class="cont margen">
+    <h1 class="titular cont-h"><span data-fit="1" data-fit-max="40vh">{tx.contacto.titulo}</span></h1>
+
+    <div class="cont-grid">
+      <div class="cont-foto" data-speed="0.2">
+        <Foto carpeta="personal" archivo="contacto-flores" proporcion="3:4" etiqueta="Contacto · flores" arte="flores" alt="" sizes="(min-width: 861px) 28vw, 70vw" parallax />
+      </div>
+      <div class="cont-txt">
+        <p class="cont-intro" data-reveal>{tx.contacto.texto}</p>
+        <a class="cont-email" href={`mailto:${CONTACTO.email}`} data-reveal>
+          <span data-fit="1">{CONTACTO.email}</span>
+        </a>
+        <p class="mini gris" data-reveal>{tx.ui.disponible}</p>
+        <ul class="cont-redes" data-reveal aria-label={tx.contacto.redes}>
+          <li><a href={CONTACTO.linkedin} target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          <li><a href={CONTACTO.instagram} target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a></li>
+          <li><a href={CONTACTO.cv[lang]} download>CV (PDF) <span aria-hidden="true">↓</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cont { padding-top: calc(var(--cabecera) + 6vh); }
+  .cont-h { display: block; }
+  .cont-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; margin-top: 4rem; align-items: end; }
+  .cont-foto { max-width: 26rem; }
+  .cont-txt { display: grid; gap: 1.6rem; min-width: 0; }
+  .cont-intro { font-size: var(--t-medio); line-height: 1.12; letter-spacing: -0.02em; font-weight: 500; max-width: 26ch; }
+  .cont-email {
+    display: block;
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .cont-email:hover { color: var(--color-firma); }
+  .cont-redes li { border-top: 1px solid var(--color-tinta); }
+  .cont-redes li:last-child { border-bottom: 1px solid var(--color-tinta); }
+  .cont-redes a {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 0.9rem;
+    font-size: var(--t-medio);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    transition: padding 0.4s var(--ease), color 0.3s;
+  }
+  .cont-redes a:hover { padding-inline: 0.8rem; color: var(--color-firma); }
+  @media (max-width: 860px) {
+    .cont-grid { grid-template-columns: 1fr; }
+  }
+</style>

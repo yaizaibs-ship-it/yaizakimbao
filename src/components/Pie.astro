@@ -1,0 +1,118 @@
+---
+import { t, url, type Idioma } from '../i18n';
+import { CONTACTO } from '../i18n/comun';
+
+interface Props { lang: Idioma }
+const { lang } = Astro.props;
+const tx = t(lang);
+const cinta = tx.pie.cinta;
+---
+
+<footer class="pie" id="contacto-pie">
+  <p class="sr-only">{cinta.map((c) => c.join(' ')).join(' ')}</p>
+  <div class="cinta" aria-hidden="true">
+    <div class="cinta-pista" data-cinta>
+      {
+        [0, 1].map(() => (
+          <span class="cinta-grupo" aria-hidden="true">
+            {cinta.map(([a, b]) => (
+              <>
+                <span class="gris-claro">{a}</span> <span>{b}</span>{' '}
+              </>
+            ))}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <a class="cta" href={`mailto:${CONTACTO.email}`}>
+    <span class="cta-caja">{CONTACTO.email}</span>
+    <span class="cta-circulo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"></path></svg>
+    </span>
+  </a>
+
+  <div class="pie-filas mini margen">
+    <span>© {new Date().getFullYear()} {CONTACTO.nombre} · <span class="firma pie-firma" aria-hidden="true">{CONTACTO.firma}</span></span>
+    <span class="gris">{tx.pie.lugar}</span>
+    <ul class="pie-redes">
+      <li><a class="enlace" href={CONTACTO.instagram} rel="noopener" target="_blank">Instagram</a></li>
+      <li><a class="enlace" href={CONTACTO.linkedin} rel="noopener" target="_blank">LinkedIn</a></li>
+      <li><a class="enlace" href={url(lang, 'contacto')}>{tx.ui.nav.contacto}</a></li>
+    </ul>
+    <a class="enlace" href="#top" data-arriba>{tx.ui.volverArriba} ↑</a>
+  </div>
+</footer>
+
+<style>
+  .pie { padding-top: var(--seccion); overflow: hidden; }
+  .cinta { overflow: hidden; }
+  .cinta-pista {
+    display: flex;
+    width: max-content;
+    animation: cinta 30s linear infinite;
+  }
+  .cinta:hover .cinta-pista { animation-play-state: paused; }
+  .cinta-grupo {
+    flex: none;
+    padding-right: 0.25em;
+    font-size: clamp(4.5rem, 12vw, 13rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .gris-claro { color: #b3ada6; }
+  @keyframes cinta { to { transform: translateX(-50%); } }
+
+  .cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+    margin: clamp(2.5rem, 8vh, 5rem) var(--margen) 0;
+    flex-wrap: wrap;
+  }
+  .cta-caja {
+    border: 2px solid var(--color-tinta);
+    padding: 1.1rem 2rem;
+    font-weight: 900;
+    font-size: clamp(1rem, 2.3vw, 2rem);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    background: linear-gradient(var(--color-tinta), var(--color-tinta)) no-repeat left / 0 100%;
+    transition: background-size 0.5s var(--ease-in-out), color 0.5s var(--ease-in-out);
+  }
+  .cta:hover .cta-caja, .cta:focus-visible .cta-caja { background-size: 100% 100%; color: var(--color-fondo); }
+  .cta-circulo {
+    display: grid;
+    place-items: center;
+    width: clamp(3.4rem, 5.4vw, 5rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-firma);
+    color: #fff;
+    transition: transform 0.5s var(--ease-in-out);
+  }
+  .cta-circulo svg { width: 40%; }
+  .cta:hover .cta-circulo { transform: rotate(-45deg); }
+
+  .pie-filas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: clamp(4rem, 12vh, 8rem);
+    padding-bottom: 1.4rem;
+  }
+  .pie-firma { font-size: 1.35em; color: var(--color-firma); }
+  .pie-redes { display: flex; gap: 1.2rem; }
+
+  @media (max-width: 640px) {
+    .pie-filas { flex-direction: column; align-items: flex-start; }
+    .cta-caja { padding: 0.9rem 1.2rem; }
+  }
+</style>

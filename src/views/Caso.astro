@@ -1,0 +1,209 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import { t, url, otroIdioma, type Idioma } from '../i18n';
+import { getProyectos } from '../lib/proyectos';
+import { buscaImagen } from '../lib/imagenes';
+
+interface Props { lang: Idioma; slug: string }
+const { lang, slug } = Astro.props;
+const tx = t(lang);
+const lista = await getProyectos(lang);
+const i = lista.findIndex((x) => x.slug === slug);
+const p = lista[i];
+const sig = lista[(i + 1) % lista.length];
+const { Content } = await render(p.entrada);
+const carpeta = `proyectos/${p.slug}`;
+const [primera, ...resto] = p.galeria;
+const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
+---
+
+<Base
+  lang={lang}
+  actual="proyecto"
+  urlOtroIdioma={url(otroIdioma(lang), 'proyecto', p.slug)}
+  titulo={p.titulo}
+  descripcion={p.descripcion}
+  imagenOG={buscaImagen(carpeta, 'portada')}
+  acento={p.color}
+  acentoTexto={p.colorTexto}
+>
+  <article class="caso">
+    <!-- Cabecera: la portada de la tarjeta crece hasta aquí y luego se reduce -->
+    <header class="caso-portada" data-encoge>
+      <div class="caso-portada-img" data-encoge-img>
+        <Foto
+          carpeta={carpeta}
+          archivo="portada"
+          etiqueta={`Portada ${p.titulo} (cabecera, recomendada 16:9)`}
+          alt={p.portadaAlt}
+          color={p.color}
+          colorTexto={p.colorTexto}
+          sizes="100vw"
+          ancho={2600}
+          carga="eager"
+          transitionName={`portada-${p.slug}`}
+        />
+      </div>
+    </header>
+
+    <section class="caso-intro">
+      <div class="margen">
+        <p class="mini intro-n">({String(i + 1).padStart(2, '0')}/{String(lista.length).padStart(2, '0')}) — {tx.ui.nav.trabajo}</p>
+        <h1 class="titular caso-h"><span data-fit="1" data-fit-max="30vh">{p.titulo}</span></h1>
+        <div class="intro-grid">
+          <p class="caso-desc" data-reveal>{p.descripcion}</p>
+          <dl class="ficha mini" data-reveal>
+            {p.anio && (<div><dt>{tx.ui.ficha.anio}</dt><dd>{p.anio}</dd></div>)}
+            {p.cliente && (<div><dt>{tx.ui.ficha.cliente}</dt><dd>{p.cliente}</dd></div>)}
+            {p.rol && (<div><dt>{tx.ui.ficha.rol}</dt><dd>{p.rol}</dd></div>)}
+            {p.disciplinas.length > 0 && (<div><dt>{tx.ui.ficha.disciplinas}</dt><dd>{p.disciplinas.map((d) => tx.ui.disciplinas[d]).join(', ')}</dd></div>)}
+            {p.enlaces.length > 0 && (
+              <div>
+                <dt>{tx.ui.ficha.enlaces}</dt>
+                <dd>{p.enlaces.map((e) => <a class="enlace" href={e.url} target="_blank" rel="noopener">{e.texto} ↗</a>)}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+        {p.sinTraducir && <p class="mini aviso">{tx.ui.soloEspanol}</p>}
+      </div>
+    </section>
+
+    <div class="caso-cuerpo margen" lang={p.sinTraducir ? 'es' : undefined}>
+      <Content />
+    </div>
+
+    {
+      primera && (
+        <section class="galeria" aria-label={tx.ui.galeria}>
+          <div class="crece" data-crece>
+            <div class="crece-media" data-crece-media>
+              <Foto
+                carpeta={carpeta}
+                archivo={primera.archivo}
+                etiqueta={`${nombreGaleria(1)} — ${primera.proporcion} (se muestra a pantalla completa)`}
+                alt={primera.alt}
+                color={p.color}
+                colorTexto={p.colorTexto}
+                sizes="100vw"
+                ancho={2600}
+              />
+            </div>
+            <span class="mini crece-pie" data-crece-pie>{tx.ui.galeria} ↓</span>
+          </div>
+          <div class="rejilla margen">
+            {resto.map((g, n) => (
+              <figure class:list={['rejilla-item', { ancha: g.ancha }]} data-reveal>
+                <Foto
+                  carpeta={carpeta}
+                  archivo={g.archivo}
+                  proporcion={g.proporcion}
+                  etiqueta={nombreGaleria(n + 2)}
+                  alt={g.alt}
+                  color={p.color}
+                  colorTexto={p.colorTexto}
+                  sizes={g.ancha ? '100vw' : '(min-width: 861px) 48vw, 100vw'}
+                  parallax
+                />
+              </figure>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <nav class="siguiente" style={`--sig:${sig.color};--sig-texto:${sig.colorTexto}`} aria-label={tx.ui.siguiente}>
+      <a href={url(lang, 'proyecto', sig.slug)} class="sig-a">
+        <span class="mini">{tx.ui.siguiente} →</span>
+        <span class="titular sig-t"><span data-fit="1" data-fit-max="28vh">{sig.titulo}</span></span>
+      </a>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .caso-portada { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
+  .caso-portada-img { position: absolute; inset: 0; transform-origin: 50% 0%; }
+
+  .caso-intro { background: var(--accent); color: var(--accent-texto); padding-block: 3rem 4rem; margin-top: -1px; }
+  .intro-n { margin-bottom: 1.5rem; }
+  .caso-h { display: block; }
+  .intro-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; margin-top: 2.5rem; align-items: start; }
+  .caso-desc { font-size: var(--t-medio); line-height: 1.12; letter-spacing: -0.02em; font-weight: 500; max-width: 30ch; }
+  .ficha { display: grid; gap: 0.8rem; }
+  .ficha div { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; border-top: 1px solid currentColor; padding-top: 0.6rem; }
+  .ficha dt { opacity: 0.65; }
+  .ficha dd { display: flex; flex-direction: column; gap: 0.2rem; }
+  .aviso { margin-top: 2rem; opacity: 0.8; }
+
+  /* ---- Cuerpo del caso (markdown) ---- */
+  .caso-cuerpo { counter-reset: seccion; padding-block: var(--seccion) 2rem; }
+  .caso-cuerpo :global(h2) {
+    counter-increment: seccion;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: baseline;
+    margin-top: clamp(3rem, 9vh, 6rem);
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-tinta);
+    font-size: clamp(2rem, 5.2vw, 5.4rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+  }
+  .caso-cuerpo :global(h2::before) {
+    content: '(' counter(seccion, decimal-leading-zero) ')';
+    font-size: var(--t-mini);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    filter: saturate(1.2);
+  }
+  .caso-cuerpo :global(h2:first-child) { margin-top: 0; }
+  .caso-cuerpo :global(p), .caso-cuerpo :global(ul) {
+    margin-left: calc(33.333% + 0.7rem);
+    margin-top: 1.2rem;
+    max-width: 40ch;
+    font-size: var(--t-medio);
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+  }
+  .caso-cuerpo :global(ul) { list-style: none; }
+  .caso-cuerpo :global(li) { padding-left: 1.2em; position: relative; }
+  .caso-cuerpo :global(li::before) { content: '—'; position: absolute; left: 0; color: var(--accent); }
+  .caso-cuerpo :global(strong) { font-weight: 800; }
+  .caso-cuerpo :global(a) { text-decoration: underline; text-underline-offset: 0.15em; }
+
+  /* ---- Galería ---- */
+  .galeria { padding-top: var(--seccion); }
+  .crece { position: relative; height: 100vh; height: 100svh; }
+  .crece-media { position: absolute; inset: 0; }
+  .crece-pie { position: absolute; left: 50%; bottom: 1.5rem; transform: translateX(-50%); }
+  .rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: var(--hueco); padding-top: var(--hueco); align-items: start; }
+  .rejilla-item.ancha { grid-column: 1 / -1; }
+  .rejilla-item:nth-child(4n + 2):not(.ancha) { margin-top: 18vh; }
+
+  /* ---- Siguiente proyecto ---- */
+  .siguiente { margin-top: var(--seccion); }
+  .sig-a {
+    display: block;
+    padding: 2.4rem var(--margen) 2rem;
+    background: var(--sig);
+    color: var(--sig-texto);
+    overflow: hidden;
+  }
+  .sig-t { display: block; margin-top: 1rem; transition: transform 0.7s var(--ease); }
+  .sig-a:hover .sig-t { transform: translateX(1.5rem); }
+
+  @media (max-width: 860px) {
+    .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .caso-cuerpo :global(h2) { grid-template-columns: 1fr; gap: 0.6rem; }
+    .caso-cuerpo :global(p), .caso-cuerpo :global(ul) { margin-left: 0; }
+    .rejilla { grid-template-columns: 1fr; }
+    .rejilla-item:nth-child(4n + 2):not(.ancha) { margin-top: 0; }
+  }
+</style>
