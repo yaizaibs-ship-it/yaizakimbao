@@ -18,7 +18,7 @@ Hecha con **Astro** y con las animaciones en **GSAP + ScrollTrigger + Lenis**.
 | Textos generales en inglés              | `src/i18n/en.ts`                                     |
 | Email, LinkedIn, Instagram, CV          | `src/i18n/comun.ts`                                  |
 | El CV en PDF                            | `public/cv/`                                         |
-| Colores, tipografías, tamaños           | `src/styles/tokens.css`                              |
+| Colores, tipografía (Geist), tamaños    | `src/styles/tokens.css`                              |
 | Las 3 direcciones de diseño propuestas  | `PROPUESTAS.md`                                      |
 
 ---
@@ -103,7 +103,7 @@ La **primera foto de la galería** se expande a pantalla completa con el scroll:
 - **CV:** sustituye `public/cv/cv-yaiza-ibanez-es.pdf` y `public/cv/cv-yaiza-ibanez-en.pdf` por los tuyos, con el mismo nombre. Los actuales son provisionales, generados a partir de tus textos.
 - **Colores, tipografías y tamaños:** `src/styles/tokens.css`. Todo está en variables con comentarios: `--color-firma` (magenta), `--color-fondo`, `--font-sans`, `--font-firma`, `--t-base`…
 - **Color de cada proyecto:** `color` y `colorTexto` en su `.md` en español.
-- **Cambiar de tipografía:** las fuentes se instalan como paquetes (`@fontsource…`). Para usar otra, instala su paquete de [Fontsource](https://fontsource.org), cámbialo en la primera línea de `src/layouts/Base.astro` y pon su nombre en `--font-sans` o `--font-firma`.
+- **Tipografía:** toda la web usa una sola familia, **Geist** (gratuita), en peso medio, al estilo de Fuego. Para usar otra, instala su paquete de [Fontsource](https://fontsource.org) (`npm i @fontsource-variable/<nombre>`), cámbialo en la primera línea de `src/layouts/Base.astro` y pon su nombre en `--font-sans`. Si compras la licencia de **Roobert** (la de Fuego), copia sus archivos `.woff2` a `public/fonts/`, declara la fuente con `@font-face` en `src/styles/tokens.css` y pon `'Roobert'` en `--font-sans`.
 - **Imagen al compartir en redes:** `public/og-default.png` (1200 × 630). Cada caso usa automáticamente su `portada.jpg`.
 
 ## 5. Cómo editar desde la web de GitHub, sin instalar nada
