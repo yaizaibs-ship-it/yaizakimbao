@@ -38,7 +38,7 @@ const e = tx.inicio.etiquetas;
   <!-- 2 · STATEMENT fijado: Marca / Estrategia / Movimiento -->
   <section class="statement" data-statement aria-label={tx.inicio.statementIntro}>
     <div class="st-sticky margen">
-      <p class="st-intro">{tx.inicio.statementIntro}</p>
+      <p class="st-intro" data-split="palabras">{tx.inicio.statementIntro}</p>
       <span class="mini st-contador" aria-hidden="true"><span data-contador>01</span> / {String(tx.inicio.palabras.length).padStart(2, '0')}</span>
       <div class="st-palabras">
         {
@@ -58,7 +58,7 @@ const e = tx.inicio.etiquetas;
     <div class="h-pin" data-horizontal-pin>
       <div class="h-contenido" data-horizontal-contenido>
         <div class="h-titulo" data-horizontal-titulo>
-          <h2 id="titulo-trabajo" class="titular h-h2"><span data-fit="0.72" data-fit-max="36vh">{tx.inicio.trabajoTitulo}</span></h2>
+          <h2 id="titulo-trabajo" class="titular h-h2"><span data-fit="0.72" data-fit-max="36vh" data-split="letras">{tx.inicio.trabajoTitulo}</span></h2>
           <p class="mini h-scroll">{tx.ui.scroll}</p>
         </div>
         <ul class="h-pista" data-horizontal-pista>
@@ -78,6 +78,7 @@ const e = tx.inicio.etiquetas;
           </li>
         </ul>
       </div>
+      <div class="h-progreso" aria-hidden="true"><span data-horizontal-progreso></span></div>
     </div>
   </section>
 
@@ -109,7 +110,7 @@ const e = tx.inicio.etiquetas;
 
     <div class="perfil-cols margen">
       <ul class="mini" data-reveal>{tx.inicio.perfil.listaIzquierda.map((x) => <li>{x}</li>)}</ul>
-      <p class="perfil-texto" data-reveal>{tx.inicio.perfil.texto}</p>
+      <p class="perfil-texto" data-split="palabras">{tx.inicio.perfil.texto}</p>
       <ul class="mini perfil-der" data-reveal>{tx.inicio.perfil.listaDerecha.map((x) => <li>{x}</li>)}</ul>
     </div>
     <div class="perfil-mas margen" data-reveal>
@@ -216,9 +217,21 @@ const e = tx.inicio.etiquetas;
     transition: background 0.4s, color 0.4s;
   }
   .h-todo:hover { background: var(--color-tinta); color: var(--color-fondo); }
-  .h-todo-txt { font-size: var(--t-medio); font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.03em; }
+  .h-todo-txt { font-size: clamp(1.1rem, 1.7vw, 1.9rem); font-weight: 900; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.03em; }
   .h-flecha { font-size: 2.4rem; align-self: flex-end; transition: transform 0.4s var(--ease); }
   .h-todo:hover .h-flecha { transform: translateX(0.4rem); }
+
+  .h-progreso { display: none; }
+  :global(html.con-movimiento) .h-progreso {
+    display: block;
+    position: absolute;
+    left: var(--margen);
+    right: var(--margen);
+    bottom: 1.4rem;
+    height: 2px;
+    background: var(--color-linea);
+  }
+  .h-progreso span { display: block; height: 100%; background: var(--color-firma); transform: scaleX(0); transform-origin: left; }
 
   /* ---------- 4 · Doble perfil ---------- */
   .perfil { position: relative; padding-block: var(--seccion); overflow: hidden; }

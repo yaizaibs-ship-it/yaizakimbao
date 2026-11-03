@@ -11,14 +11,14 @@ const tx = t(lang);
 
 <Base lang={lang} actual="contacto" urlOtroIdioma={url(otroIdioma(lang), 'contacto')} titulo={tx.contacto.titulo} descripcion={tx.contacto.texto}>
   <section class="cont margen">
-    <h1 class="titular cont-h"><span data-fit="1" data-fit-max="40vh">{tx.contacto.titulo}</span></h1>
+    <h1 class="titular cont-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.contacto.titulo}</span></h1>
 
     <div class="cont-grid">
       <div class="cont-foto" data-speed="0.2">
         <Foto carpeta="personal" archivo="contacto-flores" proporcion="3:4" etiqueta="Contacto · flores" arte="flores" alt="" sizes="(min-width: 861px) 28vw, 70vw" parallax />
       </div>
       <div class="cont-txt">
-        <p class="cont-intro" data-reveal>{tx.contacto.texto}</p>
+        <p class="cont-intro" data-split="palabras">{tx.contacto.texto}</p>
         <a class="cont-email" href={`mailto:${CONTACTO.email}`} data-reveal>
           <span data-fit="1">{CONTACTO.email}</span>
         </a>

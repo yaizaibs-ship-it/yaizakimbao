@@ -13,7 +13,7 @@ const proyectos = await getProyectos(lang);
 
 <Base lang={lang} actual="trabajo" urlOtroIdioma={url(otroIdioma(lang), 'trabajo')} titulo={tx.ui.nav.trabajo}>
   <section class="cab margen">
-    <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh">{tx.ui.nav.trabajo}</span></h1>
+    <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.ui.nav.trabajo}</span></h1>
     <div class="cab-fila">
       <span class="mini"><span data-cuenta>{String(proyectos.length).padStart(2, '0')}</span> {tx.ui.proyectos}</span>
       <div class="filtros" data-filtros role="group" aria-label={tx.ui.filtrar}>
@@ -26,7 +26,7 @@ const proyectos = await getProyectos(lang);
   <ol class="lista margen" data-lista-trabajo>
     {
       proyectos.map((p, i) => (
-        <li class="fila" data-fila data-disciplinas={p.disciplinas.join(' ')} style={`--accent:${p.color}`} data-reveal>
+        <li class="fila" data-cursor={tx.ui.ver} data-fila data-disciplinas={p.disciplinas.join(' ')} style={`--accent:${p.color}`} data-reveal>
           <a href={url(lang, 'proyecto', p.slug)} class="fila-a">
             <span class="mini gris fila-n">{String(i + 1).padStart(2, '0')}</span>
             <span class="fila-titulo">{p.titulo}</span>

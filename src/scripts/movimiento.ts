@@ -15,6 +15,11 @@
  *   data-crece               → una miniatura se expande hasta pantalla completa
  *   data-encoge              → una imagen a sangre se reduce al hacer scroll
  *   data-desliza="-1|1"      → texto que se desplaza en horizontal con el scroll
+ *   data-split="letras|palabras" → el texto se revela letra a letra / palabra a palabra
+ *   data-cursor="Ver"        → el cursor se convierte en un círculo con ese texto
+ *
+ * Además: el fondo pasa de blanco a negro al hacer scroll (temaOscuro),
+ * hay un cursor propio y una intro con contador en la primera visita.
  *
  * Con «prefers-reduced-motion» no se anima nada: todo queda estático y legible.
  */
@@ -161,10 +166,131 @@ function interacciones(signal: AbortSignal) {
   }
 }
 
+
+/* ------------------------------------------------------------------ */
+/* Fondo blanco → negro al hacer scroll                                */
+/* ------------------------------------------------------------------ */
+const CLARO = { '--color-fondo': '#f4f1ec', '--color-tinta': '#0e0d0c', '--color-gris': '#6c6761', '--color-linea': '#d9d4cc' };
+const OSCURO = { '--color-fondo': '#0b0b0a', '--color-tinta': '#f2eee8', '--color-gris': '#9a948c', '--color-linea': '#2b2926' };
+
+function temaOscuro() {
+  const root = document.documentElement;
+  const cambia = (tema: Record<string, string>, oscuro: boolean) => {
+    root.classList.toggle('oscuro', oscuro);
+    gsap.to(root, { ...tema, duration: 0.8, ease: 'power2.inOut', overwrite: true });
+  };
+  // Al bajar algo más de media pantalla, la web pasa a negro (y vuelve a blanco arriba del todo)
+  ScrollTrigger.create({
+    trigger: document.body,
+    start: () => `top+=${window.innerHeight * 0.6} top`,
+    invalidateOnRefresh: true,
+    onEnter: () => cambia(OSCURO, true),
+    onLeaveBack: () => cambia(CLARO, false),
+  });
+}
+
+function reseteaTema() {
+  const root = document.documentElement;
+  gsap.killTweensOf(root);
+  for (const k of Object.keys(CLARO)) root.style.removeProperty(k);
+  root.classList.remove('oscuro');
+}
+
+/* ------------------------------------------------------------------ */
+/* Dividir texto en letras o palabras para revelarlo                   */
+/* ------------------------------------------------------------------ */
+function divide(el: HTMLElement) {
+  if (el.dataset.splitHecho) return;
+  const modo = el.dataset.split || 'palabras';
+  const texto = el.textContent || '';
+  el.setAttribute('aria-label', texto.trim());
+  const piezas = modo === 'letras' ? Array.from(texto) : texto.split(/(\s+)/);
+  el.innerHTML = piezas
+    .map((t) => (/^\s+$/.test(t) ? (modo === 'letras' ? '<span class="sp-esp"> </span>' : ' ') : `<span class="sp" aria-hidden="true"><span class="sp-i">${t.replace(/</g, '&lt;')}</span></span>`))
+    .join('');
+  el.dataset.splitHecho = '1';
+}
+
+function textos() {
+  for (const el of $$<HTMLElement>('[data-split]')) {
+    divide(el);
+    const piezas = el.querySelectorAll('.sp-i');
+    const letras = el.dataset.split === 'letras';
+    gsap.fromTo(
+      piezas,
+      { yPercent: 115, rotate: letras ? 6 : 2 },
+      {
+        yPercent: 0,
+        rotate: 0,
+        duration: letras ? 1.1 : 1.2,
+        ease: 'expo.out',
+        stagger: letras ? 0.035 : 0.025,
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      },
+    );
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Cursor propio                                                       */
+/* ------------------------------------------------------------------ */
+function cursor(signal: AbortSignal) {
+  const c = document.querySelector<HTMLElement>('[data-cursor-el]');
+  if (!c || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const etiqueta = c.querySelector<HTMLElement>('[data-cursor-texto]')!;
+  document.documentElement.classList.add('cursor-propio');
+  const x = gsap.quickTo(c, 'x', { duration: 0.35, ease: 'power3' });
+  const y = gsap.quickTo(c, 'y', { duration: 0.35, ease: 'power3' });
+  window.addEventListener('pointermove', (e) => { x(e.clientX); y(e.clientY); c.classList.add('visible'); }, { signal });
+  document.addEventListener('pointerleave', () => c.classList.remove('visible'), { signal });
+  document.addEventListener(
+    'pointerover',
+    (e) => {
+      const t = e.target as HTMLElement;
+      const ver = t.closest<HTMLElement>('[data-cursor]');
+      const enlace = t.closest('a, button, [role="button"]');
+      c.classList.toggle('grande', Boolean(ver));
+      c.classList.toggle('enlace', !ver && Boolean(enlace));
+      etiqueta.textContent = ver ? ver.dataset.cursor || '' : '';
+    },
+    { signal },
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Intro con contador (solo la primera visita de la sesión)            */
+/* ------------------------------------------------------------------ */
+function intro(): Promise<void> {
+  const root = document.documentElement;
+  const el = document.querySelector<HTMLElement>('[data-intro]');
+  if (!root.classList.contains('con-intro') || !el) return Promise.resolve();
+  const num = el.querySelector<HTMLElement>('[data-intro-num]')!;
+  const contador = { v: 0 };
+  return new Promise((ok) => {
+    gsap.timeline({
+      onComplete: () => {
+        root.classList.remove('con-intro');
+        try { sessionStorage.setItem('intro-vista', '1'); } catch {}
+        ok();
+      },
+    })
+      .to(contador, { v: 100, duration: 1.3, ease: 'power2.inOut', onUpdate: () => { num.textContent = String(Math.round(contador.v)).padStart(3, '0'); } })
+      .fromTo(el.querySelector('[data-intro-firma]'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.1, ease: 'power2.inOut' }, 0.1)
+      .to(el, { yPercent: -100, duration: 0.9, ease: 'expo.inOut' }, '+=0.15');
+  });
+}
+
 /* ------------------------------------------------------------------ */
 /* Animaciones de scroll                                               */
 /* ------------------------------------------------------------------ */
 function animaciones(esMovil: boolean) {
+  temaOscuro();
+  textos();
+
+  // --- La firma de la portada se «escribe» al cargar ---
+  for (const f of $$<HTMLElement>('[data-hero-firma] [data-fit]')) {
+    gsap.fromTo(f, { clipPath: 'inset(-20% 100% -20% 0)' }, { clipPath: 'inset(-20% -5% -20% 0)', duration: 1.8, ease: 'power2.inOut', delay: 0.15 });
+  }
   // --- Aparecer al entrar ---
   const reveal = $$<HTMLElement>('[data-reveal]');
   if (reveal.length) {
@@ -282,10 +408,26 @@ function animaciones(esMovil: boolean) {
       gsap.to(contenido, { y: () => -subida(), ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + subida(), scrub: true, invalidateOnRefresh: true } });
       gsap.to(titulo, { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + subida() * 0.9, scrub: true, invalidateOnRefresh: true } });
     }
+    const tarjetas = $$<HTMLElement>('.h-item', pista);
+    const inclina = gsap.quickTo(tarjetas, 'skewX', { duration: 0.6, ease: 'power3' });
+    const barra = sec.querySelector<HTMLElement>('[data-horizontal-progreso]');
     const mueve = gsap.to(pista, {
       x: () => -recorrido(),
       ease: 'none',
-      scrollTrigger: { trigger: sec, start: () => 'top top-=' + subida(), end: () => '+=' + recorrido(), scrub: true, invalidateOnRefresh: true },
+      scrollTrigger: {
+        trigger: sec,
+        start: () => 'top top-=' + subida(),
+        end: () => '+=' + recorrido(),
+        scrub: true,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          // las tarjetas se inclinan según la velocidad del scroll
+          inclina(gsap.utils.clamp(-5, 5, self.getVelocity() / -300));
+          if (barra) barra.style.transform = `scaleX(${self.progress})`;
+        },
+        onLeave: () => inclina(0),
+        onLeaveBack: () => inclina(0),
+      },
     });
     for (const img of $$<HTMLElement>('[data-parallax-img]', pista)) {
       gsap.fromTo(
@@ -343,7 +485,12 @@ export async function iniciar() {
   document.fonts?.addEventListener('loadingdone', reajusta, { signal: control.signal });
   window.addEventListener('load', reajusta, { once: true, signal: control.signal });
 
-  if (reducir) return;
+  if (reducir) {
+    document.documentElement.classList.remove('con-intro');
+    return;
+  }
+  cursor(control.signal);
+  await intro();
 
   lenis = new Lenis({ lerp: 0.1, anchors: true, autoRaf: false });
   lenis.on('scroll', ScrollTrigger.update);
@@ -376,4 +523,6 @@ export function detener() {
   lenis?.destroy();
   lenis = null;
   document.documentElement.style.overflow = '';
+  document.documentElement.classList.remove('cursor-propio');
+  reseteaTema();
 }

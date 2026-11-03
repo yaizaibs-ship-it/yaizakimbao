@@ -15,15 +15,16 @@ const en: Textos = {
   ui: {
     saltar: 'Skip to content',
     nav: { inicio: 'Home', trabajo: 'Work', sobre: 'About', contacto: 'Contact' },
-    disponible: 'Available for projects',
+    disponible: 'Available for new projects',
     escribeme: 'Get in touch',
     menu: 'Menu',
     cerrar: 'Close',
     idioma: 'Language',
     cambiarIdioma: 'View this page in English',
-    scroll: 'Scroll to explore',
+    scroll: 'Keep scrolling',
+    ver: 'View',
     verProyecto: 'View project',
-    verTodo: 'See all work',
+    verTodo: 'All work',
     proyectos: 'projects',
     filtrar: 'Filter by discipline',
     todo: 'All',
@@ -43,20 +44,20 @@ const en: Textos = {
   },
 
   inicio: {
-    etiquetas: ['Visual Designer', 'Communication strategy', 'Portfolio 2026', 'Barcelona — Utiel-Requena'],
-    statementIntro: 'I make brands that make sense, feel right and move.',
+    etiquetas: ['Visual Designer', 'Branding · Strategy · Motion', 'Portfolio 2026', 'Barcelona — Utiel-Requena'],
+    statementIntro: 'I design brands with a point, tell them with strategy and set them in motion.',
     palabras: [
       {
         palabra: 'Brand',
-        texto: 'Solid visual identities: logo, system, brand book and applications, from the label to the shop floor.',
+        texto: 'Identities with character: logo, system and brand book that hold up on a swing tag and in a shop window alike.',
       },
       {
         palabra: 'Strategy',
-        texto: 'Communication built around goals: paid and organic campaigns, newsletters, A/B testing and metrics.',
+        texto: 'Every piece has a job to do. Paid and organic campaigns, newsletters, A/B tests and data to decide.',
       },
       {
         palabra: 'Motion',
-        texto: 'Content made for the screen: motion graphics, video, photography and AI-generated imagery.',
+        texto: 'Motion, video, photography and AI so the brand never sits still on screen.',
       },
     ],
     trabajoTitulo: 'Work',
@@ -66,17 +67,17 @@ const en: Textos = {
       listaIzquierda: ['Data-driven design', 'Paid & organic', 'UX/UI', 'Newsletters', 'SEO / SEM'],
       listaDerecha: ['Fashion', 'Upcycling', 'Football culture', 'Craft', 'Flowers'],
       texto:
-        'I come from agencies —VML The Cocktail, Alegre Design— and I run my own brands: HEAD BUTT BARCELONA and KIMBAO 999. I work with data and with instinct, and I don’t see a conflict between the two.',
+        'I come from agencies —VML The Cocktail, Alegre Design— and I run my own brands: HEAD BUTT BARCELONA and KIMBAO 999. I measure like a data designer and make things like someone who sews her own bags.',
     },
   },
 
   sobre: {
     titulo: 'About',
     entradilla:
-      'I’m Yaiza Ibáñez, and I sign my work as Yaiza Kimbao. Visual designer and communication strategist specialising in branding and visual communication.',
+      'I’m Yaiza Ibáñez, though I sign my work as Yaiza Kimbao. Visual designer and communication strategist: I make brands, and I make them move.',
     bio: [
-      'My background spans graphic design, video production, photography, AI image generation, digital product and marketing. I take a holistic approach: building strong visual identities and creative strategies that serve each project’s goals.',
-      'I’m driven by innovation and constant learning, bringing new tools and trends into my work to sharpen visual impact and user experience.',
+      'I move between graphic design, video, photography, AI, digital product and marketing. I don’t see them as separate disciplines but as tools for one idea: giving every brand a solid identity and a strategy that makes it work.',
+      'I learn fast and try everything new. If a tool or a trend sharpens the visual impact or the experience of whoever is on the other side, it ends up in how I work.',
     ],
     trayectoriaTitulo: 'Experience',
     trayectoria: [
@@ -124,7 +125,7 @@ const en: Textos = {
 
   contacto: {
     titulo: 'Contact',
-    texto: 'Got a brand to build, a campaign to launch or something to stitch together? Let’s talk.',
+    texto: 'A brand to build, a campaign to launch or something to stitch together? Drop me a line.',
     redes: 'Social',
   },
 

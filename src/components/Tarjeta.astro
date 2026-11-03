@@ -12,7 +12,7 @@ const { p, lang, indice } = Astro.props;
 const tx = t(lang);
 ---
 
-<a class:list={['tarjeta', { 'tarjeta--vertical': p.vertical }]} href={url(lang, 'proyecto', p.slug)} style={`--accent:${p.color}`}>
+<a class:list={['tarjeta', { 'tarjeta--vertical': p.vertical }]} href={url(lang, 'proyecto', p.slug)} style={`--accent:${p.color}`} data-cursor={tx.ui.ver}>
   <Foto
     carpeta={`proyectos/${p.slug}`}
     archivo="portada"

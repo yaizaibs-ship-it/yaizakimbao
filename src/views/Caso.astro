@@ -51,9 +51,9 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
     <section class="caso-intro">
       <div class="margen">
         <p class="mini intro-n">({String(i + 1).padStart(2, '0')}/{String(lista.length).padStart(2, '0')}) — {tx.ui.nav.trabajo}</p>
-        <h1 class="titular caso-h"><span data-fit="1" data-fit-max="30vh">{p.titulo}</span></h1>
+        <h1 class="titular caso-h"><span data-fit="1" data-fit-max="30vh" data-split="letras">{p.titulo}</span></h1>
         <div class="intro-grid">
-          <p class="caso-desc" data-reveal>{p.descripcion}</p>
+          <p class="caso-desc" data-split="palabras">{p.descripcion}</p>
           <dl class="ficha mini" data-reveal>
             {p.anio && (<div><dt>{tx.ui.ficha.anio}</dt><dd>{p.anio}</dd></div>)}
             {p.cliente && (<div><dt>{tx.ui.ficha.cliente}</dt><dd>{p.cliente}</dd></div>)}
@@ -115,7 +115,7 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
     }
 
     <nav class="siguiente" style={`--sig:${sig.color};--sig-texto:${sig.colorTexto}`} aria-label={tx.ui.siguiente}>
-      <a href={url(lang, 'proyecto', sig.slug)} class="sig-a">
+      <a href={url(lang, 'proyecto', sig.slug)} class="sig-a" data-cursor={tx.ui.ver}>
         <span class="mini">{tx.ui.siguiente} →</span>
         <span class="titular sig-t"><span data-fit="1" data-fit-max="28vh">{sig.titulo}</span></span>
       </a>

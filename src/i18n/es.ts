@@ -14,15 +14,16 @@ const es = {
   ui: {
     saltar: 'Saltar al contenido',
     nav: { inicio: 'Inicio', trabajo: 'Trabajo', sobre: 'Sobre mí', contacto: 'Contacto' },
-    disponible: 'Disponible para proyectos',
+    disponible: 'Disponible para nuevos proyectos',
     escribeme: 'Escríbeme',
     menu: 'Menú',
     cerrar: 'Cerrar',
     idioma: 'Idioma',
     cambiarIdioma: 'Ver esta página en español',
-    scroll: 'Scroll para explorar',
+    scroll: 'Sigue bajando',
+    ver: 'Ver',
     verProyecto: 'Ver proyecto',
-    verTodo: 'Ver todo el trabajo',
+    verTodo: 'Todo el trabajo',
     proyectos: 'proyectos',
     filtrar: 'Filtrar por disciplina',
     todo: 'Todo',
@@ -42,20 +43,20 @@ const es = {
   },
 
   inicio: {
-    etiquetas: ['Visual Designer', 'Estrategia de comunicación', 'Portfolio 2026', 'Barcelona — Utiel-Requena'],
-    statementIntro: 'Hago marcas que se entienden, se sienten y se mueven.',
+    etiquetas: ['Visual Designer', 'Branding · Estrategia · Motion', 'Portfolio 2026', 'Barcelona — Utiel-Requena'],
+    statementIntro: 'Diseño marcas con cabeza, las cuento con estrategia y las pongo en movimiento.',
     palabras: [
       {
         palabra: 'Marca',
-        texto: 'Identidades visuales sólidas: logo, sistema, brandbook y aplicaciones, de la etiqueta a la tienda.',
+        texto: 'Identidades con carácter: logo, sistema y brandbook que aguantan igual en una etiqueta que en un escaparate.',
       },
       {
         palabra: 'Estrategia',
-        texto: 'Comunicación alineada con objetivos: campañas paid y orgánicas, newsletters, A/B testing y métricas.',
+        texto: 'Cada pieza responde a un objetivo. Campañas paid y orgánicas, newsletters, tests A/B y datos para decidir.',
       },
       {
         palabra: 'Movimiento',
-        texto: 'Contenido que vive en pantalla: motion graphics, vídeo, fotografía e imagen generada con IA.',
+        texto: 'Motion, vídeo, foto e IA para que la marca no se quede quieta en la pantalla.',
       },
     ],
     trabajoTitulo: 'Trabajo',
@@ -65,17 +66,17 @@ const es = {
       listaIzquierda: ['Data driven design', 'Paid & orgánico', 'UX/UI', 'Newsletters', 'SEO / SEM'],
       listaDerecha: ['Moda', 'Upcycling', 'Cultura futbolera', 'Artesanía', 'Flores'],
       texto:
-        'Vengo de agencia —VML The Cocktail, Alegre Design— y llevo mis propias marcas: HEAD BUTT BARCELONA y KIMBAO 999. Trabajo con datos y con intuición, y no veo contradicción entre ambas.',
+        'Vengo de agencia —VML The Cocktail, Alegre Design— y tengo mis propias marcas: HEAD BUTT BARCELONA y KIMBAO 999. Mido como una data designer y creo como alguien que se cose sus propios bolsos.',
     },
   },
 
   sobre: {
     titulo: 'Sobre mí',
     entradilla:
-      'Soy Yaiza Ibáñez y firmo como Yaiza Kimbao. Visual Designer y estratega de comunicación especializada en branding y comunicación visual.',
+      'Soy Yaiza Ibáñez, aunque firmo como Yaiza Kimbao. Visual designer y estratega de comunicación: hago marcas y las hago moverse.',
     bio: [
-      'Tengo experiencia en diseño gráfico, producción de vídeo, fotografía, generación con IA, producto digital y marketing. Mi enfoque es integral: construyo identidades visuales sólidas y estrategias creativas alineadas con los objetivos de cada proyecto.',
-      'Me mueve la innovación y el aprendizaje continuo: aplico nuevas tecnologías y tendencias para mejorar el impacto visual y la experiencia de usuario.',
+      'Me muevo entre el diseño gráfico, el vídeo, la fotografía, la IA, el producto digital y el marketing. No los veo como disciplinas separadas, sino como herramientas de una misma idea: que cada marca tenga una identidad sólida y una estrategia que la haga funcionar.',
+      'Aprendo rápido y pruebo todo lo nuevo. Si una tecnología o una tendencia mejora el impacto visual o la experiencia de quien está al otro lado, acaba en mi forma de trabajar.',
     ],
     trayectoriaTitulo: 'Trayectoria',
     trayectoria: [
@@ -123,7 +124,7 @@ const es = {
 
   contacto: {
     titulo: 'Contacto',
-    texto: '¿Tienes una marca que construir, una campaña que lanzar o algo que coser? Hablemos.',
+    texto: '¿Una marca por construir, una campaña por lanzar o algo por coser? Escríbeme.',
     redes: 'Redes',
   },
 

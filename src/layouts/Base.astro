@@ -71,11 +71,23 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
     <script is:inline define:vars={{ lang }}>
       try { localStorage.setItem('idioma', lang); } catch (e) {}
       document.documentElement.classList.add('js');
+      // Intro con contador: solo la primera vez en la sesión y si no se pide menos movimiento
+      try {
+        if (!sessionStorage.getItem('intro-vista') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('con-intro');
+        }
+      } catch (e) {}
     </script>
     <ClientRouter fallback="swap" />
   </head>
   <body style={estiloAcento} data-pagina={actual}>
     <a class="saltar" href="#contenido">{tx.ui.saltar}</a>
+    <div class="intro" data-intro aria-hidden="true">
+      <span class="firma intro-firma" data-intro-firma>{CONTACTO.firma}</span>
+      <span class="intro-num" data-intro-num>000</span>
+      <span class="mini intro-txt">{tx.inicio.etiquetas[0]} — {tx.inicio.etiquetas[1]}</span>
+    </div>
+    <div class="cursor" data-cursor-el aria-hidden="true"><span data-cursor-texto></span></div>
     <span id="top"></span>
     <Cabecera lang={lang} actual={actual} urlOtroIdioma={urlOtroIdioma} />
     <main id="contenido" tabindex="-1">

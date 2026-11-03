@@ -13,9 +13,9 @@ const s = tx.sobre;
 <Base lang={lang} actual="sobre" urlOtroIdioma={url(otroIdioma(lang), 'sobre')} titulo={s.titulo} descripcion={s.entradilla}>
   <!-- Cabecera: título enorme + retrato -->
   <section class="cab margen">
-    <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh">{s.titulo}</span></h1>
+    <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{s.titulo}</span></h1>
     <div class="cab-grid">
-      <p class="entradilla" data-reveal>{s.entradilla}</p>
+      <p class="entradilla" data-split="palabras">{s.entradilla}</p>
       <div class="retrato" data-speed="0.18">
         <Foto carpeta="personal" archivo="retrato" proporcion="4:5" etiqueta="Retrato Yaiza" alt={CONTACTO.nombre} color="#d9d4cc" colorTexto="#0e0d0c" sizes="(min-width: 861px) 30vw, 80vw" parallax />
       </div>
