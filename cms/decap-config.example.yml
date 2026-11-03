@@ -1,0 +1,50 @@
+# Configuración de ejemplo para Decap CMS (no está activa).
+# Para activarla, copia este archivo a public/admin/config.yml (ver cms/README.md).
+backend:
+  name: github
+  repo: TU-USUARIO/yaiza-kimbao-portfolio # [PENDIENTE]
+  branch: main
+
+media_folder: src/assets/proyectos
+public_folder: /src/assets/proyectos
+
+i18n:
+  structure: multiple_folders
+  locales: [es, en]
+  default_locale: es
+
+collections:
+  - name: proyectos
+    label: Proyectos
+    folder: src/content/proyectos
+    create: true
+    i18n: true
+    slug: '{{slug}}'
+    fields:
+      - { name: titulo, label: Título, widget: string, i18n: true }
+      - { name: descripcion, label: Descripción corta, widget: text, i18n: true }
+      - { name: cliente, label: Cliente, widget: string, required: false, i18n: true }
+      - { name: rol, label: Rol, widget: string, required: false, i18n: true }
+      - { name: portadaAlt, label: Texto alternativo de la portada, widget: string, required: false, i18n: true }
+      - { name: anio, label: Año, widget: string, required: false, i18n: duplicate }
+      - name: disciplinas
+        label: Disciplinas
+        widget: select
+        multiple: true
+        options: [branding, estrategia, motion, digital, moda]
+        i18n: duplicate
+      - { name: color, label: Color de acento, widget: color, i18n: duplicate }
+      - { name: colorTexto, label: Color del texto sobre el acento, widget: color, i18n: duplicate }
+      - { name: orden, label: Orden, widget: number, i18n: duplicate }
+      - { name: destacado, label: Destacado en la home, widget: boolean, default: false, i18n: duplicate }
+      - { name: vertical, label: Tarjeta vertical, widget: boolean, default: false, i18n: duplicate }
+      - name: galeria
+        label: Galería
+        widget: list
+        i18n: duplicate
+        fields:
+          - { name: archivo, label: Nombre del archivo (sin extensión), widget: string }
+          - { name: proporcion, label: Proporción, widget: string, default: '4:5' }
+          - { name: alt, label: Texto alternativo, widget: string }
+          - { name: ancha, label: Ancho completo, widget: boolean, default: false }
+      - { name: body, label: Texto del caso, widget: markdown, i18n: true }
