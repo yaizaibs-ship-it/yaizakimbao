@@ -1,3 +1,5 @@
+import { conBase } from './rutas';
+
 /**
  * Datos de contacto y enlaces: son iguales en los dos idiomas,
  * así que viven aquí una sola vez.
@@ -10,7 +12,7 @@ export const CONTACTO = {
   instagram: 'https://www.instagram.com/', // [PENDIENTE] pega aquí tu URL de Instagram
   /** Archivos del CV dentro de /public/cv/ */
   cv: {
-    es: '/cv/cv-yaiza-ibanez-es.pdf',
-    en: '/cv/cv-yaiza-ibanez-en.pdf',
+    es: conBase('/cv/cv-yaiza-ibanez-es.pdf'),
+    en: conBase('/cv/cv-yaiza-ibanez-en.pdf'),
   },
 };

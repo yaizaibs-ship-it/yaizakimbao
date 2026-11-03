@@ -16,11 +16,17 @@ export const RUTAS = {
 
 export type ClaveRuta = keyof typeof RUTAS;
 
+/** Antepone la carpeta donde está publicada la web (p. ej. /yaizakimbao) */
+export function conBase(ruta: string): string {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  return base + (ruta.startsWith('/') ? ruta : '/' + ruta);
+}
+
 /** Construye una URL: url('en', 'proyecto', 'acero') → /en/projects/acero/ */
 export function url(lang: Idioma, clave: ClaveRuta, slug?: string): string {
   const base = RUTAS[clave][lang];
   const partes = [lang, base, slug].filter(Boolean);
-  return '/' + partes.join('/') + '/';
+  return conBase('/' + partes.join('/') + '/');
 }
 
 export function otroIdioma(lang: Idioma): Idioma {

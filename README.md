@@ -127,18 +127,27 @@ npm run dev      # abre http://localhost:4321 y se actualiza al guardar
 npm run build    # genera la web final en /dist (lo mismo que hace Vercel)
 ```
 
-## 7. Cómo publicar en Vercel y conectar tu dominio
+## 7. Dónde está publicada y cómo conectar tu dominio
 
-**Publicar (una sola vez):**
-1. Crea una cuenta en [vercel.com](https://vercel.com) con tu cuenta de GitHub.
-2. **Add New → Project** → elige este repositorio → **Import**.
-3. Vercel detecta Astro solo. No toques nada y pulsa **Deploy**.
-4. A partir de ahí, cada cambio que subas a GitHub se publica automáticamente.
+**Ahora:** la web se publica gratis en **GitHub Pages**:
+https://yaizaibs-ship-it.github.io/yaizakimbao/
 
-**Conectar tu dominio:**
-1. En Vercel: **Project → Settings → Domains → Add** y escribe tu dominio (por ejemplo `yaizakimbao.com`).
-2. Vercel te dará unos registros DNS (normalmente un registro `A` y un `CNAME` para `www`). Cópialos en el panel de tu proveedor de dominio (GoDaddy, Namecheap, IONOS…).
-3. Cambia la URL en `astro.config.mjs` (`const SITE = …`) y en `public/robots.txt` por la de tu dominio. Así el sitemap y las etiquetas para Google apuntan bien.
+Cada vez que se guarda un cambio en GitHub, se vuelve a publicar sola en 1–2 minutos (lo hace el archivo `.github/workflows/publicar.yml`). Puedes ver el progreso en la pestaña **Actions** del repositorio: un círculo amarillo significa que está publicando, un check verde que ya está lista y una cruz roja que algo ha fallado (la versión anterior sigue en línea).
+
+**Primera vez (solo una):** en GitHub, ve a **Settings → Pages** y en **Source** elige **GitHub Actions**.
+
+**Cuando compres tu dominio** (por ejemplo `yaizakimbao.com`):
+1. En `.github/workflows/publicar.yml` cambia:
+   - `SITE: https://yaizaibs-ship-it.github.io` → `SITE: https://yaizakimbao.com`
+   - `BASE: /yaizakimbao` → `BASE: /`
+2. Crea el archivo `public/CNAME` con una sola línea: `yaizakimbao.com`
+3. En GitHub, **Settings → Pages → Custom domain**: escribe tu dominio, guarda y marca **Enforce HTTPS**.
+4. En el panel de tu proveedor de dominio, añade estos registros DNS:
+   - Cuatro registros `A` para `@` apuntando a `185.199.108.153`, `185.199.109.153`, `185.199.110.153` y `185.199.111.153`
+   - Un registro `CNAME` para `www` apuntando a `yaizaibs-ship-it.github.io`
+5. Los DNS pueden tardar unas horas en activarse.
+
+> Si más adelante prefieres Vercel (más rápido y con estadísticas), también funciona: importa el repositorio en vercel.com y pon `SITE` y `BASE` como variables de entorno en su configuración.
 
 ---
 

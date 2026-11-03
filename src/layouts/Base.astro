@@ -6,7 +6,7 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
-import { t, otroIdioma, type Idioma, type ClaveRuta } from '../i18n';
+import { t, otroIdioma, conBase, type Idioma, type ClaveRuta } from '../i18n';
 import { CONTACTO } from '../i18n/comun';
 
 interface Props {
@@ -32,7 +32,7 @@ const alterna = new URL(urlOtroIdioma, site).href;
 const urlEs = lang === 'es' ? canonica : alterna;
 const urlEn = lang === 'en' ? canonica : alterna;
 
-let og = new URL('/og-default.png', site).href;
+let og = new URL(conBase('/og-default.png'), site).href;
 if (imagenOG) {
   const img = await getImage({ src: imagenOG, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
   og = new URL(img.src, site).href;
@@ -51,8 +51,8 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
     <link rel="alternate" hreflang="es" href={urlEs} />
     <link rel="alternate" hreflang="en" href={urlEn} />
     <link rel="alternate" hreflang="x-default" href={urlEs} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href={conBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="sitemap" href={conBase('/sitemap-index.xml')} />
     <meta name="theme-color" content="#f4f1ec" />
 
     <!-- Open Graph / redes -->

@@ -1,0 +1,49 @@
+# Publica la web en GitHub Pages cada vez que se sube un cambio a «main».
+# Primera vez: en GitHub → Settings → Pages → Source: «GitHub Actions».
+name: Publicar web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # permite publicar a mano desde la pestaña «Actions»
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  # Dirección de la web. Cuando tengas dominio propio:
+  #   SITE: https://tudominio.com
+  #   BASE: /
+  SITE: https://yaizaibs-ship-it.github.io
+  BASE: /yaizakimbao
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

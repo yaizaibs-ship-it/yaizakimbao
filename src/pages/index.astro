@@ -1,5 +1,8 @@
 ---
-// La raíz «/» lleva al idioma que el visitante eligió la última vez (o al español).
+// La raíz lleva al idioma que el visitante eligió la última vez (o al español).
+import { conBase } from '../i18n/rutas';
+const es = conBase('/es/');
+const en = conBase('/en/');
 ---
 
 <!doctype html>
@@ -9,21 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Yaiza Kimbao</title>
     <meta name="robots" content="noindex" />
-    <link rel="alternate" hreflang="es" href="/es/" />
-    <link rel="alternate" hreflang="en" href="/en/" />
-    <script is:inline>
+    <link rel="alternate" hreflang="es" href={es} />
+    <link rel="alternate" hreflang="en" href={en} />
+    <script is:inline define:vars={{ es, en }}>
       (function () {
-        var lang = 'es';
+        var destino = es;
         try {
-          var guardado = localStorage.getItem('idioma');
-          if (guardado === 'en' || guardado === 'es') lang = guardado;
+          if (localStorage.getItem('idioma') === 'en') destino = en;
         } catch (e) {}
-        location.replace('/' + lang + '/');
+        location.replace(destino);
       })();
     </script>
-    <meta http-equiv="refresh" content="1; url=/es/" />
+    <meta http-equiv="refresh" content={`1; url=${es}`} />
   </head>
   <body>
-    <p><a href="/es/">Español</a> · <a href="/en/">English</a></p>
+    <p><a href={es}>Español</a> · <a href={en}>English</a></p>
   </body>
 </html>
