@@ -105,7 +105,6 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
                   color={p.color}
                   colorTexto={p.colorTexto}
                   sizes={g.ancha ? '100vw' : '(min-width: 861px) 48vw, 100vw'}
-                  parallax
                 />
               </figure>
             ))}
@@ -200,6 +199,10 @@ const nombreGaleria = (n: number) => `Galería ${p.titulo} ${n}`;
   .sig-a:hover .sig-t { transform: translateX(1.5rem); }
 
   @media (max-width: 860px) {
+    /* En móvil, la portada y la imagen grande se ven enteras sobre el color del proyecto */
+    .caso-portada :global(img), .crece-media :global(img) { object-fit: contain; }
+    .caso-portada { height: auto; aspect-ratio: 3 / 2; margin-top: calc(var(--cabecera) - 1rem); }
+    .crece { height: auto; aspect-ratio: 8 / 5; }
     .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
     .caso-cuerpo :global(h2) { grid-template-columns: 1fr; gap: 0.6rem; }
     .caso-cuerpo :global(p), .caso-cuerpo :global(ul) { margin-left: 0; }

@@ -1,33 +1,39 @@
 ---
 # Solo textos en inglés. Color, orden, año, disciplinas y galería se cogen del archivo español.
 titulo: "HEAD BUTT BARCELONA"
-descripcion: "My own vintage football-culture clothing brand: identity, editorial brand book, custom Shopify store and the launch of the physical shop."
+descripcion: "My own brand of authenticated vintage football shirts: identity, brand book, a custom Shopify store and a physical shop in Barcelona’s Gothic Quarter turned into a locker room."
 cliente: "Own brand"
-rol: "Founder · creative direction & design"
-portadaAlt: "HEAD BUTT BARCELONA identity"
+rol: "Founder · creative direction, identity & website"
+portadaAlt: "HEAD BUTT logo on grass green, with the headbutt illustration between HEAD and BUTT"
 galeriaAlt:
-  - "Spread from the HEAD BUTT BARCELONA brand book"
-  - "Still from the logo animation"
-  - "Shopify store on mobile"
-  - "Physical shop in the Gothic Quarter"
-  - "Launch content for social media"
-  - "Vintage garments and brand labels"
+  - "Brand book page: the logo and its three parts (wordmark, the moment and the green field)"
+  - "“The pitch is the city” in white condensed type on green"
+  - "Logo versions on green, white, night blue, black and photography"
+  - "Colour palette: grass green, match blue, night blue, black, white, cream, greys and signal red"
+  - "Type system: Sztos, Bebas Neue, Space Grotesk and DM Mono"
+  - "Colour and type pairings that read well"
+  - "Logo misuse: squashing, rotating, cropping, recolouring"
 ---
 
 ## The challenge
 
-Build a vintage football clothing brand from scratch that didn’t look like just another shirt shop. It had to speak football, fashion and internet culture all at once, and hold up equally well on a swing tag, on Instagram and in a physical shop in Barcelona’s Gothic Quarter.
+Build a vintage football shirt brand from scratch that didn’t look like just another shirt shop. It had to speak football, fashion and internet culture at once, and hold up equally well on a swing tag, on Instagram and in a physical shop in Barcelona’s Gothic Quarter.
 
 ## Strategic approach
 
-The concept comes from Zidane’s headbutt in the 2006 World Cup final: an iconic, awkward, very online moment, turned into a name and an attitude. From there, the brand is built as an archive of football culture rather than a product catalogue.
+The concept comes from a single second: on 9 July 2006, in Berlin, Zidane ended his last match with a headbutt in the World Cup final. A scandal for a night that never went away: painted, sculpted, memed, worn. One second of football became culture.
 
-- Audience: [PENDIENTE]
-- Tone of voice: [PENDIENTE]
+HEADBUTT starts from that second: a Barcelona archive of authenticated vintage shirts for people who read football as a language of style and memory. *“Football is a language of identity. The shirt is its alphabet.”*
 
 ## Visual solution
 
-A brutalist-minimal identity in midnight blue and pitch green, set out in an editorial brand book. The system carries through to a custom Shopify store, the logo animation and the launch content for the physical shop.
+- **Logo:** custom heavy italic condensed lettering, drawn as artwork. An illustration of the headbutt splits HEAD and BUTT exactly where the contact happens, all set inside a green field that works like a flag: the logo is always used whole. The only permitted crop is the circular avatar.
+- **Colour:** grass green (#298E3A) leads, night blue anchors, and red is only a signal, below 2% of any layout.
+- **Typography:** Sztos for the logo, Bebas Neue for headlines and prices, Space Grotesk for text and DM Mono for catalogue data, like archive records.
+- **Shop:** the physical space is framed as a locker room, with astroturf walls, a goal net, painted pitch markings and shirts hung by name and number, backs to the room.
+- **Applications:** shopping bag, a hang tag listing club, era, number and condition, and stickers.
+
+It all comes together in a brand book with usage rules and a custom Shopify store, plus the logo animation and launch content.
 
 ## Results & impact
 
