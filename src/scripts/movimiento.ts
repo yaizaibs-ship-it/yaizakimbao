@@ -283,6 +283,13 @@ function intro(): Promise<void> {
 /* ------------------------------------------------------------------ */
 /* Animaciones de scroll                                               */
 /* ------------------------------------------------------------------ */
+/** Las secciones que fijan la pantalla deben calcularse de arriba abajo:
+ *  cuanto más arriba está en la página, mayor prioridad. */
+function prioridad(el: HTMLElement) {
+  const fijadas = $$<HTMLElement>('[data-crece], [data-horizontal]');
+  return fijadas.length - fijadas.indexOf(el);
+}
+
 function animaciones(esMovil: boolean) {
   temaOscuro();
   textos();
@@ -404,7 +411,7 @@ function animaciones(esMovil: boolean) {
     const subida = () => (titulo ? Math.max(0, titulo.offsetHeight - cabecera() + 8) : 0);
     const recorrido = () => Math.max(0, pista.scrollWidth - window.innerWidth);
 
-    ScrollTrigger.create({ trigger: sec, pin, start: 'top top', end: () => '+=' + (subida() + recorrido()), invalidateOnRefresh: true });
+    ScrollTrigger.create({ trigger: sec, pin, start: 'top top', end: () => '+=' + (subida() + recorrido()), invalidateOnRefresh: true, refreshPriority: prioridad(sec) });
     if (titulo) {
       gsap.to(contenido, { y: () => -subida(), ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + subida(), scrub: true, invalidateOnRefresh: true } });
       gsap.to(titulo, { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + subida() * 0.9, scrub: true, invalidateOnRefresh: true } });
@@ -445,7 +452,8 @@ function animaciones(esMovil: boolean) {
     const pie = el.querySelector('[data-crece-pie]');
     const tl = gsap.timeline({
       defaults: { ease: 'none' },
-      scrollTrigger: { trigger: el, start: 'top top', end: '+=120%', pin: true, scrub: true },
+      // refreshPriority: las secciones fijadas se calculan en el orden de la página
+      scrollTrigger: { trigger: el, start: 'top top', end: '+=120%', pin: true, scrub: true, refreshPriority: prioridad(el) },
     });
     // data-crece-desde="8% 6% 8% 6%" permite empezar desde otro tamaño
     const desde = (esMovil ? el.dataset.creceDesdeMovil : el.dataset.creceDesde) || (esMovil ? '28% 18% 28% 18%' : '26% 34% 26% 34%');
@@ -510,6 +518,7 @@ export async function iniciar() {
   for (const img of $$<HTMLImageElement>('img')) {
     if (!img.complete) img.addEventListener('load', () => ScrollTrigger.refresh(), { once: true, signal: control.signal });
   }
+  ScrollTrigger.sort();
   ScrollTrigger.refresh();
 }
 
