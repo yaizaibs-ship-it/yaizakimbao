@@ -26,6 +26,7 @@ export interface Proyecto {
   orden: number;
   destacado: boolean;
   vertical: boolean;
+  portadaPosicion: string;
   enlaces: { texto: string; url: string }[];
   galeria: { archivo: string; proporcion: string; alt: string; ancha?: boolean }[];
   videos: { url: string; embed: string; plataforma: string; vertical: boolean; titulo?: string }[];
@@ -82,6 +83,7 @@ export async function getProyectos(lang: Idioma): Promise<Proyecto[]> {
       orden: d.orden ?? 999,
       destacado: d.destacado ?? false,
       vertical: d.vertical ?? false,
+      portadaPosicion: d.portadaPosicion ?? 'center',
       enlaces: tx.enlaces ?? d.enlaces ?? [],
       galeria,
       videos: (d.videos ?? []).flatMap((v, i) => {

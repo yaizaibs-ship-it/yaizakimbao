@@ -30,6 +30,8 @@ interface Props {
   arte?: 'liso' | 'flores';
   class?: string;
   transitionName?: string;
+  /** Punto de la foto que se mantiene al recortar (object-position) */
+  posicion?: string;
 }
 
 const {
@@ -47,6 +49,7 @@ const {
   arte = 'liso',
   class: clase = '',
   transitionName,
+  posicion,
 } = Astro.props;
 
 const imagen = buscaImagen(carpeta, archivo);
@@ -56,6 +59,7 @@ const estilo = [
   ratio ? `aspect-ratio:${ratio}` : 'height:100%',
   color ? `--ph:${color}` : '',
   `--ph-texto:${colorTexto}`,
+  posicion ? `--pos:${posicion}` : '',
 ].filter(Boolean).join(';');
 const ruta = `src/assets/${carpeta}/${archivo}.jpg`;
 ---
@@ -79,6 +83,7 @@ const ruta = `src/assets/${carpeta}/${archivo}.jpg`;
 
 <style>
   .foto-plano { position: absolute; inset: 0; }
+  .foto :global(img) { object-position: var(--pos, center); }
   .foto-capa { inset: -8% 0; }
   .ph-arte {
     background-color: var(--ph, var(--accent));

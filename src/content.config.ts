@@ -66,6 +66,8 @@ const proyectos = defineCollection({
     colorTexto: z.string().optional(),
     orden: z.number().optional(),
     destacado: z.boolean().optional(),
+    /** Qué parte de la portada se ve al recortarla: «center», «right», «70% 40%»… */
+    portadaPosicion: z.string().optional(),
     /** Tarjeta vertical (más alta) en el carrusel de la home */
     vertical: z.boolean().optional(),
     galeria: z.array(imagenGaleria).optional(),
