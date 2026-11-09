@@ -1,31 +1,63 @@
 ---
-# Solo textos en inglés. Color, orden, año, disciplinas y galería se cogen del archivo español.
-titulo: "Tierra Bobal / Adapt@+T"
-descripcion: "Institutional and tourism communication for the Mancomunidad del Interior Tierra del Vino."
-cliente: "Mancomunidad del Interior Tierra del Vino"
-rol: "Communication & design"
-portadaAlt: "“Huele a Tierra Bobal” campaign"
+# Solo textos en inglés. Color, orden, año, disciplinas y piezas se cogen del archivo español.
+titulo: "Día de Tierra Bobal"
+descripcion: "Identity and campaign for the first Tierra Bobal Day: a week of 19 experiences across the region and a trade and celebration day in Requena, Spanish City of Wine 2026."
+cliente: "Mancomunidad del Interior Tierra del Vino · Tierra Bobal"
+rol: "Event identity, posters, digital campaign and social media"
+portadaAlt: "Tierra Bobal Day posters: a mosaic of regional pictograms in burgundy, green, orange, mustard and black"
 galeriaAlt:
-  - "Piece from the “Huele a Tierra Bobal” campaign"
-  - "Interpretive panel on site"
-  - "Infographic"
-  - "Vineyard landscape in the region"
-  - "Social media posts"
-  - "Newsletter"
+  - "The four A3 Tierra Bobal Day posters side by side"
+bloquesTexto:
+  - titulo: "A mosaic system"
+    texto: "The identity is built from colour modules that work like an alphabet of the region. Every piece is composed by recombining them, so the system grows without losing coherence."
+    alts:
+      - "Web banner: a row of pictograms above the Día de Tierra Bobal logo"
+      - "Main poster with the title in three colour bands and a summary of activities"
+      - "Post with the calendar for the week of 9–15 November"
+  - titulo: "Posters"
+    texto: "Four A3 posters for the region: the general one, the Saturday event, the full event programme and a grid with all 19 experiences of the week."
+    alts:
+      - "Poster for the trade and celebration day on Saturday 14 November"
+      - "Poster with the grid of all 19 experiences of the week"
+      - "Event programme: round table, talk, community lunch and music"
+      - "Piece for the event at the Requena fairground, 11:00 to 18:00, free entry"
+  - titulo: "Experience week on social"
+    texto: "Two carousels present the experiences: wineries, olive mills, cheesemakers, routes and heritage. Each one gets a pictogram and a number, and the practical details read at a glance."
+    alts:
+      - "Carousel cover, part 1"
+      - "Experiences 01 and 02: Finca Hoya de Cadenas and Bodegas del Valle"
+      - "Experiences 03 and 04: Oli-Oli and Hoya de la Iglesia"
+      - "Experiences 05 and 06: FEREVIN and Las Mercedes del Cabriel"
+      - "Experiences 07 and 08: BobalCabriel Experience and La Arponera y Casa Lucía"
+      - "Experiences 09 and 10: Emilio Clemente and Vinea Clausa"
+      - "Carousel cover, part 2"
+      - "Experiences 11 and 12: Bodega Vera de Estenas and the Orange Route"
+      - "Experiences 13 and 14: wine pairing dinner and Requena heritage"
+  - titulo: "Web and invitation"
+    texto: "The same pieces adapt to the Tierra Bobal website and to the official invitation to the trade day."
+    alts:
+      - "Invitation to the trade day on 14 November"
+      - "Banner with the calendar of the experience week"
+      - "Experiences 15 and 16: Kelin and a wine, history and stories tasting"
 ---
 
 ## The challenge
 
-Communicate a rural wine-growing region —and the Adapt@+T programme— to very different audiences: visitors, locals and institutions, with a single visual system and public-sector resources.
+Tierra Bobal needed an event of its own that would bring the whole region together, from wineries and olive mills to accommodation, routes and heritage, and work for two audiences at once: visitors and the trade. In the year Requena is Spanish City of Wine, the challenge was to communicate 19 different experiences, across many towns and in a single week, without the information turning into an unreadable list.
 
 ## Strategic approach
 
-[PENDIENTE] Campaign goals, audiences and priority channels.
+The event was set out in two parts: an **Experience Week** from 9 to 15 November, open to the public, and on **Saturday 14** a trade and celebration day at the Requena fairground, with a round table, a talk, a community lunch and live music.
+
+The communication had to explain that two-part format and turn the programme into something appealing: the week’s calendar is the main device, with the 14th highlighted, and each experience is presented as a standalone piece with all its practical details.
 
 ## Visual solution
 
-The “Huele a Tierra Bobal” campaign (roughly, “It smells of Tierra Bobal”) [REVISAR], interpretive panels, infographics, newsletters and social media management, all under a shared visual line for the tourism brand.
+- **Mosaic system:** geometric pictograms that sum up the region (grape bunch, vineyard rows, bottles, clay jar, mountains, bell tower, flower, leaf and the night sky), set in a grid of colour. They recombine in every format, from a banner strip to an A3 poster.
+- **Colour:** the Tierra Bobal palette (burgundy, green, orange, mustard and black) on a warm off-white.
+- **Typography:** the Tierra Bobal logotype paired with an italic serif for “Día de” and a geometric sans for the information.
+- **Pieces:** four A3 posters, two numbered carousels with the experiences, posts, web banners and an official invitation.
 
 ## Results & impact
 
-[PENDIENTE] Reach, social growth, newsletter open rates…
+[PENDIENTE] Event attendance, experience bookings, carousel reach…

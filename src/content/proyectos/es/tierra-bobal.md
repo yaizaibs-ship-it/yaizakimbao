@@ -1,53 +1,104 @@
 ---
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
-titulo: "Tierra Bobal / Adapt@+T"
-descripcion: "Comunicación institucional y turística para la Mancomunidad del Interior Tierra del Vino."
-cliente: "Mancomunidad del Interior Tierra del Vino"
-rol: "Comunicación y diseño"
-portadaAlt: "Campaña «Huele a Tierra Bobal»"
+titulo: "Día de Tierra Bobal"
+descripcion: "Identidad y campaña del primer Día de Tierra Bobal: una semana con 19 experiencias por el territorio y una jornada técnica y de celebración en Requena, Ciudad Española del Vino 2026."
+cliente: "Mancomunidad del Interior Tierra del Vino · Tierra Bobal"
+rol: "Identidad del evento, cartelería, campaña digital y redes sociales"
+portadaAlt: "Carteles del Día de Tierra Bobal: mosaico de pictogramas del territorio en granate, verde, naranja, mostaza y negro"
 
 # --- Datos compartidos ---
-anio: "Actualidad"
-disciplinas: ["estrategia", "branding", "digital"]  # branding, estrategia, motion, digital, moda
-color: "#6b1530"
-colorTexto: "#f6e7d8"
+anio: "2026"
+disciplinas: ["branding", "estrategia", "digital"]  # branding, estrategia, motion, digital, moda
+color: "#772638"
+colorTexto: "#F8F4EC"
 orden: 4
 destacado: true  # true = aparece en el carrusel de la home
 vertical: false  # true = tarjeta alta en el carrusel
 galeria:
   - archivo: "galeria-01"
     proporcion: "16:9"
-    alt: "Pieza de la campaña «Huele a Tierra Bobal»"
-  - archivo: "galeria-02"
-    proporcion: "4:5"
-    alt: "Panel interpretativo en el territorio"
-  - archivo: "galeria-03"
-    proporcion: "4:5"
-    alt: "Infografía"
-  - archivo: "galeria-04"
-    proporcion: "16:9"
-    alt: "Paisaje de viñedos de la comarca"
-    ancha: true
-  - archivo: "galeria-05"
-    proporcion: "1:1"
-    alt: "Publicaciones en redes sociales"
-  - archivo: "galeria-06"
-    proporcion: "4:5"
-    alt: "Newsletter"
+    alt: "Los cuatro carteles A3 del Día de Tierra Bobal, uno al lado del otro"
+bloques:
+  - titulo: "Un sistema en mosaico"
+    texto: "La identidad se construye con módulos de color que funcionan como un alfabeto del territorio. Cada pieza se compone recombinándolos, así el sistema crece sin perder coherencia."
+    piezas:
+      - archivo: "banner-web"
+        proporcion: "1920:500"
+        alt: "Banner web: fila de pictogramas sobre el logotipo Día de Tierra Bobal"
+        tamano: "completo"
+      - archivo: "cartel-principal"
+        proporcion: "843:1192"
+        alt: "Cartel principal con el titular en tres bandas de color y el resumen de actividades"
+        tamano: "mitad"
+      - archivo: "post-calendario"
+        proporcion: "3:4"
+        alt: "Post con el calendario de la semana del 9 al 15 de noviembre"
+        tamano: "mitad"
+  - titulo: "Cartelería"
+    texto: "Cuatro carteles A3 para el territorio: el general, el de la jornada del sábado, el programa completo de la jornada y la parrilla con las 19 experiencias de la semana."
+    piezas:
+      - archivo: "cartel-jornada"
+        proporcion: "1190:1684"
+        alt: "Cartel de la jornada técnica y celebración del sábado 14 de noviembre"
+        tamano: "mitad"
+      - archivo: "cartel-programa-semana"
+        proporcion: "1191:1684"
+        alt: "Cartel con la parrilla de las 19 experiencias de la semana"
+        tamano: "mitad"
+      - archivo: "cartel-programa-jornada"
+        proporcion: "1123:1588"
+        alt: "Programa de la jornada: mesa redonda, ponencia, comida popular y música"
+        tamano: "mitad"
+      - archivo: "post-jornada"
+        proporcion: "3:4"
+        alt: "Pieza de la jornada en el Recinto Ferial de Requena, de 11:00 a 18:00, con entrada libre"
+        tamano: "mitad"
+  - titulo: "Semana de experiencias en redes"
+    texto: "Dos carruseles presentan las experiencias de bodegas, almazaras, queserías, rutas y patrimonio. Cada experiencia recibe un pictograma y un número, y la información práctica se lee de un vistazo."
+    piezas:
+      - { archivo: "carrusel-01", proporcion: "3:4", alt: "Portada del carrusel, parte 1", tamano: "tercio" }
+      - { archivo: "carrusel-02", proporcion: "3:4", alt: "Experiencias 01 y 02: Finca Hoya de Cadenas y Bodegas del Valle", tamano: "tercio" }
+      - { archivo: "carrusel-03", proporcion: "3:4", alt: "Experiencias 03 y 04: Oli-Oli y Hoya de la Iglesia", tamano: "tercio" }
+      - { archivo: "carrusel-04", proporcion: "3:4", alt: "Experiencias 05 y 06: FEREVIN y Las Mercedes del Cabriel", tamano: "tercio" }
+      - { archivo: "carrusel-05", proporcion: "3:4", alt: "Experiencias 07 y 08: BobalCabriel Experience y La Arponera y Casa Lucía", tamano: "tercio" }
+      - { archivo: "carrusel-06", proporcion: "3:4", alt: "Experiencias 09 y 10: Emilio Clemente y Vinea Clausa", tamano: "tercio" }
+      - { archivo: "carrusel-07", proporcion: "3:4", alt: "Portada del carrusel, parte 2", tamano: "tercio" }
+      - { archivo: "carrusel-08", proporcion: "3:4", alt: "Experiencias 11 y 12: Bodega Vera de Estenas y la Ruta Naranja", tamano: "tercio" }
+      - { archivo: "carrusel-09", proporcion: "3:4", alt: "Experiencias 13 y 14: Cata Maridaje y patrimonio de Requena", tamano: "tercio" }
+  - titulo: "Web e invitación"
+    texto: "Las mismas piezas se adaptan a la web de Tierra Bobal y a la invitación institucional a la jornada técnica."
+    piezas:
+      - archivo: "invitacion"
+        proporcion: "1443:703"
+        alt: "Invitación a la jornada técnica del 14 de noviembre"
+        tamano: "completo"
+      - archivo: "banner-calendario"
+        proporcion: "1020:470"
+        alt: "Banner con el calendario de la semana de experiencias"
+        tamano: "dostercios"
+      - archivo: "carrusel-10"
+        proporcion: "3:4"
+        alt: "Experiencias 15 y 16: Kelin y Cata de vinos, historia y curiosidades"
+        tamano: "tercio"
 ---
 
 ## Reto
 
-Comunicar un territorio rural y vinícola —y el programa Adapt@+T— a públicos muy distintos: visitantes, vecinos e instituciones, con un mismo sistema visual y recursos de administración pública.
+Tierra Bobal necesitaba un evento propio que reuniera a todo el territorio, de las bodegas y almazaras a los alojamientos, las rutas y el patrimonio, y que funcionara a la vez para dos públicos: los visitantes y el sector. En el año de Requena como Ciudad Española del Vino, el reto era comunicar 19 experiencias distintas, en muchos municipios y en una sola semana, sin que la información se volviera un listado imposible de leer.
 
 ## Enfoque estratégico
 
-[PENDIENTE] Objetivos de la campaña, públicos y canales prioritarios.
+El evento se organizó en dos tiempos: una **Semana de experiencias** del 9 al 15 de noviembre, abierta al público, y el **sábado 14** una jornada técnica y de celebración en el Recinto Ferial de Requena, con mesa redonda, ponencia, comida popular y música.
+
+La comunicación tenía que explicar ese formato doble y convertir el programa en algo atractivo: el calendario de la semana se usa como recurso principal, con el día 14 destacado, y cada experiencia se presenta como una pieza independiente con todos sus datos prácticos.
 
 ## Solución visual
 
-La campaña «Huele a Tierra Bobal», paneles interpretativos, infografías, newsletters y la gestión de redes sociales, con una línea visual común para la marca turística.
+- **Sistema en mosaico:** pictogramas geométricos que resumen el territorio (racimo, viñedo, botellas, tinaja, montañas, campanario, flor, hoja y el cielo nocturno), dispuestos en una retícula de color. Se recombinan en cada formato, de la tira de un banner al cartel A3.
+- **Color:** la paleta de Tierra Bobal (granate, verde, naranja, mostaza y negro) sobre un blanco roto cálido.
+- **Tipografía:** el logotipo de Tierra Bobal combinado con una serif cursiva para el «Día de» y una sans geométrica para la información.
+- **Piezas:** cuatro carteles A3, dos carruseles numerados con las experiencias, posts, banners web e invitación institucional.
 
 ## Resultados e impacto
 
-[PENDIENTE] Alcance, crecimiento en redes, aperturas de newsletter…
+[PENDIENTE] Asistentes a la jornada, reservas de las experiencias, alcance de los carruseles…

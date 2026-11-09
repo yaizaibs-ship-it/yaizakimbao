@@ -29,6 +29,7 @@ export interface Proyecto {
   portadaPosicion: string;
   enlaces: { texto: string; url: string }[];
   galeria: { archivo: string; proporcion: string; alt: string; ancha?: boolean }[];
+  bloques: { titulo: string; texto?: string; piezas: { archivo: string; proporcion: string; alt: string; tamano: string }[] }[];
   videos: { url: string; embed: string; plataforma: string; vertical: boolean; titulo?: string }[];
 }
 
@@ -86,6 +87,14 @@ export async function getProyectos(lang: Idioma): Promise<Proyecto[]> {
       portadaPosicion: d.portadaPosicion ?? 'center',
       enlaces: tx.enlaces ?? d.enlaces ?? [],
       galeria,
+      bloques: (d.bloques ?? []).map((b, i) => {
+        const tr = lang !== 'es' ? tx.bloquesTexto?.[i] : undefined;
+        return {
+          titulo: tr?.titulo ?? b.titulo,
+          texto: tr?.texto ?? b.texto,
+          piezas: b.piezas.map((pz, j) => ({ ...pz, alt: tr?.alts?.[j] ?? pz.alt })),
+        };
+      }),
       videos: (d.videos ?? []).flatMap((v, i) => {
         const e = videoEmbed(v.url);
         if (!e) return [];

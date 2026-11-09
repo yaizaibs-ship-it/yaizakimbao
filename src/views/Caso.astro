@@ -124,7 +124,7 @@ const esEstrecha = (pr: string) => {
             </div>
             <span class="mini crece-pie" data-crece-pie>{tx.ui.galeria} ↓</span>
           </div>
-          <div class="rejilla margen">
+          {resto.length > 0 && <div class="rejilla margen">
             {resto.map((g, n) => (
               <figure class:list={['rejilla-item', { ancha: g.ancha, estrecha: esEstrecha(g.proporcion) }]} data-reveal>
                 <Foto
@@ -139,9 +139,37 @@ const esEstrecha = (pr: string) => {
                 />
               </figure>
             ))}
-          </div>
+          </div>}
         </section>
       )
+    }
+
+    {
+      p.bloques.map((b, i) => (
+        <section class="bloque margen" aria-labelledby={`bloque-${i}`}>
+          <header class="bloque-cab" data-reveal>
+            <span class="mini bloque-n">({String(i + 1).padStart(2, '0')})</span>
+            <h2 id={`bloque-${i}`} class="bloque-h">{b.titulo}</h2>
+            {b.texto && <p class="bloque-txt">{b.texto}</p>}
+          </header>
+          <div class="mosaico">
+            {b.piezas.map((pz) => (
+              <figure class:list={['pieza', `pieza--${pz.tamano}`]} data-reveal>
+                <Foto
+                  carpeta={carpeta}
+                  archivo={pz.archivo}
+                  proporcion={pz.proporcion}
+                  etiqueta={`${b.titulo} — ${pz.archivo}`}
+                  alt={pz.alt}
+                  color={p.color}
+                  colorTexto={p.colorTexto}
+                  sizes={pz.tamano === 'completo' ? '100vw' : '(min-width: 861px) 50vw, 100vw'}
+                />
+              </figure>
+            ))}
+          </div>
+        </section>
+      ))
     }
 
     <nav class="siguiente" style={`--sig:${sig.color};--sig-texto:${sig.colorTexto}`} aria-label={tx.ui.siguiente}>
@@ -229,6 +257,28 @@ const esEstrecha = (pr: string) => {
   .rejilla-item.estrecha { grid-column: span 2; }
   .rejilla-item:nth-child(4n + 2):not(.ancha):not(.estrecha) { margin-top: 18vh; }
 
+  /* ---- Bloques en mosaico ---- */
+  .bloque { padding-top: var(--seccion); }
+  .bloque-cab {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.6rem 2rem;
+    align-items: baseline;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-tinta);
+    margin-bottom: clamp(1.5rem, 4vh, 3rem);
+  }
+  .bloque-n { color: var(--accent); filter: saturate(1.2); }
+  .bloque-h { font-size: clamp(2.2rem, 5.6vw, 6rem); font-weight: 500; line-height: 0.9; letter-spacing: -0.055em; }
+  .bloque-txt { grid-column: 2; max-width: 40ch; font-size: var(--t-medio); line-height: 1.2; letter-spacing: -0.012em; }
+  .mosaico { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--hueco); align-items: start; }
+  .pieza { grid-column: span 6; }
+  .pieza--completo { grid-column: 1 / -1; }
+  .pieza--dostercios { grid-column: span 8; }
+  .pieza--tercio { grid-column: span 4; }
+  .pieza--cuarto { grid-column: span 3; }
+  .pieza :global(.foto) { border-radius: 0.35rem; }
+
   /* ---- Siguiente proyecto ---- */
   .siguiente { margin-top: var(--seccion); }
   .sig-a {
@@ -249,6 +299,10 @@ const esEstrecha = (pr: string) => {
     .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
     .caso-cuerpo :global(h2) { grid-template-columns: 1fr; gap: 0.6rem; }
     .caso-cuerpo :global(p), .caso-cuerpo :global(ul) { margin-left: 0; }
+    .bloque-cab { grid-template-columns: 1fr; }
+    .bloque-txt { grid-column: 1; }
+    .pieza, .pieza--dostercios { grid-column: 1 / -1; }
+    .pieza--tercio, .pieza--cuarto { grid-column: span 6; }
     .rejilla { grid-template-columns: 1fr 1fr; }
     .rejilla-item, .rejilla-item.ancha { grid-column: 1 / -1; }
     .rejilla-item.estrecha { grid-column: span 1; }

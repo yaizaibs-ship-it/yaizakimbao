@@ -43,6 +43,26 @@ const video = z.object({
   titulo: z.string().optional(),
 });
 
+/** Bloques de trabajo con título y mosaico de piezas (cartelería, redes, web…) */
+const pieza = z.object({
+  /** Nombre del archivo sin extensión */
+  archivo: z.string(),
+  proporcion: z.string(),
+  alt: z.string().default(''),
+  /** Ancho en el mosaico: completo, dostercios, mitad, tercio o cuarto */
+  tamano: z.enum(['completo', 'dostercios', 'mitad', 'tercio', 'cuarto']).default('mitad'),
+});
+const bloque = z.object({
+  titulo: z.string(),
+  texto: z.string().optional(),
+  piezas: z.array(pieza),
+});
+const bloqueTexto = z.object({
+  titulo: z.string(),
+  texto: z.string().optional(),
+  alts: z.array(z.string()).optional(),
+});
+
 const proyectos = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/proyectos' }),
   schema: z.object({
@@ -72,6 +92,9 @@ const proyectos = defineCollection({
     vertical: z.boolean().optional(),
     galeria: z.array(imagenGaleria).optional(),
     videos: z.array(video).optional(),
+    bloques: z.array(bloque).optional(),
+    /** Traducción de los bloques, en el mismo orden (solo en el archivo inglés) */
+    bloquesTexto: z.array(bloqueTexto).optional(),
     /** Textos traducidos de los vídeos, en el mismo orden (solo en el archivo inglés) */
     videosTitulo: z.array(z.string()).optional(),
   }),

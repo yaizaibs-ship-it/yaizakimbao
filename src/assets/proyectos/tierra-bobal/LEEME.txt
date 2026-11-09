@@ -1,14 +1,5 @@
-FOTOS DE Tierra Bobal / Adapt@+T
-
-Arrastra aquí tus fotos con ESTOS nombres (vale .jpg, .png, .webp o .avif):
-
-  portada.jpg      → 3:2 o 16:9, mínimo 2400 × 1600 px (se usa en la tarjeta, la lista y la cabecera del caso)
-  galeria-01.jpg  → 16:9  — Pieza de la campaña «Huele a Tierra Bobal»
-  galeria-02.jpg  → 4:5  — Panel interpretativo en el territorio
-  galeria-03.jpg  → 4:5  — Infografía
-  galeria-04.jpg  → 16:9  — Paisaje de viñedos de la comarca
-  galeria-05.jpg  → 1:1  — Publicaciones en redes sociales
-  galeria-06.jpg  → 4:5  — Newsletter
-
-Tamaño recomendado: lado largo de 2400 px (las anchas, 3000 px). La web las optimiza sola.
-Si una foto no existe, la web muestra un recuadro de color con su nombre.
+PIEZAS DE TIERRA BOBAL · DÍA DE TIERRA BOBAL
+Las piezas se organizan en «bloques» (ver src/content/proyectos/es/tierra-bobal.md).
+Para cambiar una, sustitúyela por otra con el mismo nombre.
+Para añadir una, súbela aquí y añádela a la lista «piezas» del bloque que toque
+(tamano: completo, dostercios, mitad, tercio o cuarto).
