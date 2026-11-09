@@ -227,10 +227,14 @@ const pf = tx.inicio.perfil;
     border-radius: 0.4rem;
     transition: background 0.4s, color 0.4s;
   }
-  .h-todo:hover { background: var(--color-tinta); color: var(--color-fondo); }
+  @media (hover: hover) {
+    .h-todo:hover { background: var(--color-tinta); color: var(--color-fondo); }
+  }
   .h-todo-txt { font-size: clamp(1.4rem, 2vw, 2.4rem); font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; }
   .h-flecha { font-size: 2.4rem; align-self: flex-end; transition: transform 0.4s var(--ease); }
-  .h-todo:hover .h-flecha { transform: translateX(0.4rem); }
+  @media (hover: hover) {
+    .h-todo:hover .h-flecha { transform: translateX(0.4rem); }
+  }
   .h-progreso { display: none; }
   :global(html.con-movimiento) .h-progreso {
     display: block;
@@ -252,7 +256,9 @@ const pf = tx.inicio.perfil;
     transition: color 0.35s;
   }
   .indice-link { padding-bottom: 1.6vw; max-width: 9rem; }
-  .indice-a:hover .indice-h { color: var(--color-firma); }
+  @media (hover: hover) {
+    .indice-a:hover .indice-h { color: var(--color-firma); }
+  }
 
   @media (max-width: 860px) {
     .marca-sup { display: none; }

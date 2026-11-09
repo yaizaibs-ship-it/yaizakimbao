@@ -7,9 +7,15 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
+/* Colores animables: el navegador hace la transición blanco ↔ negro */
+@property --color-fondo { syntax: '<color>'; inherits: true; initial-value: #f4f1ec; }
+@property --color-tinta { syntax: '<color>'; inherits: true; initial-value: #0e0d0c; }
+@property --color-gris { syntax: '<color>'; inherits: true; initial-value: #6c6761; }
+@property --color-linea { syntax: '<color>'; inherits: true; initial-value: #d9d4cc; }
+
 body {
   background: var(--color-fondo);
-  transition: none;
+  transition: --color-fondo 0.6s var(--ease-in-out), --color-tinta 0.6s var(--ease-in-out), --color-gris 0.6s var(--ease-in-out), --color-linea 0.6s var(--ease-in-out);
   color: var(--color-tinta);
   font-family: var(--font-sans);
   font-size: var(--t-base);
@@ -19,6 +25,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
+}
+/* Tema oscuro (se activa al hacer scroll) */
+body.oscuro {
+  --color-fondo: #0b0b0a;
+  --color-tinta: #f2eee8;
+  --color-gris: #9a948c;
+  --color-linea: #2b2926;
 }
 img, picture, svg, video { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -30,12 +43,16 @@ ul, ol { list-style: none; }
 body::after {
   content: '';
   position: fixed;
-  inset: -50%;
+  inset: -10%;
   z-index: 300;
   pointer-events: none;
   opacity: 0.07;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grano 0.9s steps(4) infinite;
+}
+/* En móvil el grano se queda quieto: ahorra batería y fluidez */
+@media (max-width: 860px), (hover: none) {
+  body::after { inset: 0; animation: none; }
 }
 @keyframes grano {
   0% { transform: translate(0, 0); }
@@ -56,7 +73,7 @@ html.con-intro .intro {
   background: #0b0b0a;
   color: #f2eee8;
   /* si algo falla, la intro se quita sola */
-  animation: intro-salida 0.6s ease 4.5s forwards;
+  animation: intro-salida 0.4s ease 3s forwards;
 }
 html.con-intro body { overflow: hidden; }
 .intro-firma { font-size: clamp(3.5rem, 15vw, 15rem); font-weight: 500; letter-spacing: -0.055em; line-height: 0.9; padding: 0 0.05em; }
@@ -68,21 +85,31 @@ html.con-intro body { overflow: hidden; }
 .intro-txt { position: absolute; left: var(--margen); bottom: 1.6rem; }
 @keyframes intro-salida { to { opacity: 0; visibility: hidden; } }
 
+/* ---------- Evitar parpadeo: lo que se va a revelar empieza oculto ---------- */
+html.pre-anim [data-reveal],
+html.pre-anim [data-split]:not([data-split-hecho]) { visibility: hidden; }
+
 /* ---------- Cursor propio ---------- */
 .cursor {
   position: fixed; left: 0; top: 0; z-index: 350;
-  width: 12px; height: 12px; margin: -6px 0 0 -6px;
-  border-radius: 50%;
-  background: var(--color-firma);
+  width: 96px; height: 96px; margin: -48px 0 0 -48px;
   pointer-events: none;
   opacity: 0;
   display: grid; place-items: center;
-  transition: width 0.45s var(--ease), height 0.45s var(--ease), margin 0.45s var(--ease), opacity 0.3s, background 0.3s;
+  transition: opacity 0.3s;
+}
+/* el círculo se escala (12px → 40px → 96px) en vez de cambiar de tamaño: más fluido */
+.cursor::before {
+  content: ''; position: absolute; inset: 0;
+  border-radius: 50%;
+  background: var(--color-firma);
+  transform: scale(0.125);
+  transition: transform 0.35s var(--ease), background-color 0.3s;
 }
 .cursor.visible { opacity: 1; }
-.cursor.enlace { width: 40px; height: 40px; margin: -20px 0 0 -20px; background: rgb(229 0 126 / 0.25); }
-.cursor.grande { width: 96px; height: 96px; margin: -48px 0 0 -48px; }
-.cursor span { color: #fff; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.3s; }
+.cursor.enlace::before { transform: scale(0.4167); background-color: rgb(229 0 126 / 0.25); }
+.cursor.grande::before { transform: scale(1); }
+.cursor span { position: relative; color: #fff; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.3s; }
 .cursor.grande span { opacity: 1; }
 html.cursor-propio, html.cursor-propio * { cursor: none !important; }
 
@@ -141,7 +168,9 @@ html.lenis, html.lenis body { height: auto; }
   text-transform: uppercase;
   line-height: 1.25;
 }
-.enlace-color:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+@media (hover: hover) {
+  .enlace-color:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+}
 [data-fit] { white-space: nowrap; display: inline-block; width: max-content; transition: none; }
 
 /* Subrayado que se dibuja al pasar el ratón */
@@ -151,7 +180,10 @@ html.lenis, html.lenis body { height: auto; }
   background: currentColor; transform: scaleX(0); transform-origin: right;
   transition: transform 0.4s var(--ease);
 }
-.enlace:hover::after, .enlace[aria-current='page']::after { transform: scaleX(1); transform-origin: left; }
+.enlace[aria-current='page']::after { transform: scaleX(1); transform-origin: left; }
+@media (hover: hover) {
+  .enlace:hover::after { transform: scaleX(1); transform-origin: left; }
+}
 
 /* ---------- Contenedores ---------- */
 .margen { padding-inline: var(--margen); }

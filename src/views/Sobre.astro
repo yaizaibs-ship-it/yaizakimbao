@@ -118,7 +118,9 @@ const s = tx.sobre;
     letter-spacing: 0.04em;
     transition: background 0.3s;
   }
-  .cv:hover { background: var(--color-firma); }
+  @media (hover: hover) {
+    .cv:hover { background: var(--color-firma); }
+  }
 
   .tray-cab { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; }
   .h2 { font-size: clamp(2.6rem, 8vw, 8rem); }

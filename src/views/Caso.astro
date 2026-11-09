@@ -289,7 +289,9 @@ const esEstrecha = (pr: string) => {
     overflow: hidden;
   }
   .sig-t { display: block; margin-top: 1rem; transition: transform 0.7s var(--ease); }
-  .sig-a:hover .sig-t { transform: translateX(1.5rem); }
+  @media (hover: hover) {
+    .sig-a:hover .sig-t { transform: translateX(1.5rem); }
+  }
 
   @media (max-width: 860px) {
     /* En móvil, la portada y la imagen grande se ven enteras sobre el color del proyecto */

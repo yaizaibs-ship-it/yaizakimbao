@@ -132,7 +132,9 @@ const sello = `${CONTACTO.firma} · ${tx.inicio.etiquetas[0]} · `.toUpperCase()
   }
   .idiomas a { opacity: 0.45; transition: opacity 0.3s; }
   .idiomas a[aria-current='true'] { opacity: 1; text-decoration: underline; text-underline-offset: 0.35em; }
-  .idiomas a:hover { opacity: 1; }
+  @media (hover: hover) {
+    .idiomas a:hover { opacity: 1; }
+  }
   .boton-menu { display: none; }
 
   /* ---- Menú móvil ---- */

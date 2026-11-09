@@ -75,6 +75,12 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
         if (!sessionStorage.getItem('intro-vista') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
           document.documentElement.classList.add('con-intro');
         }
+        // Lo que se revela con animación empieza oculto (sin parpadeo).
+        // Si el script de animaciones fallara, se muestra igualmente a los 4 s.
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('pre-anim');
+          setTimeout(function () { document.documentElement.classList.remove('pre-anim'); }, 4000);
+        }
       } catch (e) {}
     </script>
     <ClientRouter fallback="swap" />
@@ -97,6 +103,13 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
       import { iniciar, detener } from '../scripts/movimiento';
       document.addEventListener('astro:page-load', iniciar);
       document.addEventListener('astro:before-swap', detener);
+      // Al cambiar de página: lo que se va a revelar vuelve a empezar oculto (sin parpadeo)
+      document.addEventListener('astro:after-swap', () => {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const html = document.documentElement;
+        html.classList.add('pre-anim');
+        setTimeout(() => html.classList.remove('pre-anim'), 4000);
+      });
     </script>
   </body>
 </html>

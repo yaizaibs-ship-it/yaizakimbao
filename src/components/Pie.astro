@@ -60,7 +60,9 @@ const cinta = tx.pie.cinta;
     width: max-content;
     animation: cinta 30s linear infinite;
   }
-  .cinta:hover .cinta-pista { animation-play-state: paused; }
+  @media (hover: hover) {
+    .cinta:hover .cinta-pista { animation-play-state: paused; }
+  }
   .cinta-grupo {
     flex: none;
     padding-right: 0.25em;
@@ -91,7 +93,9 @@ const cinta = tx.pie.cinta;
     line-height: 1.1;
   }
   .pie-lista li { display: flex; align-items: flex-end; gap: 1.2rem; flex-wrap: wrap; }
-  .pie-lista a:hover { color: var(--color-firma); }
+  @media (hover: hover) {
+    .pie-lista a:hover { color: var(--color-firma); }
+  }
   .pie-lista .enlace-color { padding-bottom: 0.25em; }
 
   .pie-filas {

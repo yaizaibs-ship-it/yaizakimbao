@@ -196,30 +196,22 @@ function interacciones(signal: AbortSignal) {
 /* ------------------------------------------------------------------ */
 /* Fondo blanco → negro al hacer scroll                                */
 /* ------------------------------------------------------------------ */
-const CLARO = { '--color-fondo': '#f4f1ec', '--color-tinta': '#0e0d0c', '--color-gris': '#6c6761', '--color-linea': '#d9d4cc' };
-const OSCURO = { '--color-fondo': '#0b0b0a', '--color-tinta': '#f2eee8', '--color-gris': '#9a948c', '--color-linea': '#2b2926' };
-
+// Los colores de cada tema están en global.css (body.oscuro) y el navegador hace
+// la transición por su cuenta: más ligero que cambiarlos fotograma a fotograma.
 function temaOscuro() {
-  const root = document.documentElement;
-  const cambia = (tema: Record<string, string>, oscuro: boolean) => {
-    root.classList.toggle('oscuro', oscuro);
-    gsap.to(root, { ...tema, duration: 0.8, ease: 'power2.inOut', overwrite: true });
-  };
+  const cambia = (oscuro: boolean) => document.body.classList.toggle('oscuro', oscuro);
   // Al bajar algo más de media pantalla, la web pasa a negro (y vuelve a blanco arriba del todo)
   ScrollTrigger.create({
     trigger: document.body,
     start: () => `top+=${window.innerHeight * 0.6} top`,
     invalidateOnRefresh: true,
-    onEnter: () => cambia(OSCURO, true),
-    onLeaveBack: () => cambia(CLARO, false),
+    onEnter: () => cambia(true),
+    onLeaveBack: () => cambia(false),
   });
 }
 
 function reseteaTema() {
-  const root = document.documentElement;
-  gsap.killTweensOf(root);
-  for (const k of Object.keys(CLARO)) root.style.removeProperty(k);
-  root.classList.remove('oscuro');
+  document.body.classList.remove('oscuro');
 }
 
 /* ------------------------------------------------------------------ */
@@ -248,9 +240,9 @@ function textos() {
       {
         yPercent: 0,
         rotate: 0,
-        duration: letras ? 1.1 : 1.2,
+        duration: letras ? 0.8 : 0.9,
         ease: 'expo.out',
-        stagger: letras ? 0.035 : 0.025,
+        stagger: letras ? 0.02 : 0.018,
         scrollTrigger: { trigger: el, start: 'top 88%', once: true },
       },
     );
@@ -265,8 +257,8 @@ function cursor(signal: AbortSignal) {
   if (!c || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   const etiqueta = c.querySelector<HTMLElement>('[data-cursor-texto]')!;
   document.documentElement.classList.add('cursor-propio');
-  const x = gsap.quickTo(c, 'x', { duration: 0.35, ease: 'power3' });
-  const y = gsap.quickTo(c, 'y', { duration: 0.35, ease: 'power3' });
+  const x = gsap.quickTo(c, 'x', { duration: 0.12, ease: 'power3' });
+  const y = gsap.quickTo(c, 'y', { duration: 0.12, ease: 'power3' });
   window.addEventListener('pointermove', (e) => { x(e.clientX); y(e.clientY); c.classList.add('visible'); }, { signal });
   document.addEventListener('pointerleave', () => c.classList.remove('visible'), { signal });
   document.addEventListener(
@@ -300,9 +292,9 @@ function intro(): Promise<void> {
         ok();
       },
     })
-      .to(contador, { v: 100, duration: 1.3, ease: 'power2.inOut', onUpdate: () => { num.textContent = String(Math.round(contador.v)).padStart(3, '0'); } })
-      .fromTo(el.querySelector('[data-intro-firma]'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.1, ease: 'power2.inOut' }, 0.1)
-      .to(el, { yPercent: -100, duration: 0.9, ease: 'expo.inOut' }, '+=0.15');
+      .to(contador, { v: 100, duration: 0.75, ease: 'power2.out', onUpdate: () => { num.textContent = String(Math.round(contador.v)).padStart(3, '0'); } })
+      .fromTo(el.querySelector('[data-intro-firma]'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.7, ease: 'power3.out' }, 0)
+      .to(el, { yPercent: -100, duration: 0.6, ease: 'expo.inOut' }, '+=0.05');
   });
 }
 
@@ -322,7 +314,7 @@ function animaciones(esMovil: boolean) {
 
   // --- La firma de la portada se «escribe» al cargar ---
   for (const f of $$<HTMLElement>('[data-hero-firma] [data-fit]')) {
-    gsap.fromTo(f, { clipPath: 'inset(-20% 100% -20% 0)' }, { clipPath: 'inset(-20% -5% -20% 0)', duration: 1.8, ease: 'power2.inOut', delay: 0.15 });
+    gsap.fromTo(f, { clipPath: 'inset(-20% 100% -20% 0)' }, { clipPath: 'inset(-20% -5% -20% 0)', duration: 1, ease: 'power3.out', delay: 0.1 });
   }
   // --- Aparecer al entrar ---
   const reveal = $$<HTMLElement>('[data-reveal]');
@@ -357,7 +349,7 @@ function animaciones(esMovil: boolean) {
   }
 
   // --- Palabras que ganan peso y anchura ---
-  for (const el of $$<HTMLElement>('[data-peso]')) {
+  for (const el of esMovil ? [] : $$<HTMLElement>('[data-peso]')) {
     gsap.fromTo(
       el,
       { '--wght': 200 },
@@ -415,10 +407,13 @@ function animaciones(esMovil: boolean) {
     palabras.forEach((p, i) => {
       const t0 = i * 3;
       // entra (0.9) → se queda legible (1.5) → sale (0.6)
-      tl.fromTo(p, { autoAlpha: 0, yPercent: 35, scale: 0.85, '--wght': 150 }, { autoAlpha: 1, yPercent: 0, scale: 1, '--wght': 550, duration: 0.9 }, t0)
+      // en móvil sin cambio de peso: solo aparece y crece (más fluido)
+      const pesoIn = esMovil ? {} : { '--wght': 150 };
+      const pesoOut = esMovil ? {} : { '--wght': 550 };
+      tl.fromTo(p, { autoAlpha: 0, yPercent: 35, scale: 0.85, ...pesoIn }, { autoAlpha: 1, yPercent: 0, scale: 1, ...pesoOut, duration: 0.9 }, t0)
         .to(textos[i], { autoAlpha: 1, y: 0, duration: 0.4 }, t0 + 0.5);
       if (i < n - 1) {
-        tl.to(p, { autoAlpha: 0, yPercent: -35, scale: 1.08, '--wght': 150, duration: 0.6 }, t0 + 2.4)
+        tl.to(p, { autoAlpha: 0, yPercent: -35, scale: 1.08, ...pesoIn, duration: 0.6 }, t0 + 2.4)
           .to(textos[i], { autoAlpha: 0, y: -20, duration: 0.4 }, t0 + 2.4);
       } else {
         tl.to({}, { duration: 1 }); // pausa final
@@ -517,7 +512,7 @@ export async function iniciar() {
   window.addEventListener('load', reajusta, { once: true, signal: control.signal });
 
   if (reducir) {
-    document.documentElement.classList.remove('con-intro');
+    document.documentElement.classList.remove('con-intro', 'pre-anim');
     alPrincipio();
     ultimaNavegacion = '';
     return;
@@ -543,6 +538,8 @@ export async function iniciar() {
   }
   ScrollTrigger.sort();
   ScrollTrigger.refresh();
+  // Ya está todo preparado: se puede mostrar lo que estaba oculto esperando su animación
+  document.documentElement.classList.remove('pre-anim');
   alPrincipio();
   ultimaNavegacion = '';
 }
