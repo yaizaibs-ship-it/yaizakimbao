@@ -2,7 +2,7 @@
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "FAUVES"
 descripcion: "Identidad y brandbook de una marca de moda que habla de amistad: un logotipo inspirado en «La danza» de Matisse y la dirección de arte de su sesión de fotos."
-cliente: "Fauves Brand"
+cliente: "Fauves Brand (proyecto académico)"
 rol: "Branding, brandbook y dirección de arte"
 portadaAlt: "Grupo de amigos tumbados con las cabezas juntas, con el logotipo de FAUVES"
 enlaces:
@@ -12,7 +12,7 @@ enlaces:
     url: "https://drive.google.com/file/d/16DHZLv2EAmSRZCQi3N4qOIkb8Egkf2b_/view?usp=sharing"
 
 # --- Datos compartidos ---
-anio: "[PENDIENTE]"
+anio: "2023"
 disciplinas: ["branding", "moda"]  # branding, estrategia, motion, digital, moda
 color: "#E8365C"
 colorTexto: "#ffffff"

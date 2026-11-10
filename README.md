@@ -87,9 +87,6 @@ La **primera foto de la galería** se expande a pantalla completa con el scroll:
 | `head-butt-barcelona`   | 16:9       | 4:5        | 4:5        | 16:9 (ancha) | 1:1          | 4:5        |
 | `fauves`                | 16:9       | 4:5        | 4:5        | 16:9 (ancha) | 4:5          | 4:5        |
 | `tierra-bobal`          | 16:9       | 4:5        | 4:5        | 16:9 (ancha) | 1:1          | 4:5        |
-| `club-bayer`            | 16:9       | 3:4        | 3:4        | 3:4          | 16:9 (ancha) | —          |
-| `farline`               | 16:9       | 9:16       | 9:16       | 4:5          | 4:5          | —          |
-| `alegre-design`         | 16:9       | 9:16       | 4:5        | 16:9 (ancha) | —            | —          |
 | `kimbao-999`            | 16:9       | 4:5        | 4:5        | 1:1          | 16:9 (ancha) | —          |
 
 **Tamaños en píxeles:** lado largo de **2400 px** (las anchas y las 16:9, **3000 px**). Exporta en JPG calidad 80–85; la web genera sola las versiones ligeras para móvil.

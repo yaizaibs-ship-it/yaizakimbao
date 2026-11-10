@@ -35,11 +35,10 @@ Estado:
 |---|---|
 | HEAD BUTT BARCELONA | Completo (brandbook). Falta: resultados, fotos de tienda/aplicaciones, animación del logo |
 | KIMBAO 999 | Completo (campaña, logo, stories, TikTok). Falta: resultados |
-| FAUVES | Completo (brandbook). Falta: año, aclarar si fue académico, resultados |
+| FAUVES | Completo (brandbook). Académico, 2023. Falta: resultados |
 | Día de Tierra Bobal (`tierra-bobal`) | Completo con 4 bloques en mosaico. Falta: resultados; se pueden añadir campaña «Huele a Tierra Bobal», paneles e infografías como bloques nuevos |
-| Club Bayer, Farline, Alegre Design | Solo texto y placeholders: esperan material de Yaiza |
 
-Sin Instagram en la web (decisión de Yaiza); ACEROº retirado. CV reales ES/EN en `public/cv/` (nov 2026). Otros pendientes: posible nueva portada de la home (imagen o vídeo de flores generado con IA).
+Sin Instagram en la web (decisión de Yaiza); ACEROº retirado. Club Bayer, Farline y Alegre Design retirados como casos (sin permiso del cliente): solo se citan en la trayectoria de Sobre mí. CV reales ES/EN en `public/cv/` (nov 2026). Otros pendientes: posible nueva portada de la home (imagen o vídeo de flores generado con IA).
 
 ## Cómo trabajar
 1. Clonar, `npm ci`, hacer el cambio, `npx astro check` y `npx astro build`.

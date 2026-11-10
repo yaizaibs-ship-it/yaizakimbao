@@ -2,7 +2,7 @@
 # Solo textos en inglés. Color, orden, año, disciplinas y galería se cogen del archivo español.
 titulo: "FAUVES"
 descripcion: "Identity and brand book for a fashion label about friendship: a logo inspired by Matisse’s “Dance” and the art direction of its photo shoot."
-cliente: "Fauves Brand"
+cliente: "Fauves Brand (academic project)"
 rol: "Branding, brand book & art direction"
 portadaAlt: "A group of friends lying with their heads together, with the FAUVES logo"
 enlaces:

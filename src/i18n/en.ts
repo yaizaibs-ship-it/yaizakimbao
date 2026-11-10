@@ -106,13 +106,13 @@ const en: Textos = {
         fecha: 'Oct 2024 — Mar 2025',
         puesto: 'Data Driven Designer',
         lugar: 'VML The Cocktail',
-        texto: 'Paid and organic campaigns, social media, motion, UX/UI and newsletters for Club Bayer, Farline and Welnia.',
+        texto: 'Club Bayer: newsletters for several markets, A/B tests and click and engagement analysis. Farline: paid and organic Instagram content, posts and stories. Also Welnia: social media, motion and UX/UI.',
       },
       {
         fecha: 'Mar — Aug 2024',
         puesto: 'Graphic designer, marketing & communication',
         lugar: 'Alegre Design',
-        texto: 'Social media, newsletters and website; art direction for photo and video; Meta, LinkedIn and Google Ads campaigns; SEO/SEM and Analytics.',
+        texto: 'Social media, newsletters and a UX/UI redesign of the WordPress website; art direction for photo and video; Meta, LinkedIn and Google Ads campaigns; SEO/SEM and Analytics.',
       },
       {
         fecha: 'Nov 2022 — Mar 2023',

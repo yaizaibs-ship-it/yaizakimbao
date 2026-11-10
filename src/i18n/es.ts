@@ -105,13 +105,13 @@ const es = {
         fecha: 'Oct 2024 — Mar 2025',
         puesto: 'Data Driven Designer',
         lugar: 'VML The Cocktail',
-        texto: 'Campañas paid y orgánicas, redes, motion, UX/UI y newsletters para Club Bayer, Farline y Welnia.',
+        texto: 'Club Bayer: newsletters para varios mercados, pruebas A/B y análisis de clics y engagement. Farline: contenido paid y orgánico para Instagram, posts y stories. También Welnia: redes, motion y UX/UI.',
       },
       {
         fecha: 'Mar — Ago 2024',
         puesto: 'Diseñadora gráfica, marketing y comunicación',
         lugar: 'Alegre Design',
-        texto: 'Redes, newsletters y web; dirección de arte en foto y vídeo; campañas en Meta, LinkedIn y Google Ads; SEO/SEM y Analytics.',
+        texto: 'Redes, newsletters y rediseño UX/UI de la web en WordPress; dirección de arte en foto y vídeo; campañas en Meta, LinkedIn y Google Ads; SEO/SEM y Analytics.',
       },
       {
         fecha: 'Nov 2022 — Mar 2023',
