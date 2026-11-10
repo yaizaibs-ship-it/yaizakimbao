@@ -235,6 +235,17 @@ const esEstrecha = (pr: string) => {
   .caso-cuerpo :global(li::before) { content: '—'; position: absolute; left: 0; color: var(--accent); }
   .caso-cuerpo :global(strong) { font-weight: 600; }
   .caso-cuerpo :global(a) { text-decoration: underline; text-underline-offset: 0.15em; }
+  /* Citas (reseñas, testimonios): > en el markdown */
+  .caso-cuerpo :global(blockquote) {
+    margin: 2rem 0 0 calc(33.333% + 0.7rem);
+    max-width: 22ch;
+    font-size: clamp(1.6rem, 3.2vw, 3.2rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+  .caso-cuerpo :global(blockquote p) { margin: 0; max-width: none; font-size: inherit; line-height: inherit; letter-spacing: inherit; }
+  .caso-cuerpo :global(blockquote p::before) { content: '«'; color: var(--accent); }
+  .caso-cuerpo :global(blockquote p::after) { content: '»'; color: var(--accent); }
 
   /* ---- Vídeos de redes ---- */
   .videos { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; padding-top: var(--seccion); }
@@ -301,6 +312,7 @@ const esEstrecha = (pr: string) => {
     .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
     .caso-cuerpo :global(h2) { grid-template-columns: 1fr; gap: 0.6rem; }
     .caso-cuerpo :global(p), .caso-cuerpo :global(ul) { margin-left: 0; }
+    .caso-cuerpo :global(blockquote) { margin-left: 0; }
     .bloque-cab { grid-template-columns: 1fr; }
     .bloque-txt { grid-column: 1; }
     .pieza, .pieza--dostercios { grid-column: 1 / -1; }

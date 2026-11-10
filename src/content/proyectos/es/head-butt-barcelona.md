@@ -61,4 +61,13 @@ Todo se recoge en un brandbook con las reglas de uso y una tienda Shopify a medi
 
 ## Resultados e impacto
 
-[PENDIENTE] Añade aquí datos reales: ventas, seguidores, visitas a la tienda, prensa…
+La tienda tiene una valoración de **5,0 sobre 5 en Google Maps**, con más de 180 reseñas (noviembre de 2026). Algunas de ellas:
+
+> Super cool store and very friendly staff. I highly recommend taking a look here :)
+
+> An excellent shop for vintage football jerseys, with fantastic staff 🔥🙌🏼
+
+> Great shop with really good vintage football jerseys! Definitely worth checking out. 🫶✨
+
+[Ver todas las reseñas en Google Maps](https://www.google.com/maps/place/?q=place_id:ChIJe9hQQ8yjpBIRjv__oFetjEM)
+

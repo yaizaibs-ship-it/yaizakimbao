@@ -37,4 +37,13 @@ It all comes together in a brand book with usage rules and a custom Shopify stor
 
 ## Results & impact
 
-[PENDIENTE] Add real figures here: sales, followers, shop visits, press…
+The shop is rated **5.0 out of 5 on Google Maps**, with more than 180 reviews (November 2026). A few of them:
+
+> Super cool store and very friendly staff. I highly recommend taking a look here :)
+
+> An excellent shop for vintage football jerseys, with fantastic staff 🔥🙌🏼
+
+> Great shop with really good vintage football jerseys! Definitely worth checking out. 🫶✨
+
+[Read all the reviews on Google Maps](https://www.google.com/maps/place/?q=place_id:ChIJe9hQQ8yjpBIRjv__oFetjEM)
+
