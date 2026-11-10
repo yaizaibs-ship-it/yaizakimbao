@@ -148,6 +148,11 @@ const en: Textos = {
     frase: 'Brand design, strategy and content for brands that want to move.',
     escribeme: 'Write to me',
     descarga: 'Download',
+    hechaPorMi: 'I designed and built this site myself.',
+    quieresUna: 'Want one just as cool?',
+    quieresUnaHover: 'Drop me a line and let’s make it',
+    asuntoWeb: 'I want a website like yours',
+    comoLaHice: 'How I made it',
   },
 };
 

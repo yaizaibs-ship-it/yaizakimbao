@@ -44,6 +44,21 @@ const cinta = tx.pie.cinta;
     </ul>
   </div>
 
+  <div class="pie-web margen">
+    <p class="pie-web-texto">{tx.pie.hechaPorMi}</p>
+    <a
+      class="pie-web-cta"
+      href={`mailto:${CONTACTO.email}?subject=${encodeURIComponent(tx.pie.asuntoWeb)}`}
+    >
+      <span class="sr-only">{tx.pie.quieresUna} {tx.pie.quieresUnaHover}</span>
+      <span class="rodillo" aria-hidden="true">
+        <span class="rodillo-fila">{tx.pie.quieresUna}</span>
+        <span class="rodillo-fila rodillo-oculta">{tx.pie.quieresUnaHover} <span class="flecha">→</span></span>
+      </span>
+    </a>
+    <a class="enlace-color" href={url(lang, 'proyecto', 'esta-web')}>{tx.pie.comoLaHice} ↗</a>
+  </div>
+
   <div class="pie-filas mini margen">
     <span>© {new Date().getFullYear()} {CONTACTO.nombre} — {CONTACTO.firma}</span>
     <a class="enlace" href={url(lang, 'contacto')}>{tx.ui.nav.contacto}</a>
@@ -96,6 +111,57 @@ const cinta = tx.pie.cinta;
     .pie-lista a:hover { color: var(--color-firma); }
   }
   .pie-lista .enlace-color { padding-bottom: 0.25em; }
+
+  /* ---- «Esta web la he hecho yo» ----
+     Al pasar el ratón, la pregunta sube y entra «Escríbeme…» en magenta.
+     Solo pasa con el ratón encima (o con el teclado): el resto del tiempo está quieta. */
+  .pie-web {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.35em 0.6em;
+    padding-top: clamp(3rem, 9vh, 6rem);
+    font-size: var(--t-medio);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .pie-web-texto { color: var(--color-gris); }
+  .pie-web .enlace-color { align-self: center; margin-left: 0.4em; }
+  .pie-web-cta { display: inline-block; }
+  .rodillo {
+    display: inline-grid;
+    overflow: hidden;
+    height: 1.15em;
+    vertical-align: bottom;
+  }
+  .rodillo-fila {
+    grid-area: 1 / 1;
+    white-space: nowrap;
+    transition: transform 0.55s var(--ease);
+  }
+  .rodillo-oculta {
+    color: var(--color-firma);
+    transform: translateY(110%);
+  }
+  .flecha { display: inline-block; transition: transform 0.55s var(--ease) 0.08s; }
+  .pie-web-cta:hover .rodillo-fila:first-child,
+  .pie-web-cta:focus-visible .rodillo-fila:first-child { transform: translateY(-110%); }
+  .pie-web-cta:hover .rodillo-oculta,
+  .pie-web-cta:focus-visible .rodillo-oculta { transform: translateY(0); }
+  .pie-web-cta:hover .flecha { transform: translateX(0.25em); }
+  /* En móvil no hay ratón: se ve la pregunta subrayada en magenta */
+  @media (hover: none) {
+    .pie-web-cta .rodillo-fila:first-child {
+      text-decoration: underline;
+      text-decoration-color: var(--color-firma);
+      text-underline-offset: 0.18em;
+      text-decoration-thickness: 2px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rodillo-fila, .flecha { transition: none; }
+  }
 
   .pie-filas {
     display: flex;

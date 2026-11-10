@@ -147,6 +147,12 @@ const es = {
     frase: 'Diseño de marca, estrategia y contenido para marcas que quieren moverse.',
     escribeme: 'Escríbeme',
     descarga: 'Descargar',
+    /** Línea «esta web la he hecho yo» (abajo del todo) */
+    hechaPorMi: 'Esta web la he diseñado y programado yo.',
+    quieresUna: '¿Quieres una igual de guay?',
+    quieresUnaHover: 'Escríbeme y la hacemos',
+    asuntoWeb: 'Quiero una web como la tuya',
+    comoLaHice: 'Cómo la hice',
   },
 };
 
