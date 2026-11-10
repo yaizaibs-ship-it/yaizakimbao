@@ -277,7 +277,7 @@ function cursor(signal: AbortSignal) {
       const ver = t.closest<HTMLElement>('[data-cursor]');
       const enlace = t.closest('a, button, [role="button"]');
       c.classList.toggle('grande', Boolean(ver));
-      c.classList.toggle('enlace', !ver && Boolean(enlace));
+      c.classList.toggle('sobre-enlace', !ver && Boolean(enlace));
       etiqueta.textContent = ver ? ver.dataset.cursor || '' : '';
     },
     { signal },

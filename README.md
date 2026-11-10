@@ -28,11 +28,11 @@ Hecha con **Astro** y con las animaciones en **GSAP + ScrollTrigger + Lenis**.
 Cada proyecto tiene **un archivo por idioma, con el mismo nombre**:
 
 ```
-src/content/proyectos/es/acero.md   ← textos en español + datos compartidos
-src/content/proyectos/en/acero.md   ← solo textos en inglés
+src/content/proyectos/es/fauves.md   ← textos en español + datos compartidos
+src/content/proyectos/en/fauves.md   ← solo textos en inglés
 ```
 
-El nombre del archivo (`acero`) es la dirección de la página: `/es/proyectos/acero/` y `/en/projects/acero/`.
+El nombre del archivo (`fauves`) es la dirección de la página: `/es/proyectos/fauves/` y `/en/projects/fauves/`.
 
 **Editar:** abre el `.md` y cambia el texto. La parte de arriba, entre las dos líneas `---`, son los datos (título, color…). Debajo va el texto del caso, con sus cuatro secciones (`## Reto`, `## Enfoque estratégico`…). Cada `##` es una sección numerada en la web.
 
@@ -85,7 +85,6 @@ La **primera foto de la galería** se expande a pantalla completa con el scroll:
 | Proyecto                | galeria-01 | galeria-02 | galeria-03 | galeria-04   | galeria-05   | galeria-06 |
 | ----------------------- | ---------- | ---------- | ---------- | ------------ | ------------ | ---------- |
 | `head-butt-barcelona`   | 16:9       | 4:5        | 4:5        | 16:9 (ancha) | 1:1          | 4:5        |
-| `acero`                 | 16:9       | 4:5        | 4:5        | 16:9 (ancha) | 1:1          | —          |
 | `fauves`                | 16:9       | 4:5        | 4:5        | 16:9 (ancha) | 4:5          | 4:5        |
 | `tierra-bobal`          | 16:9       | 4:5        | 4:5        | 16:9 (ancha) | 1:1          | 4:5        |
 | `club-bayer`            | 16:9       | 3:4        | 3:4        | 3:4          | 16:9 (ancha) | —          |
@@ -113,7 +112,7 @@ La **primera foto de la galería** se expande a pantalla completa con el scroll:
 3. Haz el cambio y pulsa **Commit changes** con una frase que lo describa («Cambio la bio»).
 4. Vercel publica la web sola en uno o dos minutos.
 
-**Subir fotos desde GitHub:** entra en la carpeta (por ejemplo `src/assets/proyectos/acero/`), pulsa **Add file → Upload files**, arrastra las fotos con su nombre exacto y pulsa **Commit changes**.
+**Subir fotos desde GitHub:** entra en la carpeta (por ejemplo `src/assets/proyectos/fauves/`), pulsa **Add file → Upload files**, arrastra las fotos con su nombre exacto y pulsa **Commit changes**.
 
 > Truco: pulsa la tecla `.` dentro del repositorio y se abre un editor completo en el navegador (github.dev) para cambiar varios archivos a la vez.
 

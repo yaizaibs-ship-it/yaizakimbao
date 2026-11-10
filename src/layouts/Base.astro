@@ -33,8 +33,6 @@ const urlEs = lang === 'es' ? canonica : alterna;
 const urlEn = lang === 'en' ? canonica : alterna;
 
 // Ficha para Google y asistentes de IA: quién es Yaiza y dónde encontrarla.
-// Las redes solo se añaden cuando en comun.ts ya hay un perfil real (no la página genérica).
-const esPerfilReal = (u: string) => !/^https:\/\/www\.(linkedin|instagram)\.com\/?$/.test(u);
 const urlInicio = new URL(conBase(`/${lang}/`), site).href;
 const fichaPersona = {
   '@context': 'https://schema.org',
@@ -45,7 +43,7 @@ const fichaPersona = {
   description: tx.meta.descripcion,
   url: urlInicio,
   email: `mailto:${CONTACTO.email}`,
-  sameAs: [CONTACTO.linkedin, CONTACTO.instagram].filter(esPerfilReal),
+  sameAs: [CONTACTO.linkedin],
 };
 
 let og = new URL(conBase('/og-default.png'), site).href;

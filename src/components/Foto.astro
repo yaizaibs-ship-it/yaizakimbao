@@ -10,13 +10,13 @@ import { Image } from 'astro:assets';
 import { buscaImagen } from '../lib/imagenes';
 
 interface Props {
-  /** Carpeta dentro de src/assets: «proyectos/acero» o «personal» */
+  /** Carpeta dentro de src/assets: «proyectos/fauves» o «personal» */
   carpeta: string;
   /** Nombre del archivo sin extensión: «portada», «galeria-01»… */
   archivo: string;
   /** Proporción «16:9», «4:5»… Si no se indica, la foto rellena su contenedor */
   proporcion?: string;
-  /** Lo que se lee en el placeholder: «Portada ACEROº» */
+  /** Lo que se lee en el placeholder: «Portada FAUVES» */
   etiqueta: string;
   alt: string;
   color?: string;

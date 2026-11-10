@@ -121,7 +121,7 @@ html.pre-anim [data-split]:not([data-split-hecho]) { visibility: hidden; }
   transition: transform 0.35s var(--ease), background-color 0.3s;
 }
 .cursor.visible { opacity: 1; }
-.cursor.enlace::before { transform: scale(0.4167); background-color: rgb(229 0 126 / 0.25); }
+.cursor.sobre-enlace::before { transform: scale(0.4167); background-color: rgb(229 0 126 / 0.25); }
 .cursor.grande::before { transform: scale(1); }
 .cursor span { position: relative; color: #fff; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.3s; }
 .cursor.grande span { opacity: 1; }

@@ -37,9 +37,9 @@ Estado:
 | KIMBAO 999 | Completo (campaña, logo, stories, TikTok). Falta: resultados |
 | FAUVES | Completo (brandbook). Falta: año, aclarar si fue académico, resultados |
 | Día de Tierra Bobal (`tierra-bobal`) | Completo con 4 bloques en mosaico. Falta: resultados; se pueden añadir campaña «Huele a Tierra Bobal», paneles e infografías como bloques nuevos |
-| ACEROº, Club Bayer, Farline, Alegre Design | Solo texto y placeholders: esperan material de Yaiza |
+| Club Bayer, Farline, Alegre Design | Solo texto y placeholders: esperan material de Yaiza |
 
-Otros pendientes: URLs de LinkedIn e Instagram en `comun.ts`; CV definitivos en `public/cv/`; posible nueva portada de la home (imagen o vídeo de flores generado con IA).
+Sin Instagram en la web (decisión de Yaiza); ACEROº retirado. Otros pendientes: CV definitivos en `public/cv/`; posible nueva portada de la home (imagen o vídeo de flores generado con IA).
 
 ## Cómo trabajar
 1. Clonar, `npm ci`, hacer el cambio, `npx astro check` y `npx astro build`.

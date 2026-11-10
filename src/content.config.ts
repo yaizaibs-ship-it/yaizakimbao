@@ -2,10 +2,10 @@
  * ESQUEMA DE LOS PROYECTOS
  * ------------------------------------------------------------------
  * Cada proyecto tiene un archivo .md por idioma, con el MISMO nombre:
- *   src/content/proyectos/es/acero.md
- *   src/content/proyectos/en/acero.md
+ *   src/content/proyectos/es/fauves.md
+ *   src/content/proyectos/en/fauves.md
  *
- * El nombre del archivo es el «slug» (la URL): /es/proyectos/acero/
+ * El nombre del archivo es el «slug» (la URL): /es/proyectos/fauves/
  *
  * Los datos que NO cambian con el idioma (color, orden, año, disciplinas,
  * galería…) se escriben SOLO en el archivo español. El inglés los hereda.

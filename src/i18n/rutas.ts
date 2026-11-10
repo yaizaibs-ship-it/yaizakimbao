@@ -22,7 +22,7 @@ export function conBase(ruta: string): string {
   return base + (ruta.startsWith('/') ? ruta : '/' + ruta);
 }
 
-/** Construye una URL: url('en', 'proyecto', 'acero') → /en/projects/acero/ */
+/** Construye una URL: url('en', 'proyecto', 'fauves') → /en/projects/fauves/ */
 export function url(lang: Idioma, clave: ClaveRuta, slug?: string): string {
   const base = RUTAS[clave][lang];
   const partes = [lang, base, slug].filter(Boolean);
