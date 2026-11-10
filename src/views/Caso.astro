@@ -146,27 +146,57 @@ const esEstrecha = (pr: string) => {
 
     {
       p.bloques.map((b, i) => (
-        <section class="bloque margen" aria-labelledby={`bloque-${i}`}>
-          <header class="bloque-cab" data-reveal>
-            <span class="mini bloque-n">({String(i + 1).padStart(2, '0')})</span>
-            <h2 id={`bloque-${i}`} class="bloque-h">{b.titulo}</h2>
-            {b.texto && <p class="bloque-txt">{b.texto}</p>}
-          </header>
-          <div class="mosaico">
-            {b.piezas.map((pz) => (
-              <figure class:list={['pieza', `pieza--${pz.tamano}`]} data-reveal>
-                <Foto
-                  carpeta={carpeta}
-                  archivo={pz.archivo}
-                  proporcion={pz.proporcion}
-                  etiqueta={`${b.titulo} — ${pz.archivo}`}
-                  alt={pz.alt}
-                  color={p.color}
-                  colorTexto={p.colorTexto}
-                  sizes={pz.tamano === 'completo' ? '100vw' : '(min-width: 861px) 50vw, 100vw'}
-                />
-              </figure>
-            ))}
+        <section
+          class:list={['bloque', { 'bloque--color': b.fondo }]}
+          style={b.fondo ? `--bloque-fondo:${b.fondo};--bloque-texto:${b.colorTexto ?? 'inherit'}` : undefined}
+          aria-labelledby={`bloque-${i}`}
+        >
+          <div class="margen">
+            {b.cita && (
+              <p class="bloque-cita" data-split="palabras">{b.cita}</p>
+            )}
+            <header class="bloque-cab" data-reveal>
+              <span class="mini bloque-n">{b.etiqueta ?? `(${String(i + 1).padStart(2, '0')})`}</span>
+              <h2 id={`bloque-${i}`} class="bloque-h">{b.titulo}</h2>
+              {b.texto && <p class="bloque-txt">{b.texto}</p>}
+            </header>
+            {b.piezas.length > 0 && (
+              <div class="mosaico">
+                {b.piezas.map((pz) => (
+                  <figure class:list={['pieza', `pieza--${pz.tamano}`, { 'pieza--desfase': pz.desfase }]} data-reveal>
+                    {pz.video ? (
+                      <div class="pieza-video" style={`aspect-ratio:${pz.proporcion.replace(':', ' / ')}`}>
+                        <iframe
+                          src={pz.video.embed}
+                          title={pz.alt || `${p.titulo} — ${pz.video.plataforma}`}
+                          loading="lazy"
+                          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                          allowfullscreen
+                          referrerpolicy="strict-origin-when-cross-origin"
+                        ></iframe>
+                      </div>
+                    ) : (
+                      <Foto
+                        carpeta={carpeta}
+                        archivo={pz.archivo ?? ''}
+                        proporcion={pz.proporcion}
+                        etiqueta={`${b.titulo} — ${pz.archivo}`}
+                        alt={pz.alt}
+                        color={p.color}
+                        colorTexto={p.colorTexto}
+                        sizes={pz.tamano === 'completo' ? '100vw' : '(min-width: 861px) 50vw, 100vw'}
+                      />
+                    )}
+                    {(pz.pie || pz.video) && (
+                      <figcaption class="mini pieza-pie">
+                        {pz.pie && <span>{pz.pie}</span>}
+                        {pz.video && <a class="enlace" href={pz.video.url} target="_blank" rel="noopener">{tx.ui.verEn} {pz.video.plataforma} ↗</a>}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       ))
@@ -270,16 +300,34 @@ const esEstrecha = (pr: string) => {
 
   /* ---- Bloques en mosaico ---- */
   .bloque { padding-top: var(--seccion); }
+  /* Bloque con color propio: va a sangre y lleva su propio aire arriba y abajo */
+  .bloque--color {
+    margin-top: var(--seccion);
+    padding-block: clamp(3.5rem, 10vh, 7rem);
+    background: var(--bloque-fondo);
+    color: var(--bloque-texto);
+  }
+  .bloque--color + .bloque--color { margin-top: 0; }
+  .bloque-cita {
+    max-width: 18ch;
+    margin-bottom: clamp(2.5rem, 8vh, 6rem);
+    font-size: clamp(2.6rem, 1rem + 6.4vw, 8.5rem);
+    font-weight: 500;
+    line-height: 0.88;
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+  }
   .bloque-cab {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 0.6rem 2rem;
     align-items: baseline;
     padding-top: 1rem;
-    border-top: 1px solid var(--color-tinta);
+    border-top: 1px solid currentColor;
     margin-bottom: clamp(1.5rem, 4vh, 3rem);
   }
   .bloque-n { color: var(--accent); filter: saturate(1.2); }
+  .bloque--color .bloque-n { color: inherit; filter: none; }
   .bloque-h { font-size: clamp(2.2rem, 5.6vw, 6rem); font-weight: 500; line-height: 0.9; letter-spacing: -0.055em; }
   .bloque-txt { grid-column: 2; max-width: 52ch; font-size: var(--t-cuerpo); line-height: 1.38; letter-spacing: -0.01em; }
   .mosaico { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--hueco); align-items: start; }
@@ -288,7 +336,12 @@ const esEstrecha = (pr: string) => {
   .pieza--dostercios { grid-column: span 8; }
   .pieza--tercio { grid-column: span 4; }
   .pieza--cuarto { grid-column: span 3; }
+  .pieza--sexto { grid-column: span 2; }
+  .pieza--desfase { margin-top: clamp(3rem, 14vh, 10rem); }
   .pieza :global(.foto) { border-radius: 0.35rem; }
+  .pieza-video { position: relative; border-radius: 0.35rem; overflow: hidden; background: var(--color-oscuro); }
+  .pieza-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .pieza-pie { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.6rem; opacity: 0.8; }
 
   /* ---- Siguiente proyecto ---- */
   .siguiente { margin-top: var(--seccion); }
@@ -317,6 +370,9 @@ const esEstrecha = (pr: string) => {
     .bloque-txt { grid-column: 1; }
     .pieza, .pieza--dostercios { grid-column: 1 / -1; }
     .pieza--tercio, .pieza--cuarto { grid-column: span 6; }
+    .pieza--sexto { grid-column: span 4; }
+    .pieza--desfase { margin-top: 0; }
+    .bloque-cita { max-width: none; }
     .rejilla { grid-template-columns: 1fr 1fr; }
     .rejilla-item, .rejilla-item.ancha { grid-column: 1 / -1; }
     .rejilla-item.estrecha { grid-column: span 1; }

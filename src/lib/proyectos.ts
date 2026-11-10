@@ -29,7 +29,23 @@ export interface Proyecto {
   portadaPosicion: string;
   enlaces: { texto: string; url: string }[];
   galeria: { archivo: string; proporcion: string; alt: string; ancha?: boolean }[];
-  bloques: { titulo: string; texto?: string; piezas: { archivo: string; proporcion: string; alt: string; tamano: string }[] }[];
+  bloques: {
+    titulo: string;
+    texto?: string;
+    etiqueta?: string;
+    cita?: string;
+    fondo?: string;
+    colorTexto?: string;
+    piezas: {
+      archivo?: string;
+      video?: { url: string; embed: string; plataforma: string };
+      proporcion: string;
+      alt: string;
+      tamano: string;
+      pie?: string;
+      desfase?: boolean;
+    }[];
+  }[];
   videos: { url: string; embed: string; plataforma: string; vertical: boolean; titulo?: string }[];
 }
 
@@ -92,7 +108,19 @@ export async function getProyectos(lang: Idioma): Promise<Proyecto[]> {
         return {
           titulo: tr?.titulo ?? b.titulo,
           texto: tr?.texto ?? b.texto,
-          piezas: b.piezas.map((pz, j) => ({ ...pz, alt: tr?.alts?.[j] ?? pz.alt })),
+          etiqueta: tr?.etiqueta ?? b.etiqueta,
+          cita: tr?.cita ?? b.cita,
+          fondo: b.fondo,
+          colorTexto: b.colorTexto,
+          piezas: b.piezas.map((pz, j) => {
+            const v = pz.video ? videoEmbed(pz.video) : null;
+            return {
+              ...pz,
+              video: v && pz.video ? { url: pz.video, ...v } : undefined,
+              alt: tr?.alts?.[j] ?? pz.alt,
+              pie: tr?.pies?.[j] ?? pz.pie,
+            };
+          }),
         };
       }),
       videos: (d.videos ?? []).flatMap((v, i) => {

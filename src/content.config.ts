@@ -45,22 +45,38 @@ const video = z.object({
 
 /** Bloques de trabajo con título y mosaico de piezas (cartelería, redes, web…) */
 const pieza = z.object({
-  /** Nombre del archivo sin extensión */
-  archivo: z.string(),
+  /** Nombre del archivo sin extensión (no hace falta si la pieza es un vídeo) */
+  archivo: z.string().optional(),
+  /** En vez de una foto, un vídeo de TikTok, YouTube o Vimeo dentro del mosaico */
+  video: z.url().optional(),
   proporcion: z.string(),
   alt: z.string().default(''),
-  /** Ancho en el mosaico: completo, dostercios, mitad, tercio o cuarto */
-  tamano: z.enum(['completo', 'dostercios', 'mitad', 'tercio', 'cuarto']).default('mitad'),
+  /** Ancho en el mosaico: completo, dostercios, mitad, tercio, cuarto o sexto */
+  tamano: z.enum(['completo', 'dostercios', 'mitad', 'tercio', 'cuarto', 'sexto']).default('mitad'),
+  /** Pie de foto en letra pequeña (opcional) */
+  pie: z.string().optional(),
+  /** true = la pieza baja un poco, para un ritmo de revista (solo en ordenador) */
+  desfase: z.boolean().optional(),
 });
 const bloque = z.object({
   titulo: z.string(),
   texto: z.string().optional(),
-  piezas: z.array(pieza),
+  /** Etiqueta pequeña sobre el título, p. ej. «Acto 01 — Campaña». Si falta: (01) */
+  etiqueta: z.string().optional(),
+  /** Frase grande que abre el bloque (opcional) */
+  cita: z.string().optional(),
+  /** Color de fondo a todo el ancho y color del texto encima (opcionales) */
+  fondo: z.string().optional(),
+  colorTexto: z.string().optional(),
+  piezas: z.array(pieza).default([]),
 });
 const bloqueTexto = z.object({
   titulo: z.string(),
   texto: z.string().optional(),
+  etiqueta: z.string().optional(),
+  cita: z.string().optional(),
   alts: z.array(z.string()).optional(),
+  pies: z.array(z.string()).optional(),
 });
 
 const proyectos = defineCollection({
