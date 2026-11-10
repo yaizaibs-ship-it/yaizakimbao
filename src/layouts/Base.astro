@@ -6,7 +6,7 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
-import { t, otroIdioma, conBase, type Idioma, type ClaveRuta } from '../i18n';
+import { t, otroIdioma, conBase, url, type Idioma, type ClaveRuta } from '../i18n';
 import { CONTACTO } from '../i18n/comun';
 
 interface Props {
@@ -19,9 +19,11 @@ interface Props {
   imagenOG?: ImageMetadata;
   acento?: string;
   acentoTexto?: string;
+  /** Datos del proyecto para Google (solo en los casos) */
+  proyecto?: { anio?: string; cliente?: string; disciplinas?: string[] };
 }
 
-const { lang, actual, urlOtroIdioma, titulo, descripcion, imagenOG, acento, acentoTexto } = Astro.props;
+const { lang, actual, urlOtroIdioma, titulo, descripcion, imagenOG, acento, acentoTexto, proyecto } = Astro.props;
 const tx = t(lang);
 const otro = otroIdioma(lang);
 const tituloFinal = titulo ? `${titulo} — ${CONTACTO.firma}` : tx.meta.tituloSitio;
@@ -44,12 +46,41 @@ const fichaPersona = {
   url: urlInicio,
   email: `mailto:${CONTACTO.email}`,
   sameAs: [CONTACTO.linkedin],
+  knowsAbout: ['Branding', 'Visual design', 'Communication strategy', 'Motion graphics', 'Social media', 'UX/UI'],
+  homeLocation: [{ '@type': 'Place', name: 'Barcelona' }, { '@type': 'Place', name: 'Utiel-Requena, Valencia' }],
 };
 
 let og = new URL(conBase('/og-default.png'), site).href;
 if (imagenOG) {
   const img = await getImage({ src: imagenOG, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
   og = new URL(img.src, site).href;
+}
+// En los proyectos: ficha del trabajo y migas de pan (Inicio › Trabajo › Proyecto)
+const fichasExtra: object[] = [];
+if (actual === 'proyecto' && titulo) {
+  fichasExtra.push({
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: titulo,
+    headline: titulo,
+    description: descFinal,
+    url: canonica,
+    image: og,
+    inLanguage: lang,
+    ...(proyecto?.anio ? { dateCreated: proyecto.anio } : {}),
+    ...(proyecto?.disciplinas?.length ? { keywords: proyecto.disciplinas.join(', ') } : {}),
+    ...(proyecto?.cliente ? { sourceOrganization: { '@type': 'Organization', name: proyecto.cliente } } : {}),
+    author: { '@type': 'Person', name: CONTACTO.nombre, alternateName: CONTACTO.firma, url: urlInicio },
+  });
+  fichasExtra.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: tx.ui.nav.inicio, item: urlInicio },
+      { '@type': 'ListItem', position: 2, name: tx.ui.nav.trabajo, item: new URL(url(lang, 'trabajo'), site).href },
+      { '@type': 'ListItem', position: 3, name: titulo, item: canonica },
+    ],
+  });
 }
 const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?? '#fff'}` : undefined;
 ---
@@ -80,6 +111,7 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
     <meta property="og:locale:alternate" content={t(otro).meta.locale} />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(fichaPersona)} />
+    {fichasExtra.map((f) => <script type="application/ld+json" set:html={JSON.stringify(f)} />)}
 
     <!-- Si el visitante elige idioma, se recuerda para la próxima visita -->
     <script is:inline define:vars={{ lang }}>

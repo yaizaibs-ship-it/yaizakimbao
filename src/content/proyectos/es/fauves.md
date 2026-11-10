@@ -1,7 +1,7 @@
 ---
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "FAUVES"
-descripcion: "Identidad y brandbook de una marca de moda que habla de amistad: un logotipo inspirado en «La danza» de Matisse y la dirección de arte de su sesión de fotos."
+descripcion: "Identidad y brandbook de una marca de moda sobre la amistad, con un logotipo inspirado en «La danza» de Matisse y dirección de arte."
 cliente: "Fauves Brand (proyecto académico)"
 rol: "Branding, brandbook y dirección de arte"
 portadaAlt: "Grupo de amigos tumbados con las cabezas juntas, con el logotipo de FAUVES"
@@ -67,20 +67,20 @@ galeria:
 
 ## Reto
 
-Crear la nueva identidad de FAUVES, una marca de moda que entiende la ropa como una forma de comunicación y de expresión personal, inspirada en la sensibilidad y la pureza de la infancia y en la intensidad de las emociones. La marca quería hablar de los vínculos personales y de cómo nos moldean al crecer.
+Crear la nueva identidad de FAUVES, una marca de moda que entiende la ropa como expresión personal, inspirada en la pureza de la infancia y en la intensidad de las emociones: los vínculos que nos moldean al crecer.
 
 ## Enfoque estratégico
 
-La amistad se convierte en el pilar de la marca: un sentimiento de seguridad y de hogar en un mundo cada vez más cambiante. *«Nothing in the world is holier than friendship.»*
+La amistad es el pilar de la marca: seguridad y hogar en un mundo cambiante. *«Nothing in the world is holier than friendship.»*
 
-La elección del símbolo partió de un análisis de la competencia y de la imagen que la marca quería transmitir. La referencia es «La danza» de Henri Matisse: personajes que se toman de las manos formando un círculo sin fin, una celebración de la alegría, la armonía y la unión, los mismos valores que comparte la marca.
+Tras analizar la competencia, el símbolo toma como referencia «La danza» de Henri Matisse: figuras de la mano en un círculo sin fin que celebran la alegría y la unión.
 
 ## Solución visual
 
-- **Logotipo:** el símbolo se integra en la propia tipografía y une las letras «au», que representan la unión y la amistad. Juntas dibujan un infinito: una amistad profunda que trasciende el tiempo y el espacio. Funciona en versión extendida o solo con el símbolo.
-- **Color:** un rosa intenso (#E8365C), un blanco roto (#F7F7F7) y un negro (#292929), con variaciones del logo entre los tres.
-- **Tipografía:** Varela, una sans serif redondeada que transmite amabilidad y simplicidad, complementada con una letra manuscrita, como de diario personal.
-- **Dirección de arte:** una sesión de fotos con piel, vaquero y cuerpos cercanos, con imágenes cálidas e íntimas que cuentan la amistad sin necesidad de texto.
+- **Logotipo:** el símbolo une las letras «au» y dibuja un infinito, una amistad que trasciende el tiempo. Funciona extendido o solo con el símbolo.
+- **Color:** rosa intenso (#E8365C), blanco roto (#F7F7F7) y negro (#292929).
+- **Tipografía:** Varela, una sans redondeada y amable, con una letra manuscrita de diario personal.
+- **Dirección de arte:** una sesión de fotos cálida e íntima, con piel, vaquero y cuerpos cercanos.
 - **Aplicaciones:** Instagram, carteles y web.
 
 Todo queda recogido en un brandbook con zona de exclusión, composición, test de reducción y usos de marca.

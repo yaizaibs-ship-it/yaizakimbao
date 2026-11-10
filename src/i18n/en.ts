@@ -8,7 +8,7 @@ const en: Textos = {
   meta: {
     tituloSitio: 'Yaiza Kimbao — Visual Designer',
     descripcion:
-      'Portfolio of Yaiza Ibáñez (Yaiza Kimbao): branding, communication strategy and content in motion. Barcelona — Utiel-Requena, Spain.',
+      'Portfolio of Yaiza Ibáñez (Yaiza Kimbao), visual designer and communication strategist: branding, campaigns, social media and motion. Barcelona, Spain.',
     locale: 'en_US',
   },
 
@@ -85,8 +85,8 @@ const en: Textos = {
     entradilla:
       'I’m Yaiza Ibáñez, though I sign my work as Yaiza Kimbao. Visual designer and communication strategist: I make brands, and I make them move.',
     bio: [
-      'I move between graphic design, video, photography, AI, digital product and marketing. I don’t see them as separate disciplines but as tools for one idea: giving every brand a solid identity and a strategy that makes it work.',
-      'I learn fast and try everything new. If a tool or a trend sharpens the visual impact or the experience of whoever is on the other side, it ends up in how I work.',
+      'I move between graphic design, video, photography, AI, digital product and marketing: tools for one idea, giving every brand a solid identity and a strategy that makes it work.',
+      'I learn fast and try everything new: if it sharpens the visual impact or the experience of whoever is on the other side, it ends up in how I work.',
     ],
     trayectoriaTitulo: 'Experience',
     trayectoria: [

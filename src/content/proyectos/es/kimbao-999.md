@@ -1,7 +1,7 @@
 ---
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "KIMBAO 999"
-descripcion: "Proyecto de dirección creativa sobre la identidad como proceso: moda, cuerpo y cultura visual. Una marca que cambia, workshops para transformar ropa y una instalación hecha con lo que había."
+descripcion: "Dirección creativa sobre la identidad como proceso: una marca de moda y upcycling que cambia, workshops para transformar ropa y una instalación."
 cliente: "Marca propia"
 rol: "Fundadora · dirección creativa, identidad visual y styling"
 portadaAlt: "Yaiza de espaldas en un supermercado, con falda de leopardo y camisa verde lima"

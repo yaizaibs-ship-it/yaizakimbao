@@ -33,6 +33,7 @@ const esEstrecha = (pr: string) => {
   imagenOG={buscaImagen(carpeta, 'portada')}
   acento={p.color}
   acentoTexto={p.colorTexto}
+  proyecto={{ anio: p.anio, cliente: p.cliente, disciplinas: p.disciplinas }}
 >
   <article class="caso">
     <!-- Cabecera: la portada de la tarjeta crece hasta aquí y luego se reduce -->
@@ -215,7 +216,7 @@ const esEstrecha = (pr: string) => {
   .caso-portada { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
   .caso-portada-img { position: absolute; inset: 0; transform-origin: 50% 0%; }
 
-  .caso-intro { background: var(--accent); color: var(--accent-texto); padding-block: 3rem 4rem; margin-top: -1px; }
+  .caso-intro { background: var(--accent); color: var(--accent-texto); padding-block: 2.5rem 3rem; margin-top: -1px; }
   .intro-n { margin-bottom: 1.5rem; }
   .caso-h { display: block; }
   .intro-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; margin-top: 2.5rem; align-items: start; }
@@ -234,12 +235,12 @@ const esEstrecha = (pr: string) => {
     grid-template-columns: 1fr 2fr;
     gap: 2rem;
     align-items: baseline;
-    margin-top: clamp(3rem, 9vh, 6rem);
-    padding-top: 1rem;
+    margin-top: clamp(2.5rem, 6vh, 4rem);
+    padding-top: 0.8rem;
     border-top: 1px solid var(--color-tinta);
-    font-size: clamp(2.2rem, 5.6vw, 6rem);
+    font-size: clamp(1.9rem, 3.8vw, 4rem);
     font-weight: 500;
-    line-height: 0.9;
+    line-height: 0.92;
     letter-spacing: -0.055em;
   }
   .caso-cuerpo :global(h2::before) {
@@ -254,7 +255,7 @@ const esEstrecha = (pr: string) => {
   .caso-cuerpo :global(h2:first-child) { margin-top: 0; }
   .caso-cuerpo :global(p), .caso-cuerpo :global(ul) {
     margin-left: calc(33.333% + 0.7rem);
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     max-width: 52ch;
     font-size: var(--t-cuerpo);
     line-height: 1.38;
@@ -269,7 +270,7 @@ const esEstrecha = (pr: string) => {
   .caso-cuerpo :global(blockquote) {
     margin: 2rem 0 0 calc(33.333% + 0.7rem);
     max-width: 22ch;
-    font-size: clamp(1.6rem, 3.2vw, 3.2rem);
+    font-size: clamp(1.3rem, 2.2vw, 2.2rem);
     line-height: 1;
     letter-spacing: -0.045em;
   }
@@ -278,7 +279,7 @@ const esEstrecha = (pr: string) => {
   .caso-cuerpo :global(blockquote p::after) { content: '»'; color: var(--accent); }
 
   /* ---- Vídeos de redes ---- */
-  .videos { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; padding-top: var(--seccion); }
+  .videos { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; padding-top: var(--seccion); }
   .video { width: min(100%, 60rem); }
   .video--vertical { width: min(100%, 23rem); }
   .video-marco { position: relative; aspect-ratio: 16 / 9; background: var(--accent); border-radius: 0.5rem; overflow: hidden; }
@@ -296,22 +297,22 @@ const esEstrecha = (pr: string) => {
   .rejilla-item { grid-column: span 3; }
   .rejilla-item.ancha { grid-column: 1 / -1; }
   .rejilla-item.estrecha { grid-column: span 2; }
-  .rejilla-item:nth-child(4n + 2):not(.ancha):not(.estrecha) { margin-top: 18vh; }
+  .rejilla-item:nth-child(4n + 2):not(.ancha):not(.estrecha) { margin-top: 10vh; }
 
   /* ---- Bloques en mosaico ---- */
   .bloque { padding-top: var(--seccion); }
   /* Bloque con color propio: va a sangre y lleva su propio aire arriba y abajo */
   .bloque--color {
     margin-top: var(--seccion);
-    padding-block: clamp(3.5rem, 10vh, 7rem);
+    padding-block: clamp(2.5rem, 7vh, 5rem);
     background: var(--bloque-fondo);
     color: var(--bloque-texto);
   }
   .bloque--color + .bloque--color { margin-top: 0; }
   .bloque-cita {
     max-width: 18ch;
-    margin-bottom: clamp(2.5rem, 8vh, 6rem);
-    font-size: clamp(2.6rem, 1rem + 6.4vw, 8.5rem);
+    margin-bottom: clamp(2rem, 5vh, 4rem);
+    font-size: clamp(2.2rem, 1rem + 4.4vw, 6rem);
     font-weight: 500;
     line-height: 0.88;
     letter-spacing: -0.06em;
@@ -324,11 +325,11 @@ const esEstrecha = (pr: string) => {
     align-items: baseline;
     padding-top: 1rem;
     border-top: 1px solid currentColor;
-    margin-bottom: clamp(1.5rem, 4vh, 3rem);
+    margin-bottom: clamp(1.2rem, 3vh, 2.2rem);
   }
   .bloque-n { color: var(--accent); filter: saturate(1.2); }
   .bloque--color .bloque-n { color: inherit; filter: none; }
-  .bloque-h { font-size: clamp(2.2rem, 5.6vw, 6rem); font-weight: 500; line-height: 0.9; letter-spacing: -0.055em; }
+  .bloque-h { font-size: clamp(1.9rem, 3.8vw, 4rem); font-weight: 500; line-height: 0.9; letter-spacing: -0.055em; }
   .bloque-txt { grid-column: 2; max-width: 52ch; font-size: var(--t-cuerpo); line-height: 1.38; letter-spacing: -0.01em; }
   .mosaico { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--hueco); align-items: start; }
   .pieza { grid-column: span 6; }
@@ -337,7 +338,7 @@ const esEstrecha = (pr: string) => {
   .pieza--tercio { grid-column: span 4; }
   .pieza--cuarto { grid-column: span 3; }
   .pieza--sexto { grid-column: span 2; }
-  .pieza--desfase { margin-top: clamp(3rem, 14vh, 10rem); }
+  .pieza--desfase { margin-top: clamp(2rem, 8vh, 6rem); }
   .pieza :global(.foto) { border-radius: 0.35rem; }
   .pieza-video { position: relative; border-radius: 0.35rem; overflow: hidden; background: var(--color-oscuro); }
   .pieza-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }

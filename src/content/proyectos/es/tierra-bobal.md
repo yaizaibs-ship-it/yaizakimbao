@@ -1,7 +1,7 @@
 ---
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "Día de Tierra Bobal"
-descripcion: "Identidad y campaña del primer Día de Tierra Bobal: una semana con 19 experiencias por el territorio y una jornada técnica y de celebración en Requena, Ciudad Española del Vino 2026."
+descripcion: "Identidad y campaña del primer Día de Tierra Bobal: 19 experiencias en una semana y una jornada en Requena, Ciudad Española del Vino 2026."
 cliente: "Mancomunidad del Interior Tierra del Vino · Tierra Bobal"
 rol: "Identidad del evento, cartelería, campaña digital y redes sociales"
 portadaAlt: "Carteles del Día de Tierra Bobal: mosaico de pictogramas del territorio en granate, verde, naranja, mostaza y negro"
@@ -84,20 +84,20 @@ bloques:
 
 ## Reto
 
-Tierra Bobal necesitaba un evento propio que reuniera a todo el territorio, de las bodegas y almazaras a los alojamientos, las rutas y el patrimonio, y que funcionara a la vez para dos públicos: los visitantes y el sector. En el año de Requena como Ciudad Española del Vino, el reto era comunicar 19 experiencias distintas, en muchos municipios y en una sola semana, sin que la información se volviera un listado imposible de leer.
+Tierra Bobal necesitaba un evento propio que reuniera a todo el territorio (bodegas, almazaras, alojamientos, rutas y patrimonio) y hablara a dos públicos: visitantes y sector. El reto: comunicar 19 experiencias en muchos municipios y en una sola semana sin que el programa se volviera un listado imposible de leer.
 
 ## Enfoque estratégico
 
-El evento se organizó en dos tiempos: una **Semana de experiencias** del 9 al 15 de noviembre, abierta al público, y el **sábado 14** una jornada técnica y de celebración en el Recinto Ferial de Requena, con mesa redonda, ponencia, comida popular y música.
+El evento tuvo dos tiempos: una **Semana de experiencias** del 9 al 15 de noviembre, abierta al público, y el **sábado 14** una jornada técnica y de celebración en el Recinto Ferial de Requena.
 
-La comunicación tenía que explicar ese formato doble y convertir el programa en algo atractivo: el calendario de la semana se usa como recurso principal, con el día 14 destacado, y cada experiencia se presenta como una pieza independiente con todos sus datos prácticos.
+El calendario de la semana es el recurso principal, con el día 14 destacado, y cada experiencia funciona como una pieza independiente con todos sus datos prácticos.
 
 ## Solución visual
 
-- **Sistema en mosaico:** pictogramas geométricos que resumen el territorio (racimo, viñedo, botellas, tinaja, montañas, campanario, flor, hoja y el cielo nocturno), dispuestos en una retícula de color. Se recombinan en cada formato, de la tira de un banner al cartel A3.
-- **Color:** la paleta de Tierra Bobal (granate, verde, naranja, mostaza y negro) sobre un blanco roto cálido.
-- **Tipografía:** el logotipo de Tierra Bobal combinado con una serif cursiva para el «Día de» y una sans geométrica para la información.
-- **Piezas:** cuatro carteles A3, dos carruseles numerados con las experiencias, posts, banners web e invitación institucional.
+- **Sistema en mosaico:** pictogramas del territorio (racimo, viñedo, tinaja, montañas, campanario…) en una retícula de color que se recombina en cada formato.
+- **Color:** la paleta de Tierra Bobal (granate, verde, naranja, mostaza y negro) sobre blanco roto.
+- **Tipografía:** el logotipo de Tierra Bobal con una serif cursiva para el «Día de» y una sans geométrica para la información.
+- **Piezas:** cuatro carteles A3, dos carruseles, posts, banners web e invitación institucional.
 
 ## Resultados e impacto
 

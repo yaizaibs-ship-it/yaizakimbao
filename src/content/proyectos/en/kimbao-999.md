@@ -1,7 +1,7 @@
 ---
 # Solo textos en inglés. Color, orden, año, disciplinas, galería y bloques se cogen del archivo español.
 titulo: "KIMBAO 999"
-descripcion: "A creative direction project about identity as a process: fashion, body and visual culture. A brand that changes, workshops to transform clothes and an installation built from what was at hand."
+descripcion: "Creative direction on identity as a process: a changing fashion and upcycling brand, workshops to transform clothes and an installation."
 cliente: "Own brand"
 rol: "Founder · creative direction, visual identity & styling"
 portadaAlt: "Yaiza seen from behind in a supermarket, in a leopard skirt and lime-green shirt"

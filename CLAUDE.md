@@ -18,6 +18,8 @@ Este archivo resume el proyecto para que cualquier conversación nueva con Claud
 - Tipografía única **Geist** (peso 500, tracking negativo), estilo inspirado en fuegocaminaconmigo.com. Acento **magenta #e5007e**. Fondo blanco roto que pasa a **negro** al hacer scroll.
 - Variables de estilo: `src/styles/tokens.css`. Textos generales: `src/i18n/es.ts` y `en.ts`. Contacto/CV: `src/i18n/comun.ts`.
 - Rutas con base: usar siempre `url()` / `conBase()` de `src/i18n/rutas.ts` (la web vive en una subcarpeta).
+- Tamaños de texto: `--t-cuerpo` para párrafos, `--t-medio` para entradillas; textos de casos cortos y descripciones ≤160 caracteres (son también la meta description).
+- SEO: `Base.astro` genera canonical, hreflang, Open Graph y JSON-LD (Person en todas; CreativeWork + BreadcrumbList en los casos). `robots.txt` se genera en `src/pages/robots.txt.ts` con el sitemap.
 - Animaciones declaradas con atributos `data-*` y programadas en `src/scripts/movimiento.ts` (documentado arriba del archivo). Las secciones fijadas usan `refreshPriority` para calcularse en orden.
 - Home (`src/views/Inicio.astro`): nombre a todo el ancho → flores que crecen a pantalla completa → cita → statement fijado (Marca/Estrategia/Movimiento) → carrusel horizontal de destacados → índice gigante → pie con cinta «Say hola!».
 

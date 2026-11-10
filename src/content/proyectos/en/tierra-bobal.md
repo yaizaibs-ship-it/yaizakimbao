@@ -1,7 +1,7 @@
 ---
 # Solo textos en inglés. Color, orden, año, disciplinas y piezas se cogen del archivo español.
 titulo: "Día de Tierra Bobal"
-descripcion: "Identity and campaign for the first Tierra Bobal Day: a week of 19 experiences across the region and a trade and celebration day in Requena, Spanish City of Wine 2026."
+descripcion: "Identity and campaign for the first Tierra Bobal Day: 19 experiences in one week and a trade day in Requena, Spanish City of Wine 2026."
 cliente: "Mancomunidad del Interior Tierra del Vino · Tierra Bobal"
 rol: "Event identity, posters, digital campaign and social media"
 portadaAlt: "Tierra Bobal Day posters: a mosaic of regional pictograms in burgundy, green, orange, mustard and black"
@@ -43,20 +43,20 @@ bloquesTexto:
 
 ## The challenge
 
-Tierra Bobal needed an event of its own that would bring the whole region together, from wineries and olive mills to accommodation, routes and heritage, and work for two audiences at once: visitors and the trade. In the year Requena is Spanish City of Wine, the challenge was to communicate 19 different experiences, across many towns and in a single week, without the information turning into an unreadable list.
+Tierra Bobal needed an event of its own to bring the whole region together (wineries, olive mills, accommodation, routes and heritage) and speak to two audiences: visitors and the trade. The challenge: communicate 19 experiences across many towns in a single week without the programme turning into an unreadable list.
 
 ## Strategic approach
 
-The event was set out in two parts: an **Experience Week** from 9 to 15 November, open to the public, and on **Saturday 14** a trade and celebration day at the Requena fairground, with a round table, a talk, a community lunch and live music.
+The event had two parts: an **Experience Week** from 9 to 15 November, open to the public, and on **Saturday 14** a trade and celebration day at the Requena fairground.
 
-The communication had to explain that two-part format and turn the programme into something appealing: the week’s calendar is the main device, with the 14th highlighted, and each experience is presented as a standalone piece with all its practical details.
+The week’s calendar is the main device, with the 14th highlighted, and each experience works as a standalone piece with all its practical details.
 
 ## Visual solution
 
-- **Mosaic system:** geometric pictograms that sum up the region (grape bunch, vineyard rows, bottles, clay jar, mountains, bell tower, flower, leaf and the night sky), set in a grid of colour. They recombine in every format, from a banner strip to an A3 poster.
-- **Colour:** the Tierra Bobal palette (burgundy, green, orange, mustard and black) on a warm off-white.
-- **Typography:** the Tierra Bobal logotype paired with an italic serif for “Día de” and a geometric sans for the information.
-- **Pieces:** four A3 posters, two numbered carousels with the experiences, posts, web banners and an official invitation.
+- **Mosaic system:** pictograms of the region (grape bunch, vineyard, clay jar, mountains, bell tower…) in a colour grid that recombines in every format.
+- **Colour:** the Tierra Bobal palette (burgundy, green, orange, mustard and black) on off-white.
+- **Typography:** the Tierra Bobal logotype with an italic serif for “Día de” and a geometric sans for the information.
+- **Pieces:** four A3 posters, two carousels, posts, web banners and an official invitation.
 
 ## Results & impact
 

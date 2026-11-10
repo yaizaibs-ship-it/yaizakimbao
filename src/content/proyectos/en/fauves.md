@@ -1,7 +1,7 @@
 ---
 # Solo textos en inglés. Color, orden, año, disciplinas y galería se cogen del archivo español.
 titulo: "FAUVES"
-descripcion: "Identity and brand book for a fashion label about friendship: a logo inspired by Matisse’s “Dance” and the art direction of its photo shoot."
+descripcion: "Identity and brand book for a fashion label about friendship, with a logo inspired by Matisse’s “Dance” and art direction."
 cliente: "Fauves Brand (academic project)"
 rol: "Branding, brand book & art direction"
 portadaAlt: "A group of friends lying with their heads together, with the FAUVES logo"
@@ -28,20 +28,20 @@ galeriaAlt:
 
 ## The challenge
 
-Create a new identity for FAUVES, a fashion label that sees clothing as a form of communication and personal expression, inspired by the sensitivity and purity of childhood and the intensity of emotions. The brand wanted to talk about personal bonds and how they shape us as we grow up.
+Create a new identity for FAUVES, a fashion label that sees clothing as personal expression, inspired by the purity of childhood and the intensity of emotions: the bonds that shape us as we grow up.
 
 ## Strategic approach
 
-Friendship becomes the brand’s cornerstone: a feeling of safety and home in an ever-changing world. *“Nothing in the world is holier than friendship.”*
+Friendship is the brand’s cornerstone: safety and home in an ever-changing world. *“Nothing in the world is holier than friendship.”*
 
-The symbol came out of an analysis of the competition and of the image the brand wanted to project. The reference is Henri Matisse’s “Dance”: figures holding hands in an endless circle, a celebration of joy, harmony and togetherness, the same values the brand stands for.
+After a competitor analysis, the symbol takes Henri Matisse’s “Dance” as its reference: figures holding hands in an endless circle, celebrating joy and togetherness.
 
 ## Visual solution
 
-- **Logo:** the symbol is built into the lettering itself, joining the letters “au”, which stand for togetherness and friendship. Together they draw an infinity sign: a deep friendship that transcends time and space. It works as the full wordmark or as the symbol alone.
-- **Colour:** an intense pink (#E8365C), an off-white (#F7F7F7) and a black (#292929), with logo variations across all three.
-- **Typography:** Varela, a rounded sans serif that feels friendly and simple, paired with a handwritten typeface, like a personal diary.
-- **Art direction:** a photo shoot built on skin, denim and bodies close together, with warm, intimate images that tell the story of friendship without needing any copy.
+- **Logo:** the symbol joins the letters “au” and draws an infinity sign, a friendship beyond time. It works as the full wordmark or the symbol alone.
+- **Colour:** intense pink (#E8365C), off-white (#F7F7F7) and black (#292929).
+- **Typography:** Varela, a rounded, friendly sans, paired with a handwritten diary-style typeface.
+- **Art direction:** a warm, intimate photo shoot built on skin, denim and bodies close together.
 - **Applications:** Instagram, posters and website.
 
 It all comes together in a brand book covering clear space, composition, reduction tests and brand usage.

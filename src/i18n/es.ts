@@ -7,7 +7,7 @@ const es = {
   meta: {
     tituloSitio: 'Yaiza Kimbao — Visual Designer',
     descripcion:
-      'Portfolio de Yaiza Ibáñez (Yaiza Kimbao): branding, estrategia de comunicación y contenido en movimiento. Barcelona — Utiel-Requena.',
+      'Portfolio de Yaiza Ibáñez (Yaiza Kimbao), diseñadora visual y estratega de comunicación: branding, campañas, redes y motion. Barcelona y Utiel-Requena.',
     locale: 'es_ES',
   },
 
@@ -84,8 +84,8 @@ const es = {
     entradilla:
       'Soy Yaiza Ibáñez, aunque firmo como Yaiza Kimbao. Visual designer y estratega de comunicación: hago marcas y las hago moverse.',
     bio: [
-      'Me muevo entre el diseño gráfico, el vídeo, la fotografía, la IA, el producto digital y el marketing. No los veo como disciplinas separadas, sino como herramientas de una misma idea: que cada marca tenga una identidad sólida y una estrategia que la haga funcionar.',
-      'Aprendo rápido y pruebo todo lo nuevo. Si una tecnología o una tendencia mejora el impacto visual o la experiencia de quien está al otro lado, acaba en mi forma de trabajar.',
+      'Me muevo entre el diseño gráfico, el vídeo, la fotografía, la IA, el producto digital y el marketing: herramientas de una misma idea, que cada marca tenga una identidad sólida y una estrategia que la haga funcionar.',
+      'Aprendo rápido y pruebo todo lo nuevo: si mejora el impacto visual o la experiencia de quien está al otro lado, acaba en mi forma de trabajar.',
     ],
     trayectoriaTitulo: 'Trayectoria',
     trayectoria: [
