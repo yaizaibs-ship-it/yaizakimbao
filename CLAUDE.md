@@ -29,13 +29,13 @@ Un `.md` por idioma en `src/content/proyectos/es|en/<slug>.md`; los datos compar
 Recursos disponibles en un caso:
 - `galeria`: la primera imagen crece a pantalla completa; las demás van en rejilla (`ancha: true` = todo el ancho; las muy verticales van de tres en tres).
 - `videos`: enlaces de TikTok, YouTube o Vimeo.
-- `bloques`: secciones con título, texto y mosaico de piezas (`tamano`: completo, dostercios, mitad, tercio, cuarto, sexto). Opcionales para dirección de arte: `etiqueta` («Acto 01 — Campaña»), `cita` (frase grande), `fondo` + `colorTexto` (sección de color a sangre); en cada pieza `pie` (pie de foto), `desfase: true` (baja la pieza, ritmo de revista) y `video` (TikTok/YouTube/Vimeo dentro del mosaico, sin `archivo`). En inglés se traducen con `bloquesTexto` (`etiqueta`, `cita`, `pies`). Un bloque sin piezas sirve como cierre de texto (p. ej. Resultados).
+- `bloques`: secciones con título, texto y mosaico de piezas (`tamano`: completo, dostercios, mitad, tercio, cuarto, sexto). Opcionales para dirección de arte: `etiqueta` («Acto 01 — Campaña»), `cita` (frase grande), `fondo` + `colorTexto` (sección de color a sangre); `enlace` (texto + url bajo el texto del bloque); en cada pieza `pie` (pie de foto), `desfase: true` (baja la pieza, ritmo de revista) y `video` (TikTok/YouTube/Vimeo dentro del mosaico, sin `archivo`). En inglés se traducen con `bloquesTexto` (`etiqueta`, `cita`, `pies`, `enlace`). Un bloque sin piezas sirve como cierre de texto (p. ej. Resultados).
 - `portadaPosicion`: encuadre de la portada al recortarla.
 
 Estado:
 | Caso | Estado |
 |---|---|
-| HEAD BUTT BARCELONA | Completo (brandbook + reseñas de Google Maps en resultados). Falta: fotos de tienda/aplicaciones, animación del logo |
+| HEAD BUTT BARCELONA | Rediseñado como relato en 4 actos (concepto en negro, marca en verde, sistema en azul noche, calle en crema) + cierre con reseñas. Falta: fotos reales de tienda/aplicaciones y lookbook, animación del logo |
 | KIMBAO 999 | Rediseñado como relato en 4 actos (campaña en lima, identidad en negro, Workshop 999 en rosa, instalación) + cierre. Falta: resultados |
 | FAUVES | Completo (brandbook). Académico, 2023. Falta: resultados |
 | Día de Tierra Bobal (`tierra-bobal`) | Completo con 4 bloques en mosaico. Falta: resultados; se pueden añadir campaña «Huele a Tierra Bobal», paneles e infografías como bloques nuevos |

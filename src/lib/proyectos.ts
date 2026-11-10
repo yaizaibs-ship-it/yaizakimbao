@@ -36,6 +36,7 @@ export interface Proyecto {
     cita?: string;
     fondo?: string;
     colorTexto?: string;
+    enlace?: { texto: string; url: string };
     piezas: {
       archivo?: string;
       video?: { url: string; embed: string; plataforma: string };
@@ -112,6 +113,7 @@ export async function getProyectos(lang: Idioma): Promise<Proyecto[]> {
           cita: tr?.cita ?? b.cita,
           fondo: b.fondo,
           colorTexto: b.colorTexto,
+          enlace: b.enlace ? { url: b.enlace.url, texto: tr?.enlace ?? b.enlace.texto } : undefined,
           piezas: b.piezas.map((pz, j) => {
             const v = pz.video ? videoEmbed(pz.video) : null;
             return {

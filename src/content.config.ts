@@ -68,6 +68,8 @@ const bloque = z.object({
   /** Color de fondo a todo el ancho y color del texto encima (opcionales) */
   fondo: z.string().optional(),
   colorTexto: z.string().optional(),
+  /** Enlace bajo el texto del bloque, p. ej. «Ver reseñas en Google Maps» (opcional) */
+  enlace: enlace.optional(),
   piezas: z.array(pieza).default([]),
 });
 const bloqueTexto = z.object({
@@ -75,6 +77,8 @@ const bloqueTexto = z.object({
   texto: z.string().optional(),
   etiqueta: z.string().optional(),
   cita: z.string().optional(),
+  /** Texto traducido del enlace del bloque (la URL se hereda del español) */
+  enlace: z.string().optional(),
   alts: z.array(z.string()).optional(),
   pies: z.array(z.string()).optional(),
 });
