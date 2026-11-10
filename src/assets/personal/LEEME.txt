@@ -3,7 +3,6 @@ FOTOS PERSONALES (flores, plantas y retrato)
 Arrastra aquí tus fotos con ESTOS nombres (vale .jpg, .png, .webp o .avif):
 
   portada-flores.jpg   → horizontal 3:2, mínimo 2800 × 1870 px. Foto a sangre de la portada de la home (flores/plantas).
-  flores-02.jpg        → vertical 4:5, 1200 × 1500 px. Capa flotante en la sección «Rigor de agencia & Mirada propia».
   retrato.jpg          → vertical 4:5, 1600 × 2000 px. Tu retrato en «Sobre mí».
   contacto-flores.jpg  → vertical 3:4, 1500 × 2000 px. Foto de la página de contacto.
 

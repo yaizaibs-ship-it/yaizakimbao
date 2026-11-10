@@ -91,7 +91,7 @@ const sello = `${CONTACTO.firma} · ${tx.inicio.etiquetas[0]} · `.toUpperCase()
     grid-template-columns: auto 1fr auto;
     align-items: start;
     gap: 2rem;
-    padding: 1rem var(--margen) 0;
+    padding: calc(1rem + var(--seguro-arriba)) max(var(--margen), env(safe-area-inset-right, 0px)) 0 max(var(--margen), env(safe-area-inset-left, 0px));
     color: #fff;
     mix-blend-mode: difference;
     pointer-events: none;
@@ -144,7 +144,7 @@ const sello = `${CONTACTO.firma} · ${tx.inicio.etiquetas[0]} · `.toUpperCase()
     z-index: 99;
     background: var(--color-tinta);
     color: var(--color-fondo);
-    padding: 7.5rem var(--margen) 2rem;
+    padding: calc(7.5rem + var(--seguro-arriba)) var(--margen) calc(2rem + var(--seguro-abajo));
     display: flex;
     flex-direction: column;
     justify-content: space-between;

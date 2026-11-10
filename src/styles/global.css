@@ -12,10 +12,11 @@ html {
 @property --color-tinta { syntax: '<color>'; inherits: true; initial-value: #0e0d0c; }
 @property --color-gris { syntax: '<color>'; inherits: true; initial-value: #6c6761; }
 @property --color-linea { syntax: '<color>'; inherits: true; initial-value: #d9d4cc; }
+@property --color-firma-texto { syntax: '<color>'; inherits: true; initial-value: #c7006d; }
 
 body {
   background: var(--color-fondo);
-  transition: --color-fondo 0.6s var(--ease-in-out), --color-tinta 0.6s var(--ease-in-out), --color-gris 0.6s var(--ease-in-out), --color-linea 0.6s var(--ease-in-out);
+  transition: --color-fondo 0.6s var(--ease-in-out), --color-tinta 0.6s var(--ease-in-out), --color-gris 0.6s var(--ease-in-out), --color-linea 0.6s var(--ease-in-out), --color-firma-texto 0.6s var(--ease-in-out);
   color: var(--color-tinta);
   font-family: var(--font-sans);
   font-size: var(--t-base);
@@ -32,10 +33,23 @@ body.oscuro {
   --color-tinta: #f2eee8;
   --color-gris: #9a948c;
   --color-linea: #2b2926;
+  --color-firma-texto: #f0168f;
 }
 img, picture, svg, video { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* ---------- Sensación de app en el móvil ---------- */
+/* Sin el destello gris al tocar, y toques instantáneos (sin esperar al doble toque) */
+a, button, label, summary, [role='button'] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+/* Mantener el dedo sobre un botón no selecciona su texto */
+button, summary, [role='button'], .cabecera nav a, .filtros button {
+  -webkit-user-select: none;
+  user-select: none;
+}
 ul, ol { list-style: none; }
 ::selection { background: var(--accent); color: var(--accent-texto); }
 
@@ -78,11 +92,11 @@ html.con-intro .intro {
 html.con-intro body { overflow: hidden; }
 .intro-firma { font-size: clamp(3.5rem, 15vw, 15rem); font-weight: 500; letter-spacing: -0.055em; line-height: 0.9; padding: 0 0.05em; }
 .intro-num {
-  position: absolute; right: var(--margen); bottom: 1.2rem;
+  position: absolute; right: var(--margen); bottom: calc(1.2rem + var(--seguro-abajo));
   font-size: clamp(2.5rem, 7vw, 6rem); font-weight: 500; letter-spacing: -0.05em; color: var(--color-firma); line-height: 0.85;
   font-variant-numeric: tabular-nums;
 }
-.intro-txt { position: absolute; left: var(--margen); bottom: 1.6rem; }
+.intro-txt { position: absolute; left: var(--margen); bottom: calc(1.6rem + var(--seguro-abajo)); }
 @keyframes intro-salida { to { opacity: 0; visibility: hidden; } }
 
 /* ---------- Evitar parpadeo: lo que se va a revelar empieza oculto ---------- */
@@ -161,7 +175,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 /* Enlace pequeño de color con flecha, como en Fuego («VER PROYECTOS →») */
 .enlace-color {
-  color: var(--color-firma);
+  color: var(--color-firma-texto);
   font-size: var(--t-mini);
   font-weight: 500;
   letter-spacing: 0.02em;

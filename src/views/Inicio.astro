@@ -143,7 +143,7 @@ const pf = tx.inicio.perfil;
     position: absolute;
     left: var(--margen);
     right: var(--margen);
-    bottom: 1.3rem;
+    bottom: calc(1.3rem + var(--seguro-abajo));
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -241,7 +241,7 @@ const pf = tx.inicio.perfil;
     position: absolute;
     left: var(--margen);
     right: var(--margen);
-    bottom: 1.4rem;
+    bottom: calc(1.4rem + var(--seguro-abajo));
     height: 1px;
     background: var(--color-linea);
   }

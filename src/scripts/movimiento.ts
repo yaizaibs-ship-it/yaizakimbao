@@ -198,8 +198,16 @@ function interacciones(signal: AbortSignal) {
 /* ------------------------------------------------------------------ */
 // Los colores de cada tema están en global.css (body.oscuro) y el navegador hace
 // la transición por su cuenta: más ligero que cambiarlos fotograma a fotograma.
+// La barra del navegador del móvil acompaña al fondo (claro u oscuro)
+function colorBarraMovil(oscuro: boolean) {
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', oscuro ? '#0b0b0a' : '#f4f1ec');
+}
+
 function temaOscuro() {
-  const cambia = (oscuro: boolean) => document.body.classList.toggle('oscuro', oscuro);
+  const cambia = (oscuro: boolean) => {
+    document.body.classList.toggle('oscuro', oscuro);
+    colorBarraMovil(oscuro);
+  };
   // Al bajar algo más de media pantalla, la web pasa a negro (y vuelve a blanco arriba del todo)
   ScrollTrigger.create({
     trigger: document.body,
@@ -212,6 +220,7 @@ function temaOscuro() {
 
 function reseteaTema() {
   document.body.classList.remove('oscuro');
+  colorBarraMovil(false);
 }
 
 /* ------------------------------------------------------------------ */
@@ -532,9 +541,16 @@ export async function iniciar() {
     animaciones(Boolean(ctx.conditions?.movil));
   });
 
-  // Recalcular cuando terminan de cargar las fotos
+  // Recalcular cuando terminan de cargar las fotos. Si llegan varias seguidas,
+  // se espera a que paren 150 ms y se recalcula una sola vez (evita tirones).
+  let esperaFotos = 0;
+  const recalculaTrasFotos = () => {
+    clearTimeout(esperaFotos);
+    esperaFotos = window.setTimeout(() => ScrollTrigger.refresh(), 150);
+  };
+  control.signal.addEventListener('abort', () => clearTimeout(esperaFotos));
   for (const img of $$<HTMLImageElement>('img')) {
-    if (!img.complete) img.addEventListener('load', () => ScrollTrigger.refresh(), { once: true, signal: control.signal });
+    if (!img.complete) img.addEventListener('load', recalculaTrasFotos, { once: true, signal: control.signal });
   }
   ScrollTrigger.sort();
   ScrollTrigger.refresh();

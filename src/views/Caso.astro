@@ -250,7 +250,7 @@ const esEstrecha = (pr: string) => {
   .galeria { padding-top: var(--seccion); }
   .crece { position: relative; height: 100vh; height: 100svh; }
   .crece-media { position: absolute; inset: 0; }
-  .crece-pie { position: absolute; left: 50%; bottom: 1.5rem; transform: translateX(-50%); }
+  .crece-pie { position: absolute; left: 50%; bottom: calc(1.5rem + var(--seguro-abajo)); transform: translateX(-50%); }
   .rejilla { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--hueco); padding-top: var(--hueco); align-items: start; }
   .rejilla-item { grid-column: span 3; }
   .rejilla-item.ancha { grid-column: 1 / -1; }

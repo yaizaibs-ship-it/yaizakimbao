@@ -8,7 +8,8 @@
   --color-tinta: #0e0d0c;        /* negro tinta */
   --color-gris: #6c6761;         /* textos secundarios */
   --color-linea: #d9d4cc;        /* líneas finas */
-  --color-firma: #e5007e;        /* magenta: enlaces pequeños, cursor, detalles */
+  --color-firma: #e5007e;        /* magenta: cursor, detalles, textos grandes */
+  --color-firma-texto: #c7006d;  /* magenta para textos pequeños: más contraste (accesible) */
   --color-oscuro: #0e0d0c;       /* fondo de secciones oscuras */
 
   /* Color de acento: cada caso lo sustituye por el suyo */
@@ -32,6 +33,9 @@
 
   /* ---- Espacios ---- */
   --margen: clamp(1rem, 3vw, 2.75rem);   /* margen lateral */
+  /* Zonas seguras del móvil (notch arriba, barra de inicio abajo). Valen 0 en ordenador */
+  --seguro-arriba: env(safe-area-inset-top, 0px);
+  --seguro-abajo: env(safe-area-inset-bottom, 0px);
   --hueco: clamp(0.75rem, 1.4vw, 1.5rem); /* separación entre tarjetas */
   --seccion: clamp(5rem, 14vh, 11rem);    /* aire entre secciones */
   --cabecera: 5.5rem;                     /* alto de la cabecera fija */

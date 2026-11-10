@@ -32,6 +32,22 @@ const alterna = new URL(urlOtroIdioma, site).href;
 const urlEs = lang === 'es' ? canonica : alterna;
 const urlEn = lang === 'en' ? canonica : alterna;
 
+// Ficha para Google y asistentes de IA: quién es Yaiza y dónde encontrarla.
+// Las redes solo se añaden cuando en comun.ts ya hay un perfil real (no la página genérica).
+const esPerfilReal = (u: string) => !/^https:\/\/www\.(linkedin|instagram)\.com\/?$/.test(u);
+const urlInicio = new URL(conBase(`/${lang}/`), site).href;
+const fichaPersona = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: CONTACTO.nombre,
+  alternateName: CONTACTO.firma,
+  jobTitle: tx.inicio.etiquetas[0],
+  description: tx.meta.descripcion,
+  url: urlInicio,
+  email: `mailto:${CONTACTO.email}`,
+  sameAs: [CONTACTO.linkedin, CONTACTO.instagram].filter(esPerfilReal),
+};
+
 let og = new URL(conBase('/og-default.png'), site).href;
 if (imagenOG) {
   const img = await getImage({ src: imagenOG, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
@@ -44,7 +60,7 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
 <html lang={lang} data-lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{tituloFinal}</title>
     <meta name="description" content={descFinal} />
     <link rel="canonical" href={canonica} />
@@ -65,6 +81,7 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
     <meta property="og:locale" content={tx.meta.locale} />
     <meta property="og:locale:alternate" content={t(otro).meta.locale} />
     <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(fichaPersona)} />
 
     <!-- Si el visitante elige idioma, se recuerda para la próxima visita -->
     <script is:inline define:vars={{ lang }}>
