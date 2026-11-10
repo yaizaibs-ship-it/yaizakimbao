@@ -33,7 +33,7 @@ Recursos disponibles en un caso:
 Estado:
 | Caso | Estado |
 |---|---|
-| HEAD BUTT BARCELONA | Completo (brandbook). Falta: resultados, fotos de tienda/aplicaciones, animación del logo |
+| HEAD BUTT BARCELONA | Completo (brandbook + reseñas de Google Maps en resultados). Falta: fotos de tienda/aplicaciones, animación del logo |
 | KIMBAO 999 | Completo (campaña, logo, stories, TikTok). Falta: resultados |
 | FAUVES | Completo (brandbook). Académico, 2023. Falta: resultados |
 | Día de Tierra Bobal (`tierra-bobal`) | Completo con 4 bloques en mosaico. Falta: resultados; se pueden añadir campaña «Huele a Tierra Bobal», paneles e infografías como bloques nuevos |
