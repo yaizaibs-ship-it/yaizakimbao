@@ -21,6 +21,7 @@ Este archivo resume el proyecto para que cualquier conversación nueva con Claud
 - Tamaños de texto: `--t-cuerpo` para párrafos, `--t-medio` para entradillas; textos de casos cortos y descripciones ≤160 caracteres (son también la meta description).
 - SEO: `Base.astro` genera canonical, hreflang, Open Graph y JSON-LD (Person en todas; CreativeWork + BreadcrumbList en los casos). `robots.txt` se genera en `src/pages/robots.txt.ts` con el sitemap.
 - Animaciones declaradas con atributos `data-*` y programadas en `src/scripts/movimiento.ts` (documentado arriba del archivo). Las secciones fijadas usan `refreshPriority` para calcularse en orden.
+- Pie (`src/components/Pie.astro`): línea «Esta web la he diseñado y programado yo. ¿Quieres una igual de guay?» con efecto rodillo al pasar el ratón (abre email con asunto) y enlace «Cómo la hice» al caso `esta-web`. Textos en `pie` de es.ts/en.ts.
 - Home (`src/views/Inicio.astro`): nombre a todo el ancho → flores que crecen a pantalla completa → cita → statement fijado (Marca/Estrategia/Movimiento) → carrusel horizontal de destacados → índice gigante → pie con cinta «Say hola!».
 
 ## Proyectos (casos)
@@ -38,6 +39,7 @@ Estado:
 | HEAD BUTT BARCELONA | Rediseñado como relato en 4 actos (concepto en negro, marca en verde, sistema en azul noche, calle en crema) + cierre con reseñas. Falta: fotos reales de tienda/aplicaciones y lookbook, animación del logo |
 | KIMBAO 999 | Rediseñado como relato en 4 actos (campaña en lima, identidad en negro, Workshop 999 en rosa, instalación) + cierre. Falta: resultados |
 | FAUVES | Completo (brandbook). Académico, 2023. Falta: resultados |
+| Esta web (`esta-web`) | Caso sobre el propio portfolio en 4 actos (proceso, tipografía en negro, animaciones en magenta, móvil), con capturas de la web. No destacado en la home. Falta: resultados; rehacer capturas si cambia mucho el diseño |
 | Día de Tierra Bobal (`tierra-bobal`) | Completo con 4 bloques en mosaico. Falta: resultados; se pueden añadir campaña «Huele a Tierra Bobal», paneles e infografías como bloques nuevos |
 
 Sin Instagram en la web (decisión de Yaiza); ACEROº retirado. Club Bayer, Farline y Alegre Design retirados como casos (sin permiso del cliente): solo se citan en la trayectoria de Sobre mí. CV reales ES/EN en `public/cv/` (nov 2026). Otros pendientes: posible nueva portada de la home (imagen o vídeo de flores generado con IA).
