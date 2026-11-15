@@ -222,3 +222,47 @@ html.lenis, html.lenis body { height: auto; }
     scroll-behavior: auto !important;
   }
 }
+
+/* =====================================================================
+   FLUIDEZ TIPO iOS
+   ===================================================================== */
+/* Al tocar: lo que se pulsa se hunde un poco y vuelve con efecto muelle.
+   Usa la propiedad «scale» (independiente de «transform»), así no choca con
+   las animaciones de cada componente. El valor lo mueve movimiento.ts. */
+:is(button, .tarjeta, .fila-a, .menu-movil li a, .boton-menu, .idiomas a, .sello, [data-pulsa]) {
+  scale: var(--pulsa, 1);
+}
+
+/* Cambio de página como en el iPhone: la nueva entra desde la derecha
+   y la anterior se retira un poco a la izquierda (al volver, al revés) */
+::view-transition-group(root) { animation-duration: var(--t-pagina); animation-timing-function: var(--ease-ios); }
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--t-pagina);
+  animation-timing-function: var(--ease-ios);
+  animation-fill-mode: both;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) { animation-name: ios-sale; }
+::view-transition-new(root) { animation-name: ios-entra; }
+[data-astro-transition='back']::view-transition-old(root) { animation-name: ios-sale-atras; }
+[data-astro-transition='back']::view-transition-new(root) { animation-name: ios-entra-atras; }
+/* Las portadas que viajan de una página a otra se transforman con la misma curva */
+::view-transition-group(*) { animation-duration: var(--t-pagina); animation-timing-function: var(--ease-ios); }
+
+/* Ida: la nueva entra por encima, opaca; la anterior se retira y se oscurece un poco */
+@keyframes ios-sale { to { transform: translateX(-10%); filter: brightness(0.9); } }
+@keyframes ios-entra { from { transform: translateX(35%); opacity: 0; } 40% { opacity: 1; } }
+/* Vuelta: la de arriba se va hacia la derecha y deja ver la de debajo */
+@keyframes ios-sale-atras { 60% { opacity: 1; } to { transform: translateX(35%); opacity: 0; } }
+@keyframes ios-entra-atras { from { transform: translateX(-10%); filter: brightness(0.9); } }
+[data-astro-transition='back']::view-transition-old(root) { z-index: 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+
+/* La cabecera se queda quieta durante el cambio de página (como la barra de iOS) */
+.cabecera { view-transition-name: cabecera; }
+::view-transition-old(cabecera) { animation: none; display: none; }
+::view-transition-new(cabecera) { animation: none; }

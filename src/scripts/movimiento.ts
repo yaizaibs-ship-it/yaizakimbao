@@ -114,18 +114,57 @@ function interacciones(signal: AbortSignal) {
   const boton = document.querySelector<HTMLButtonElement>('[data-abrir-menu]');
   const menu = document.querySelector<HTMLElement>('[data-menu-movil]');
   if (boton && menu) {
+    // Se abre como una hoja de iPhone: sube desde abajo y los enlaces entran en cascada
+    const reducir = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const enlaces = () => $$<HTMLElement>('li, .menu-pie', menu);
     const abrir = (si: boolean) => {
-      menu.hidden = !si;
       boton.setAttribute('aria-expanded', String(si));
       boton.querySelector<HTMLElement>('[data-texto-abrir]')!.hidden = si;
       boton.querySelector<HTMLElement>('[data-texto-cerrar]')!.hidden = !si;
       si ? lenis?.stop() : lenis?.start();
       document.documentElement.style.overflow = si ? 'hidden' : '';
-      if (si) menu.querySelector<HTMLElement>('a')?.focus();
+      gsap.killTweensOf([menu, ...enlaces()]);
+      if (si) {
+        menu.hidden = false;
+        if (!reducir()) {
+          gsap.fromTo(menu, { yPercent: 100, borderRadius: '2rem 2rem 0 0' }, { yPercent: 0, borderRadius: '0rem 0rem 0 0', duration: 0.65, ease: 'expo.out', clearProps: 'transform,borderRadius' });
+          gsap.fromTo(enlaces(), { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: 'expo.out', stagger: 0.045, delay: 0.08, clearProps: 'all' });
+        }
+        menu.querySelector<HTMLElement>('a')?.focus({ preventScroll: true });
+      } else if (!reducir() && !menu.hidden) {
+        gsap.to(menu, { yPercent: 100, duration: 0.45, ease: 'power3.in', onComplete: () => { menu.hidden = true; gsap.set(menu, { clearProps: 'transform' }); } });
+      } else {
+        menu.hidden = true;
+      }
     };
     boton.addEventListener('click', () => abrir(Boolean(menu.hidden)), { signal });
     document.addEventListener('keydown', (e) => e.key === 'Escape' && menu.hidden === false && (abrir(false), boton.focus()), { signal });
     menu.addEventListener('click', (e) => (e.target as HTMLElement).closest('a') && abrir(false), { signal });
+  }
+
+  // Al tocar: se hunde un poco y vuelve con efecto muelle (como los botones de iOS)
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const pulsables = 'button, .tarjeta, .fila-a, .menu-movil li a, .boton-menu, .idiomas a, .sello, [data-pulsa]';
+    let pulsado: HTMLElement | null = null;
+    const suelta = () => {
+      if (!pulsado) return;
+      gsap.to(pulsado, { '--pulsa': 1, duration: 0.7, ease: 'elastic.out(1, 0.5)', overwrite: true });
+      pulsado = null;
+    };
+    document.addEventListener(
+      'pointerdown',
+      (e) => {
+        if (e.button !== 0) return;
+        const el = (e.target as HTMLElement).closest<HTMLElement>(pulsables);
+        if (!el) return;
+        pulsado = el;
+        const grande = el.classList.contains('tarjeta') || el.classList.contains('fila-a');
+        gsap.to(el, { '--pulsa': grande ? 0.975 : 0.93, duration: 0.18, ease: 'power2.out', overwrite: true });
+      },
+      { signal, passive: true },
+    );
+    for (const ev of ['pointerup', 'pointercancel', 'dragstart'] as const) document.addEventListener(ev, suelta, { signal, passive: true });
+    window.addEventListener('scroll', suelta, { signal, passive: true });
   }
 
   // Volver arriba
@@ -134,7 +173,7 @@ function interacciones(signal: AbortSignal) {
       'click',
       (e) => {
         e.preventDefault();
-        lenis ? lenis.scrollTo(0) : window.scrollTo({ top: 0 });
+        lenis ? lenis.scrollTo(0, { duration: 1.6 }) : window.scrollTo({ top: 0, behavior: "smooth" });
         document.querySelector<HTMLElement>('.sello')?.focus({ preventScroll: true });
       },
       { signal },
@@ -529,7 +568,14 @@ export async function iniciar() {
   cursor(control.signal);
   await intro();
 
-  lenis = new Lenis({ lerp: 0.1, anchors: true, autoRaf: false });
+  // Scroll con la frenada de iOS: arranca con decisión y se detiene poco a poco.
+  // En el móvil se mantiene el scroll nativo del sistema (con su inercia real).
+  lenis = new Lenis({
+    duration: 1.15,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    anchors: { offset: 0, duration: 1.4 },
+    autoRaf: false,
+  });
   lenis.on('scroll', ScrollTrigger.update);
   tickerFn = (time: number) => lenis?.raf(time * 1000);
   gsap.ticker.add(tickerFn);
