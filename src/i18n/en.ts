@@ -44,6 +44,8 @@ const en: Textos = {
     descargarCV: 'Download CV (PDF)',
     volverArriba: 'Back to top',
     soloEspanol: 'This project has not been translated yet, so it is shown in Spanish.',
+    cuentame: 'Tell me about your project',
+    casoCta: 'Shall we make something like this for your brand?',
   },
 
   inicio: {
@@ -77,6 +79,58 @@ const en: Textos = {
       listaDerecha: ['Fashion', 'Upcycling', 'Football culture', 'Craft', 'Flowers'],
       texto:
         'I come from agencies —VML The Cocktail, Alegre Design— and I run my own brands: HEAD BUTT BARCELONA and KIMBAO 999. I measure like a data designer and make things like someone who sews her own bags.',
+    },
+
+    servicios: {
+      etiqueta: 'Who for',
+      titulo: 'Who are you?',
+      intro: 'Tell me where you’re coming from and I’ll tell you what I can cook up for you. No agency fluff, all the agency rigour.',
+      nota: 'Notes',
+      abrir: 'See what I can do',
+      cerrar: 'Close',
+      perfiles: [
+        {
+          clave: 'local',
+          titulo: 'I’m a local business',
+          resumen: 'Winery, rural stay, shop, restaurant… and you want people to notice.',
+          lista: [
+            'A logo and identity people recognise in town and beyond.',
+            'Social media with a plan: templates, calendar and monthly content.',
+            'A simple website you can update yourself.',
+            'Photos and videos of what you do, no posing.',
+            'Campaigns for your big dates: harvest, fairs, high season.',
+          ],
+        },
+        {
+          clave: 'marca',
+          titulo: 'I’m a brand',
+          resumen: 'You have a product and an audience, and want the brand to live up to them.',
+          lista: [
+            'A full identity and brandbook that holds up anywhere.',
+            'Paid and organic campaigns measured with data, not guesswork.',
+            'Social content, motion and video.',
+            'Newsletters and A/B tests to learn what works.',
+            'Art direction for photo and video.',
+          ],
+        },
+        {
+          clave: 'agencia',
+          titulo: 'I’m an agency',
+          resumen: 'You need an extra pair of hands (and a head) for a project or a season.',
+          lista: [
+            'Freelance support for busy peaks.',
+            'Design, motion and social content.',
+            'Newsletters and data-driven pieces.',
+            'I fit into your system, tools and way of working.',
+          ],
+        },
+      ],
+    },
+
+    marcas: {
+      etiqueta: 'Who with',
+      titulo: 'Brands I’ve worked with',
+      nota: 'I’ve worked or collaborated with all of them. Some of that creative work is confidential, so not everything is in the portfolio: if you’d like to know more, just ask.',
     },
   },
 
@@ -136,6 +190,58 @@ const en: Textos = {
     titulo: 'Contact',
     texto: 'A brand to build, a campaign to launch or something to stitch together? Drop me a line.',
     redes: 'Social',
+    otrasVias: 'Rather write to me without a form?',
+    formulario: {
+      titulo: 'Tell me about your project',
+      paso: 'Step',
+      de: 'of',
+      atras: '← Back',
+      siguiente: 'Next →',
+      enviar: 'Send',
+      enviando: 'Sending…',
+      perfil: {
+        pregunta: 'Who are you?',
+        opciones: [
+          { valor: 'local', texto: 'A local business' },
+          { valor: 'marca', texto: 'A brand' },
+          { valor: 'agencia', texto: 'An agency' },
+          { valor: 'otro', texto: 'Something else' },
+        ],
+      },
+      necesidad: {
+        pregunta: 'What do you need?',
+        opciones: {
+          local: ['A new brand or a refresh', 'Social media and monthly content', 'A website', 'A campaign or an event', 'Something else (tell me at the end)'],
+          marca: ['Identity or rebranding', 'A one-off campaign', 'Monthly content and social media', 'Newsletters and email', 'Something else (tell me at the end)'],
+          agencia: ['Support for a one-off project', 'Ongoing collaboration', 'Something else (tell me at the end)'],
+          otro: ['Graphic design', 'Content and social media', 'A website', 'Something else (tell me at the end)'],
+        },
+      },
+      presupuesto: {
+        pregunta: 'What’s your budget?',
+        opciones: ['Under €500', '€500 – 1,500', '€1,500 – 3,000', 'Over €3,000', 'Not sure yet'],
+      },
+      urgencia: {
+        pregunta: 'When for?',
+        opciones: ['As soon as possible', 'In the next few weeks', 'In the next few months', 'Just exploring'],
+      },
+      datos: {
+        pregunta: 'Last bit: who you are and what you have in mind',
+        mensaje: 'Tell me about the project',
+        mensajeAyuda: 'What you want to achieve, what you already have, anything that helps.',
+        nombre: 'Name',
+        email: 'Email',
+        empresa: 'Company or brand (optional)',
+        web: 'Website or Instagram (optional)',
+        privacidad: 'I agree that Yaiza Ibáñez may use this data only to reply to me. It is not shared with anyone and I can ask for it to be deleted at any time by writing to yaizakimbao@gmail.com.',
+      },
+      obligatorio: 'This field is required',
+      elige: 'Pick an option to continue',
+      exito: 'Got it! I’ll be in touch very soon.',
+      exitoCorreo: 'Your email app has opened with everything filled in: just hit send.',
+      error: 'Something went wrong. Write to me directly at yaizakimbao@gmail.com.',
+      asunto: 'New project from the website',
+    },
   },
 
   pie: {
@@ -144,6 +250,7 @@ const en: Textos = {
       ['Say', 'ciao!'],
       ['Say', 'hello!'],
     ],
+    letsCreate: 'Let’s create.',
     lugar: 'Barcelona — Utiel-Requena, Spain',
     frase: 'Brand design, strategy and content for brands that want to move.',
     escribeme: 'Write to me',

@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Foto from '../components/Foto.astro';
 import Tarjeta from '../components/Tarjeta.astro';
+import Servicios from '../components/Servicios.astro';
+import Marcas from '../components/Marcas.astro';
 import { t, url, otroIdioma, type Idioma } from '../i18n';
 import { CONTACTO } from '../i18n/comun';
 import { getProyectos } from '../lib/proyectos';
@@ -73,6 +75,9 @@ const pf = tx.inicio.perfil;
     </div>
   </section>
 
+  <!-- 4b · Servicios según quién llega (negocio local / marca / agencia) -->
+  <Servicios lang={lang} />
+
   <!-- 5 · Trabajo seleccionado: carrusel horizontal fijado -->
   <section class="destacados" data-horizontal aria-labelledby="titulo-trabajo">
     <div class="h-pin" data-horizontal-pin>
@@ -101,6 +106,9 @@ const pf = tx.inicio.perfil;
       <div class="h-progreso" aria-hidden="true"><span data-horizontal-progreso></span></div>
     </div>
   </section>
+
+  <!-- 5b · Marcas con las que he trabajado -->
+  <Marcas lang={lang} />
 
   <!-- 6 · Índice gigante con punto final (estilo Fuego) -->
   <nav class="indice margen" aria-label={tx.ui.indice}>

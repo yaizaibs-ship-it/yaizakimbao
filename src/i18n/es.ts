@@ -43,6 +43,9 @@ const es = {
     descargarCV: 'Descargar CV (PDF)',
     volverArriba: 'Volver arriba',
     soloEspanol: 'Este proyecto todavía no está traducido; se muestra en español.',
+    /** Botón que se repite por toda la web y lleva al formulario */
+    cuentame: 'Cuéntame tu proyecto',
+    casoCta: '¿Hacemos algo así para tu marca?',
   },
 
   inicio: {
@@ -76,6 +79,60 @@ const es = {
       listaDerecha: ['Moda', 'Upcycling', 'Cultura futbolera', 'Artesanía', 'Flores'],
       texto:
         'Vengo de agencia —VML The Cocktail, Alegre Design— y tengo mis propias marcas: HEAD BUTT BARCELONA y KIMBAO 999. Mido como una data designer y creo como alguien que se cose sus propios bolsos.',
+    },
+
+    /** Servicios según quién llega (tarjetas con notita desplegable) */
+    servicios: {
+      etiqueta: 'Para quién',
+      titulo: '¿Quién eres?',
+      intro: 'Dime desde dónde llegas y te cuento qué puedo maquinar para ti. Sin rollos de agencia, con rigor de agencia.',
+      nota: 'Notas',
+      abrir: 'Ver qué puedo hacer',
+      cerrar: 'Cerrar',
+      perfiles: [
+        {
+          clave: 'local',
+          titulo: 'Soy un negocio local',
+          resumen: 'Bodega, alojamiento, tienda, restaurante… con ganas de que se le vea.',
+          lista: [
+            'Logo e identidad que se reconozcan en tu pueblo y fuera de él.',
+            'Redes con cabeza: plantillas, calendario y contenido cada mes.',
+            'Una web sencilla que puedas actualizar tú.',
+            'Fotos y vídeos de lo que haces, sin postureo.',
+            'Campañas para tus fechas fuertes: vendimia, ferias, temporada alta.',
+          ],
+        },
+        {
+          clave: 'marca',
+          titulo: 'Soy una marca',
+          resumen: 'Tienes producto y público, y quieres que la marca esté a la altura.',
+          lista: [
+            'Identidad completa y brandbook que aguante cualquier soporte.',
+            'Campañas paid y orgánicas medidas con datos, no a ojo.',
+            'Contenido para redes, motion y vídeo.',
+            'Newsletters y tests A/B para saber qué funciona.',
+            'Dirección de arte en foto y vídeo.',
+          ],
+        },
+        {
+          clave: 'agencia',
+          titulo: 'Soy una agencia',
+          resumen: 'Necesitáis unas manos más (y una cabeza) para un proyecto o una temporada.',
+          lista: [
+            'Refuerzo freelance para picos de trabajo.',
+            'Diseño, motion y contenido para redes.',
+            'Newsletters y piezas data driven.',
+            'Me adapto a vuestro sistema, herramientas y forma de trabajar.',
+          ],
+        },
+      ],
+    },
+
+    /** Muro de marcas */
+    marcas: {
+      etiqueta: 'Con quién',
+      titulo: 'Marcas con las que he trabajado',
+      nota: 'Con todas he trabajado o colaborado. Parte de ese trabajo creativo es confidencial, así que no todo está en el portfolio: si quieres saber más, pregúntame.',
     },
   },
 
@@ -133,8 +190,60 @@ const es = {
 
   contacto: {
     titulo: 'Contacto',
-    texto: '¿Una marca por construir, una campaña por lanzar o algo por coser? Escríbeme.',
+    texto: '¿Una marca por construir, una campaña por lanzar o algo por coser? Cuéntamelo en cinco pasos y te respondo en persona.',
     redes: 'Redes',
+    otrasVias: '¿Prefieres escribirme sin formulario?',
+    formulario: {
+      titulo: 'Cuéntame tu proyecto',
+      paso: 'Paso',
+      de: 'de',
+      atras: '← Atrás',
+      siguiente: 'Siguiente →',
+      enviar: 'Enviar',
+      enviando: 'Enviando…',
+      perfil: {
+        pregunta: '¿Quién eres?',
+        opciones: [
+          { valor: 'local', texto: 'Un negocio local' },
+          { valor: 'marca', texto: 'Una marca' },
+          { valor: 'agencia', texto: 'Una agencia' },
+          { valor: 'otro', texto: 'Otra cosa' },
+        ],
+      },
+      necesidad: {
+        pregunta: '¿Qué necesitas?',
+        opciones: {
+          local: ['Una marca nueva o renovar la que tengo', 'Redes y contenido cada mes', 'Una web', 'Una campaña o un evento', 'Otra cosa (me lo cuentas al final)'],
+          marca: ['Identidad o rebranding', 'Una campaña puntual', 'Contenido y redes cada mes', 'Newsletters y email', 'Otra cosa (me lo cuentas al final)'],
+          agencia: ['Refuerzo para un proyecto puntual', 'Colaboración continua', 'Otra cosa (me lo cuentas al final)'],
+          otro: ['Diseño gráfico', 'Contenido y redes', 'Una web', 'Otra cosa (me lo cuentas al final)'],
+        },
+      },
+      presupuesto: {
+        pregunta: '¿Con qué presupuesto cuentas?',
+        opciones: ['Menos de 500 €', '500 – 1.500 €', '1.500 – 3.000 €', 'Más de 3.000 €', 'Aún no lo sé'],
+      },
+      urgencia: {
+        pregunta: '¿Para cuándo?',
+        opciones: ['Lo antes posible', 'En las próximas semanas', 'En los próximos meses', 'Solo estoy explorando'],
+      },
+      datos: {
+        pregunta: 'Lo último: quién eres y qué tienes en mente',
+        mensaje: 'Cuéntame el proyecto',
+        mensajeAyuda: 'Qué quieres conseguir, qué tienes ya, cualquier cosa que me ayude.',
+        nombre: 'Nombre',
+        email: 'Email',
+        empresa: 'Empresa o marca (opcional)',
+        web: 'Web o Instagram (opcional)',
+        privacidad: 'Acepto que Yaiza Ibáñez use estos datos solo para responderme. No se ceden a nadie y puedo pedir que se borren cuando quiera escribiendo a yaizakimbao@gmail.com.',
+      },
+      obligatorio: 'Este campo es obligatorio',
+      elige: 'Elige una opción para seguir',
+      exito: '¡Recibido! Te escribo muy pronto.',
+      exitoCorreo: 'Se ha abierto tu correo con todo rellenado: solo te falta darle a enviar.',
+      error: 'Algo ha fallado al enviar. Escríbeme directamente a yaizakimbao@gmail.com.',
+      asunto: 'Nuevo proyecto desde la web',
+    },
   },
 
   pie: {
@@ -143,6 +252,7 @@ const es = {
       ['Say', 'ciao!'],
       ['Say', 'hello!'],
     ],
+    letsCreate: 'Let’s create.',
     lugar: 'Barcelona — Utiel-Requena',
     frase: 'Diseño de marca, estrategia y contenido para marcas que quieren moverse.',
     escribeme: 'Escríbeme',

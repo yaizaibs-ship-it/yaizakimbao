@@ -1,0 +1,7 @@
+LOGOS DEL MURO DE MARCAS (home)
+Sube aquí el logo de cada marca con el mismo nombre que su «clave»
+en src/i18n/comun.ts → MARCAS. Ejemplos:
+  cofares.svg   club-bayer.png   royal-opera-house.svg
+Mejor SVG o PNG con fondo transparente. Da igual el color:
+la web lo pinta en negro o blanco para que todos combinen.
+Si una marca no tiene logo aquí, sale su nombre escrito.

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Foto from '../components/Foto.astro';
+import Formulario from '../components/Formulario.astro';
 import { t, url, otroIdioma, type Idioma } from '../i18n';
 import { CONTACTO } from '../i18n/comun';
 
@@ -13,12 +14,18 @@ const tx = t(lang);
   <section class="cont margen">
     <h1 class="titular cont-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.contacto.titulo}.</span></h1>
 
+    <p class="cont-intro cont-entradilla" data-split="palabras">{tx.contacto.texto}</p>
+
+    <div class="cont-form">
+      <Formulario lang={lang} />
+    </div>
+
+    <p class="mini gris cont-otras" data-reveal>{tx.contacto.otrasVias}</p>
     <div class="cont-grid">
       <div class="cont-foto" data-speed="0.2">
         <Foto carpeta="personal" archivo="contacto-flores" proporcion="3:4" etiqueta="Contacto · flores" arte="flores" alt="" sizes="(min-width: 861px) 28vw, 70vw" parallax />
       </div>
       <div class="cont-txt">
-        <p class="cont-intro" data-split="palabras">{tx.contacto.texto}</p>
         <a class="cont-email" href={`mailto:${CONTACTO.email}`} data-reveal>
           <span data-fit="1">{CONTACTO.email}</span>
         </a>
@@ -35,7 +42,10 @@ const tx = t(lang);
 <style>
   .cont { padding-top: calc(var(--cabecera) + 6vh); }
   .cont-h { display: block; }
-  .cont-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; margin-top: 4rem; align-items: end; }
+  .cont-entradilla { margin-top: clamp(2rem, 5vh, 3.5rem); }
+  .cont-form { max-width: 68rem; margin-top: clamp(2.5rem, 7vh, 5rem); padding-bottom: var(--seccion); border-bottom: 1px solid var(--color-linea); }
+  .cont-otras { margin-top: var(--seccion); }
+  .cont-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; margin-top: 1.5rem; align-items: end; }
   .cont-foto { max-width: 26rem; }
   .cont-txt { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.6rem; min-width: 0; }
   .cont-intro { font-size: var(--t-medio); line-height: 1.12; letter-spacing: -0.02em; font-weight: 500; max-width: 26ch; }

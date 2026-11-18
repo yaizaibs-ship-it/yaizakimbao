@@ -1,0 +1,416 @@
+---
+/**
+ * FORMULARIO POR PASOS (página de contacto)
+ * 1 ¿Quién eres? → 2 ¿Qué necesitas? → 3 Presupuesto → 4 ¿Para cuándo? → 5 Datos
+ * Envía con Web3Forms (clave en src/i18n/comun.ts → FORMULARIO).
+ * Sin clave, abre el correo de quien escribe con todo rellenado.
+ * Textos en es.ts / en.ts → contacto.formulario
+ */
+import { t, type Idioma } from '../i18n';
+import { CONTACTO, FORMULARIO } from '../i18n/comun';
+
+interface Props { lang: Idioma }
+const { lang } = Astro.props;
+const f = t(lang).contacto.formulario;
+const total = 5;
+const textosJs = {
+  elige: f.elige,
+  enviar: f.enviar,
+  enviando: f.enviando,
+  siguiente: f.siguiente,
+  exito: f.exito,
+  exitoCorreo: f.exitoCorreo,
+  error: f.error,
+  asunto: f.asunto,
+  etiquetas: {
+    perfil: f.perfil.pregunta,
+    necesidad: f.necesidad.pregunta,
+    presupuesto: f.presupuesto.pregunta,
+    urgencia: f.urgencia.pregunta,
+    nombre: f.datos.nombre,
+    email: f.datos.email,
+    empresa: f.datos.empresa,
+    web: f.datos.web,
+    mensaje: f.datos.mensaje,
+  },
+};
+const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
+---
+
+<form
+  id="formulario"
+  class="fm"
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  data-formulario
+  data-clave={FORMULARIO.claveWeb3Forms}
+  data-email={CONTACTO.email}
+  data-textos={JSON.stringify(textosJs)}
+  novalidate
+>
+  <input type="hidden" name="access_key" value={FORMULARIO.claveWeb3Forms} />
+  <input type="hidden" name="subject" value={f.asunto} />
+  <input type="hidden" name="from_name" value="yaizakimbao — web" />
+  <input type="checkbox" name="botcheck" class="fm-trampa" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <div class="fm-cabeza">
+    <h2 class="fm-titulo">{f.titulo}</h2>
+    <p class="mini fm-contador" aria-hidden="true">{f.paso} <span data-fm-num>1</span> {f.de} {total}</p>
+  </div>
+  <div class="fm-progreso" aria-hidden="true"><span data-fm-barra></span></div>
+
+  <!-- 1 · Perfil -->
+  <fieldset class="fm-paso" data-paso="1">
+    <legend class="fm-pregunta" tabindex="-1">{f.perfil.pregunta}</legend>
+    <div class="fm-opciones">
+      {f.perfil.opciones.map((o) => (
+        <label class="fm-opcion"><input type="radio" name="perfil" value={o.valor} data-texto={o.texto} required /><span>{o.texto}</span></label>
+      ))}
+    </div>
+  </fieldset>
+
+  <!-- 2 · Necesidad (cambia según el perfil) -->
+  <fieldset class="fm-paso" data-paso="2">
+    <legend class="fm-pregunta" tabindex="-1">{f.necesidad.pregunta}</legend>
+    {grupos.map(([perfil, opciones]) => (
+      <div class="fm-opciones" data-para={perfil}>
+        {opciones.map((o) => (
+          <label class="fm-opcion"><input type="radio" name="necesidad" value={o} required /><span>{o}</span></label>
+        ))}
+      </div>
+    ))}
+  </fieldset>
+
+  <!-- 3 · Presupuesto -->
+  <fieldset class="fm-paso" data-paso="3">
+    <legend class="fm-pregunta" tabindex="-1">{f.presupuesto.pregunta}</legend>
+    <div class="fm-opciones">
+      {f.presupuesto.opciones.map((o) => (
+        <label class="fm-opcion"><input type="radio" name="presupuesto" value={o} required /><span>{o}</span></label>
+      ))}
+    </div>
+  </fieldset>
+
+  <!-- 4 · Urgencia -->
+  <fieldset class="fm-paso" data-paso="4">
+    <legend class="fm-pregunta" tabindex="-1">{f.urgencia.pregunta}</legend>
+    <div class="fm-opciones">
+      {f.urgencia.opciones.map((o) => (
+        <label class="fm-opcion"><input type="radio" name="urgencia" value={o} required /><span>{o}</span></label>
+      ))}
+    </div>
+  </fieldset>
+
+  <!-- 5 · Datos -->
+  <fieldset class="fm-paso" data-paso="5">
+    <legend class="fm-pregunta" tabindex="-1">{f.datos.pregunta}</legend>
+    <div class="fm-campos">
+      <label class="fm-campo fm-ancho">
+        <span class="mini">{f.datos.mensaje} *</span>
+        <textarea name="mensaje" rows="4" required placeholder={f.datos.mensajeAyuda}></textarea>
+      </label>
+      <label class="fm-campo">
+        <span class="mini">{f.datos.nombre} *</span>
+        <input type="text" name="nombre" autocomplete="name" required />
+      </label>
+      <label class="fm-campo">
+        <span class="mini">{f.datos.email} *</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label class="fm-campo">
+        <span class="mini">{f.datos.empresa}</span>
+        <input type="text" name="empresa" autocomplete="organization" />
+      </label>
+      <label class="fm-campo">
+        <span class="mini">{f.datos.web}</span>
+        <input type="text" name="web" inputmode="url" />
+      </label>
+      <label class="fm-privacidad fm-ancho">
+        <input type="checkbox" name="privacidad" value="Aceptada" required />
+        <span>{f.datos.privacidad}</span>
+      </label>
+    </div>
+  </fieldset>
+
+  <p class="fm-aviso" role="status" aria-live="polite" data-fm-aviso></p>
+
+  <div class="fm-botones">
+    <button type="button" class="fm-atras" data-fm-atras>{f.atras}</button>
+    <button type="submit" class="fm-siguiente" data-fm-siguiente>{f.enviar}</button>
+  </div>
+</form>
+
+<script>
+  type Textos = {
+    elige: string; enviar: string; enviando: string; siguiente: string;
+    exito: string; exitoCorreo: string; error: string; asunto: string;
+    etiquetas: Record<string, string>;
+  };
+
+  function iniciaFormulario() {
+    const form = document.querySelector<HTMLFormElement>('[data-formulario]');
+    if (!form || form.dataset.listo) return;
+    form.dataset.listo = '1';
+    const tx: Textos = JSON.parse(form.dataset.textos || '{}');
+    const pasos = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-paso]'));
+    const num = form.querySelector<HTMLElement>('[data-fm-num]')!;
+    const barra = form.querySelector<HTMLElement>('[data-fm-barra]')!;
+    const aviso = form.querySelector<HTMLElement>('[data-fm-aviso]')!;
+    const atras = form.querySelector<HTMLButtonElement>('[data-fm-atras]')!;
+    const siguiente = form.querySelector<HTMLButtonElement>('[data-fm-siguiente]')!;
+    let actual = 0;
+
+    form.classList.add('por-pasos');
+
+    const valor = (n: string) => (form.querySelector<HTMLInputElement>(`input[name="${n}"]:checked`)?.value ?? '');
+
+    // Paso 2: solo las opciones del perfil elegido
+    function filtraNecesidad() {
+      const perfil = valor('perfil') || 'otro';
+      for (const g of form!.querySelectorAll<HTMLElement>('[data-para]')) {
+        const toca = g.dataset.para === perfil;
+        g.hidden = !toca;
+        g.querySelectorAll('input').forEach((i) => {
+          i.disabled = !toca;
+          if (!toca) i.checked = false;
+        });
+      }
+    }
+
+    function muestra(i: number, enfocar = true) {
+      actual = Math.max(0, Math.min(pasos.length - 1, i));
+      if (actual === 1) filtraNecesidad();
+      pasos.forEach((p, j) => p.classList.toggle('activo', j === actual));
+      num.textContent = String(actual + 1);
+      barra.style.transform = `scaleX(${(actual + 1) / pasos.length})`;
+      atras.hidden = actual === 0;
+      const ultimo = actual === pasos.length - 1;
+      siguiente.textContent = ultimo ? tx.enviar : tx.siguiente;
+      siguiente.hidden = !ultimo && !pasoListo(actual);
+      aviso.textContent = '';
+      if (enfocar) {
+        pasos[actual].querySelector<HTMLElement>('legend')?.focus({ preventScroll: true });
+        const arriba = form!.getBoundingClientRect().top;
+        if (arriba < 0) form!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function pasoListo(i: number) {
+      const radios = pasos[i].querySelectorAll<HTMLInputElement>('input[type="radio"]:not(:disabled)');
+      if (!radios.length) return true;
+      return Array.from(radios).some((r) => r.checked);
+    }
+
+    // Elegir una opción avanza solo
+    form.addEventListener('change', (e) => {
+      const el = e.target as HTMLInputElement;
+      if (el.type !== 'radio') return;
+      if (el.name === 'perfil') filtraNecesidad();
+      siguiente.hidden = false;
+      setTimeout(() => { if (actual < pasos.length - 1) muestra(actual + 1); }, 280);
+    });
+
+    atras.addEventListener('click', () => muestra(actual - 1));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (actual < pasos.length - 1) {
+        if (!pasoListo(actual)) { aviso.textContent = tx.elige; return; }
+        muestra(actual + 1);
+        return;
+      }
+      // Último paso: campos obligatorios
+      const campos = Array.from(pasos[actual].querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea'));
+      const malo = campos.find((c) => !c.checkValidity());
+      if (malo) { malo.reportValidity(); return; }
+      if ((form!.querySelector<HTMLInputElement>('input[name="botcheck"]'))?.checked) return;
+
+      const perfilTxt = form!.querySelector<HTMLInputElement>('input[name="perfil"]:checked')?.dataset.texto ?? '';
+      const datos: Record<string, string> = {
+        perfil: perfilTxt,
+        necesidad: valor('necesidad'),
+        presupuesto: valor('presupuesto'),
+        urgencia: valor('urgencia'),
+      };
+      for (const n of ['nombre', 'email', 'empresa', 'web', 'mensaje']) {
+        datos[n] = (form!.elements.namedItem(n) as HTMLInputElement).value.trim();
+      }
+      const resumen = Object.entries(datos)
+        .filter(([, v]) => v)
+        .map(([k, v]) => `${tx.etiquetas[k] ?? k}: ${v}`)
+        .join('\n');
+
+      const clave = form!.dataset.clave;
+      if (!clave) {
+        // Sin clave de Web3Forms: se abre el correo con todo rellenado
+        const asunto = `${tx.asunto} — ${datos.nombre}`;
+        location.href = `mailto:${form!.dataset.email}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(resumen)}`;
+        termina(tx.exitoCorreo);
+        return;
+      }
+
+      siguiente.disabled = true;
+      siguiente.textContent = tx.enviando;
+      try {
+        const r = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: clave,
+            subject: `${tx.asunto} — ${datos.nombre}`,
+            from_name: datos.nombre,
+            replyto: datos.email,
+            ...Object.fromEntries(Object.entries(datos).map(([k, v]) => [tx.etiquetas[k] ?? k, v])),
+          }),
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || j.success === false) throw new Error(j.message || 'error');
+        termina(tx.exito);
+      } catch {
+        aviso.textContent = tx.error;
+        siguiente.disabled = false;
+        siguiente.textContent = tx.enviar;
+      }
+    });
+
+    function termina(mensaje: string) {
+      form!.classList.add('enviado');
+      const ok = document.createElement('p');
+      ok.className = 'fm-ok';
+      ok.setAttribute('role', 'status');
+      ok.tabIndex = -1;
+      ok.textContent = mensaje;
+      form!.append(ok);
+      ok.focus({ preventScroll: true });
+      if (form!.getBoundingClientRect().top < 0) form!.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Si viene desde un botón de la home (?perfil=local), ya llega marcado
+    const pre = new URLSearchParams(location.search).get('perfil');
+    const radio = pre ? form.querySelector<HTMLInputElement>(`input[name="perfil"][value="${CSS.escape(pre)}"]`) : null;
+    if (radio) {
+      radio.checked = true;
+      muestra(1, false);
+    } else {
+      muestra(0, false);
+    }
+  }
+
+  document.addEventListener('astro:page-load', iniciaFormulario);
+</script>
+
+<style>
+  .fm { position: relative; scroll-margin-top: calc(var(--cabecera) + 1rem); }
+  .fm-trampa { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+  .fm-cabeza { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .fm-titulo { font-size: var(--t-medio); font-weight: 500; letter-spacing: -0.03em; }
+  .fm-progreso { display: none; height: 2px; margin-top: 0.9rem; background: var(--color-linea); overflow: hidden; }
+  .fm-progreso span { display: block; height: 100%; background: var(--color-firma); transform: scaleX(0.2); transform-origin: left; transition: transform 0.6s var(--ease-ios); }
+  .fm-contador { display: none; }
+  .fm.por-pasos .fm-progreso { display: block; }
+  .fm.por-pasos .fm-contador { display: block; }
+
+  .fm-paso { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .fm.por-pasos .fm-paso { display: none; }
+  .fm.por-pasos .fm-paso.activo { display: block; animation: entra 0.55s var(--ease-ios) both; }
+  @keyframes entra { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: none; } }
+
+  .fm-pregunta {
+    display: block;
+    float: left;
+    width: 100%;
+    padding-top: clamp(1.8rem, 5vh, 3rem);
+    margin-bottom: 1.4rem;
+    font-size: clamp(2rem, 1rem + 3.6vw, 4.6rem);
+    font-weight: 500;
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    outline: none;
+  }
+  .fm-opciones, .fm-campos { clear: both; }
+  .fm-opciones { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .fm-opciones[hidden] { display: none; }
+  .fm-opcion { position: relative; cursor: pointer; }
+  .fm-opcion input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .fm-opcion span {
+    display: inline-block;
+    padding: 0.8em 1.3em 0.85em;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: var(--t-cuerpo);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.45s var(--ease-muelle);
+  }
+  @media (hover: hover) {
+    .fm-opcion:hover span { border-color: var(--color-firma); color: var(--color-firma); }
+  }
+  .fm-opcion input:checked + span { background: var(--color-firma); border-color: var(--color-firma); color: #fff; transform: scale(1.03); }
+  .fm-opcion input:focus-visible + span { outline: 2px solid var(--color-firma); outline-offset: 3px; }
+
+  .fm-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem var(--hueco); }
+  .fm-ancho { grid-column: 1 / -1; }
+  .fm-campo { display: grid; gap: 0.45rem; }
+  .fm-campo span { color: var(--color-gris); }
+  .fm-campo input, .fm-campo textarea {
+    width: 100%;
+    padding: 0.5rem 0 0.6rem;
+    border: 0;
+    border-bottom: 1px solid var(--color-tinta);
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--t-medio);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    resize: vertical;
+    transition: border-color 0.3s;
+  }
+  .fm-campo textarea { font-size: var(--t-cuerpo); line-height: 1.35; }
+  .fm-campo textarea::placeholder { color: var(--color-gris); opacity: 0.7; }
+  .fm-campo input:focus, .fm-campo textarea:focus { outline: none; border-bottom-color: var(--color-firma); border-bottom-width: 2px; }
+  .fm-privacidad { display: flex; gap: 0.8rem; align-items: flex-start; max-width: 62ch; color: var(--color-gris); font-size: var(--t-peque); line-height: 1.4; cursor: pointer; }
+  .fm-privacidad input { flex: none; width: 1.15rem; height: 1.15rem; margin-top: 0.1rem; accent-color: var(--color-firma); }
+
+  .fm-aviso { min-height: 1.4em; margin-top: 1rem; color: var(--color-firma-texto); font-size: var(--t-peque); }
+  .fm-botones { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 0.6rem; }
+  .fm-atras { font-size: var(--t-cuerpo); font-weight: 500; color: var(--color-gris); letter-spacing: -0.02em; }
+  .fm-atras[hidden], .fm-siguiente[hidden] { display: none; }
+  @media (hover: hover) { .fm-atras:hover { color: var(--color-tinta); } }
+  .fm-siguiente {
+    margin-left: auto;
+    padding: 0.85em 1.5em 0.9em;
+    border-radius: 999px;
+    background: var(--color-firma);
+    color: #fff;
+    font-size: var(--t-cuerpo);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    transition: transform 0.5s var(--ease-muelle), opacity 0.3s;
+  }
+  @media (hover: hover) { .fm-siguiente:hover { transform: scale(1.04); } }
+  .fm-siguiente:active { transform: scale(0.97); }
+  .fm-siguiente:disabled { opacity: 0.6; }
+
+  .fm.enviado .fm-paso, .fm.enviado .fm-botones, .fm.enviado .fm-progreso, .fm.enviado .fm-contador, .fm.enviado .fm-aviso { display: none !important; }
+  .fm :global(.fm-ok) {
+    padding-top: clamp(1.8rem, 5vh, 3rem);
+    font-size: clamp(2rem, 1rem + 3.6vw, 4.6rem);
+    font-weight: 500;
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    color: var(--color-firma);
+    outline: none;
+  }
+
+  @media (max-width: 640px) {
+    .fm-campos { grid-template-columns: 1fr; }
+    .fm-opcion span { padding: 0.75em 1.1em 0.8em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fm.por-pasos .fm-paso.activo { animation: none; }
+  }
+</style>

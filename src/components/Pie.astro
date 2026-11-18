@@ -1,6 +1,7 @@
 ---
 import { t, url, type Idioma } from '../i18n';
 import { CONTACTO } from '../i18n/comun';
+import BotonProyecto from './BotonProyecto.astro';
 
 interface Props { lang: Idioma }
 const { lang } = Astro.props;
@@ -10,7 +11,7 @@ const cinta = tx.pie.cinta;
 
 <footer class="pie" id="contacto-pie">
   <p class="sr-only">{cinta.map((c) => c.join(' ')).join(' ')}</p>
-  <div class="cinta" aria-hidden="true">
+  <a class="cinta" href={url(lang, 'contacto') + '#formulario'} aria-label={tx.ui.cuentame} data-cursor="Hola!">
     <div class="cinta-pista" data-cinta>
       {
         [0, 1].map(() => (
@@ -24,6 +25,11 @@ const cinta = tx.pie.cinta;
         ))
       }
     </div>
+  </a>
+
+  <div class="pie-crea margen">
+    <p class="pie-crea-txt" data-split="palabras">{tx.pie.letsCreate}</p>
+    <BotonProyecto lang={lang} />
   </div>
 
   <div class="pie-cuerpo margen">
@@ -68,7 +74,12 @@ const cinta = tx.pie.cinta;
 
 <style>
   .pie { padding-top: var(--seccion); overflow: hidden; }
-  .cinta { overflow: hidden; }
+  .cinta { display: block; overflow: hidden; transition: color 0.35s; }
+  @media (hover: hover) {
+    .cinta:hover { color: var(--color-firma); }
+  }
+  .pie-crea { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; padding-top: clamp(2.5rem, 7vh, 5rem); }
+  .pie-crea-txt { font-size: var(--t-grande); font-weight: 500; line-height: 0.95; letter-spacing: -0.05em; }
   .cinta-pista {
     display: flex;
     width: max-content;
