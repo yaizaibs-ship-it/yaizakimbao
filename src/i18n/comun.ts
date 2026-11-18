@@ -43,10 +43,10 @@ export const MARCAS: { clave: string; nombre: string; web: string; caso?: string
   { clave: 'kimbao-999', nombre: 'KIMBAO 999', web: '', caso: 'kimbao-999' },
   { clave: 'vml', nombre: 'VML The Cocktail', web: 'https://www.vml.com' },
   { clave: 'club-bayer', nombre: 'Club Bayer', web: 'https://www.bayer.com/es-es/espana/areas-de-negocio/consumer-health' },
-  { clave: 'farline', nombre: 'Farline', web: '' /* [PENDIENTE] web */ },
-  { clave: 'aposan', nombre: 'Aposán', web: '' /* [PENDIENTE] web */ },
+  { clave: 'farline', nombre: 'Farline', web: 'https://www.cofares.es' },
+  { clave: 'aposan', nombre: 'Aposán', web: 'https://www.cofares.es' },
   { clave: 'cofares', nombre: 'Cofares', web: 'https://www.cofares.es' },
   { clave: 'alegre-design', nombre: 'Alegre Design', web: 'https://alegredesign.com' },
-  { clave: 'version-digital', nombre: 'Versión Digital', web: '' /* [PENDIENTE] web */ },
+  { clave: 'version-digital', nombre: 'Versión Digital', web: 'https://versiondigital.es' },
   { clave: 'royal-opera-house', nombre: 'Royal Opera House', web: 'https://www.roh.org.uk' },
 ];
