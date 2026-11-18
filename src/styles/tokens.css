@@ -42,7 +42,7 @@
   --cabecera: 5.5rem;                     /* alto de la cabecera fija */
 
   /* ---- Movimiento ---- */
-  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);     /* salida suave, como iOS */
   --ease-in-out: cubic-bezier(0.7, 0, 0.2, 1);
   /* Curvas tipo iOS */
   --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);   /* la de las hojas y paneles de iPhone */

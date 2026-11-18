@@ -69,7 +69,7 @@ const Etiqueta = p.enProceso ? 'div' : 'a';
     justify-self: end;
     opacity: 0;
     transform: translateY(-4px);
-    transition: opacity 0.4s, transform 0.4s;
+    transition: opacity 0.4s var(--ease-ios), transform 0.4s var(--ease-ios);
   }
   .tarjeta:focus-visible .tarjeta-disc { opacity: 1; transform: none; }
   @media (hover: hover) {

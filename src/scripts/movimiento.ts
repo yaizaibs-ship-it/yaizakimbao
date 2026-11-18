@@ -132,7 +132,7 @@ function interacciones(signal: AbortSignal) {
         }
         menu.querySelector<HTMLElement>('a')?.focus({ preventScroll: true });
       } else if (!reducir() && !menu.hidden) {
-        gsap.to(menu, { yPercent: 100, duration: 0.45, ease: 'power3.in', onComplete: () => { menu.hidden = true; gsap.set(menu, { clearProps: 'transform' }); } });
+        gsap.to(menu, { yPercent: 100, borderRadius: '2rem 2rem 0 0', duration: 0.55, ease: 'expo.inOut', onComplete: () => { menu.hidden = true; gsap.set(menu, { clearProps: 'transform,borderRadius' }); } });
       } else {
         menu.hidden = true;
       }
@@ -598,6 +598,14 @@ export async function iniciar() {
   for (const img of $$<HTMLImageElement>('img')) {
     if (!img.complete) img.addEventListener('load', recalculaTrasFotos, { once: true, signal: control.signal });
   }
+  // Cuando algo cambia de alto (tarjetas que se abren, pasos del formulario),
+  // se recalculan las secciones fijadas que vienen detrás
+  let esperaCambio = 0;
+  document.addEventListener('contenido:cambia', () => {
+    clearTimeout(esperaCambio);
+    esperaCambio = window.setTimeout(() => { lenis?.resize(); ScrollTrigger.refresh(); }, 60);
+  }, { signal: control.signal });
+  control.signal.addEventListener('abort', () => clearTimeout(esperaCambio));
   ScrollTrigger.sort();
   ScrollTrigger.refresh();
   // Ya está todo preparado: se puede mostrar lo que estaba oculto esperando su animación

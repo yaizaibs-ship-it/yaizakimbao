@@ -82,7 +82,7 @@ const logoDe = (clave: string) => {
     height: 100%;
     padding: 0.9rem 1rem;
     text-align: center;
-    transition: background 0.35s, color 0.35s;
+    transition: background 0.35s var(--ease-ios), color 0.35s var(--ease-ios);
   }
   .mc-nombre {
     max-width: 14ch;
@@ -94,7 +94,7 @@ const logoDe = (clave: string) => {
   /* Los logos se pintan en el color del texto para que todos combinen */
   .mc-a :global(.mc-logo) { width: auto; max-width: 72%; max-height: 2.2rem; object-fit: contain; filter: brightness(0); }
   :global(body.oscuro) .mc-a :global(.mc-logo) { filter: brightness(0) invert(1); }
-  .mc-flecha { position: absolute; top: 0.45rem; right: 0.55rem; font-size: var(--t-mini); opacity: 0.5; transition: opacity 0.3s, transform 0.4s var(--ease); }
+  .mc-flecha { position: absolute; top: 0.45rem; right: 0.55rem; font-size: var(--t-mini); opacity: 0.5; transition: opacity 0.3s var(--ease-ios), transform 0.4s var(--ease); }
   @media (hover: hover) {
     a.mc-a:hover { background: var(--color-firma); color: #fff; }
     a.mc-a:hover :global(.mc-logo) { filter: brightness(0) invert(1); }

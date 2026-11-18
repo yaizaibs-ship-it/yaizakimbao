@@ -233,7 +233,7 @@ const pf = tx.inicio.perfil;
     padding: 1.2rem;
     border: 1px solid currentColor;
     border-radius: 0.4rem;
-    transition: background 0.4s, color 0.4s;
+    transition: background 0.4s var(--ease-ios), color 0.4s var(--ease-ios);
   }
   @media (hover: hover) {
     .h-todo:hover { background: var(--color-tinta); color: var(--color-fondo); }
@@ -261,7 +261,7 @@ const pf = tx.inicio.perfil;
   .indice-h {
     font-size: clamp(4rem, 15vw, 17rem);
     line-height: 0.92;
-    transition: color 0.35s;
+    transition: color 0.35s var(--ease-ios);
   }
   .indice-link { padding-bottom: 1.6vw; max-width: 9rem; }
   @media (hover: hover) {

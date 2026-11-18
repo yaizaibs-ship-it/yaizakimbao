@@ -86,7 +86,7 @@ const estaWebLista = (await getProyectos(lang)).some((x) => x.slug === 'esta-web
 
 <style>
   .pie { padding-top: var(--seccion); overflow: hidden; }
-  .cinta { display: block; overflow: hidden; transition: color 0.35s; }
+  .cinta { display: block; overflow: hidden; transition: color 0.35s var(--ease-ios); }
   @media (hover: hover) {
     .cinta:hover { color: var(--color-firma); }
   }

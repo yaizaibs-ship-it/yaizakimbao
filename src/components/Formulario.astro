@@ -177,17 +177,36 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
       }
     }
 
+    // Al cambiar de paso, el alto del formulario se ajusta suave (curva de iOS) en vez de saltar
+    let animAlto: Animation | null = null;
+    function suavizaAlto(cambia: () => void, animar = true) {
+      const reducir = !animar || matchMedia('(prefers-reduced-motion: reduce)').matches;
+      animAlto?.cancel();
+      const desde = form!.offsetHeight;
+      cambia();
+      const hasta = form!.offsetHeight;
+      if (!reducir && Math.abs(hasta - desde) > 2) {
+        form!.style.overflow = 'clip';
+        const a = form!.animate([{ height: `${desde}px` }, { height: `${hasta}px` }], { duration: 600, easing: 'cubic-bezier(0.32, 0.72, 0, 1)' });
+        animAlto = a;
+        a.onfinish = a.oncancel = () => { if (animAlto === a) { form!.style.overflow = ''; animAlto = null; } };
+      }
+      document.dispatchEvent(new CustomEvent('contenido:cambia'));
+    }
+
     function muestra(i: number, enfocar = true) {
-      actual = Math.max(0, Math.min(pasos.length - 1, i));
-      if (actual === 1) filtraNecesidad();
-      pasos.forEach((p, j) => p.classList.toggle('activo', j === actual));
-      num.textContent = String(actual + 1);
-      barra.style.transform = `scaleX(${(actual + 1) / pasos.length})`;
-      atras.hidden = actual === 0;
-      const ultimo = actual === pasos.length - 1;
-      siguiente.textContent = ultimo ? tx.enviar : tx.siguiente;
-      siguiente.hidden = !ultimo && !pasoListo(actual);
-      aviso.textContent = '';
+      suavizaAlto(() => {
+        actual = Math.max(0, Math.min(pasos.length - 1, i));
+        if (actual === 1) filtraNecesidad();
+        pasos.forEach((p, j) => p.classList.toggle('activo', j === actual));
+        num.textContent = String(actual + 1);
+        barra.style.transform = `scaleX(${(actual + 1) / pasos.length})`;
+        atras.hidden = actual === 0;
+        const ultimo = actual === pasos.length - 1;
+        siguiente.textContent = ultimo ? tx.enviar : tx.siguiente;
+        siguiente.hidden = !ultimo && !pasoListo(actual);
+        aviso.textContent = '';
+      }, enfocar);
       if (enfocar) {
         pasos[actual].querySelector<HTMLElement>('legend')?.focus({ preventScroll: true });
         const arriba = form!.getBoundingClientRect().top;
@@ -207,7 +226,7 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
       if (el.type !== 'radio') return;
       if (el.name === 'perfil') filtraNecesidad();
       siguiente.hidden = false;
-      setTimeout(() => { if (actual < pasos.length - 1) muestra(actual + 1); }, 280);
+      setTimeout(() => { if (actual < pasos.length - 1) muestra(actual + 1); }, 320);
     });
 
     atras.addEventListener('click', () => muestra(actual - 1));
@@ -312,8 +331,8 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
 
   .fm-paso { border: 0; padding: 0; margin: 0; min-width: 0; }
   .fm.por-pasos .fm-paso { display: none; }
-  .fm.por-pasos .fm-paso.activo { display: block; animation: entra 0.55s var(--ease-ios) both; }
-  @keyframes entra { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: none; } }
+  .fm.por-pasos .fm-paso.activo { display: block; animation: entra 0.7s var(--ease-ios) both; }
+  @keyframes entra { from { opacity: 0; transform: translateY(1.6rem); } to { opacity: 1; transform: none; } }
 
   .fm-pregunta {
     display: block;
@@ -341,7 +360,7 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.05;
-    transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.45s var(--ease-muelle);
+    transition: background 0.3s var(--ease-ios), color 0.3s var(--ease-ios), border-color 0.3s var(--ease-ios), transform 0.45s var(--ease-muelle);
   }
   @media (hover: hover) {
     .fm-opcion:hover span { border-color: var(--color-firma); color: var(--color-firma); }
@@ -366,7 +385,7 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
     font-weight: 500;
     letter-spacing: -0.025em;
     resize: vertical;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s var(--ease-ios);
   }
   .fm-campo textarea { font-size: var(--t-cuerpo); line-height: 1.35; }
   .fm-campo textarea::placeholder { color: var(--color-gris); opacity: 0.7; }
@@ -390,7 +409,7 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1;
-    transition: transform 0.5s var(--ease-muelle), opacity 0.3s;
+    transition: transform 0.5s var(--ease-muelle), opacity 0.3s var(--ease-ios);
   }
   @media (hover: hover) { .fm-siguiente:hover { transform: scale(1.04); } }
   .fm-siguiente:active { transform: scale(0.97); }

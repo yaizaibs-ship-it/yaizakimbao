@@ -130,7 +130,7 @@ const sello = `${CONTACTO.firma} · ${tx.inicio.etiquetas[0]} · `.toUpperCase()
     gap: 0.4rem;
     padding-top: 0.6rem;
   }
-  .idiomas a { opacity: 0.45; transition: opacity 0.3s; }
+  .idiomas a { opacity: 0.45; transition: opacity 0.3s var(--ease-ios); }
   .idiomas a[aria-current='true'] { opacity: 1; text-decoration: underline; text-underline-offset: 0.35em; }
   @media (hover: hover) {
     .idiomas a:hover { opacity: 1; }

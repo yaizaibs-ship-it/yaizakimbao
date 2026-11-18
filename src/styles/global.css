@@ -110,7 +110,7 @@ html.pre-anim [data-split]:not([data-split-hecho]) { visibility: hidden; }
   pointer-events: none;
   opacity: 0;
   display: grid; place-items: center;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s var(--ease-ios);
 }
 /* el círculo se escala (12px → 40px → 96px) en vez de cambiar de tamaño: más fluido */
 .cursor::before {
@@ -118,12 +118,12 @@ html.pre-anim [data-split]:not([data-split-hecho]) { visibility: hidden; }
   border-radius: 50%;
   background: var(--color-firma);
   transform: scale(0.125);
-  transition: transform 0.35s var(--ease), background-color 0.3s;
+  transition: transform 0.35s var(--ease), background-color 0.3s var(--ease-ios);
 }
 .cursor.visible { opacity: 1; }
 .cursor.sobre-enlace::before { transform: scale(0.4167); background-color: rgb(229 0 126 / 0.25); }
 .cursor.grande::before { transform: scale(1); }
-.cursor span { position: relative; color: #fff; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.3s; }
+.cursor span { position: relative; color: #fff; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.3s var(--ease-ios); }
 .cursor.grande span { opacity: 1; }
 html.cursor-propio, html.cursor-propio * { cursor: none !important; }
 
