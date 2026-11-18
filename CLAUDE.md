@@ -28,6 +28,9 @@ Este archivo resume el proyecto para que cualquier conversación nueva con Claud
 - Formulario por pasos (`Formulario.astro`, en Contacto): perfil → necesidad (según perfil) → presupuesto → urgencia → datos + privacidad. Envía con Web3Forms a yaizakimbao@gmail.com; la clave va en `src/i18n/comun.ts` → `FORMULARIO.claveWeb3Forms`. Sin clave, abre el correo de quien escribe con todo rellenado. Textos en `contacto.formulario`.
 - Marcas: lista y enlaces en `comun.ts` → `MARCAS`; logos opcionales en `src/assets/marcas/<clave>.svg|png` (se pintan monocromo). Farline y Aposán enlazan a Cofares. Pendiente: logos (Yaiza los sube).
 
+- **Analytics y cookies** (nov 2026): Google Analytics `G-PX1ETBTNFC` (`comun.ts` → `ANALYTICS`), que solo se carga si la visita pulsa «Aceptar» en el aviso (`Cookies.astro`; la elección se guarda en el navegador). En el pie: Aviso legal · Privacidad · Cookies · Configurar cookies (este último vuelve a abrir el aviso).
+- **Páginas legales** (`views/Legal.astro`, textos en `src/i18n/legal.ts`): `/es/cookies`, `/es/privacidad`, `/es/aviso-legal` y `/en/cookies`, `/en/privacy`, `/en/legal-notice`. Yaiza no es autónoma: portfolio personal, solo nombre y email. **No publicar su NIF ni su domicilio**; cuando facture (autónoma o cooperativa), se rellenan en `comun.ts` → `LEGAL` y salen solo en el aviso legal.
+
 ## Proyectos (casos)
 Un `.md` por idioma en `src/content/proyectos/es|en/<slug>.md`; los datos compartidos (color, orden, galería, vídeos, bloques) solo en el español; el inglés lleva textos y `galeriaAlt` / `videosTitulo` / `bloquesTexto`. Imágenes en `src/assets/proyectos/<slug>/`; si falta una, sale un placeholder.
 
