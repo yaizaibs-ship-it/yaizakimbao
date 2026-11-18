@@ -1,0 +1,141 @@
+---
+/**
+ * AVISO DE COOKIES + GOOGLE ANALYTICS
+ * - Analytics NO se carga hasta que la visita pulsa «Aceptar» (lo que pide la ley en España).
+ * - La elección se guarda en el navegador; el aviso no vuelve a salir.
+ * - El enlace «Cookies» del pie (data-cookies-abrir) vuelve a enseñar el aviso para cambiar de opinión.
+ * - El ID está en src/i18n/comun.ts → ANALYTICS.id
+ */
+import { t, url, type Idioma } from '../i18n';
+import { ANALYTICS } from '../i18n/comun';
+
+interface Props { lang: Idioma }
+const { lang } = Astro.props;
+const c = t(lang).cookies;
+const id = ANALYTICS.id;
+---
+
+{
+  id && (
+    <div class="cookies" data-cookies role="region" aria-label={c.enlacePie} hidden data-ga={id}>
+      <p class="cookies-texto">{c.texto} <a href={url(lang, 'cookies')}>{c.masInfo}</a></p>
+      <div class="cookies-botones">
+        <button type="button" class="cookies-btn cookies-no" data-cookies-respuesta="no">{c.rechazar}</button>
+        <button type="button" class="cookies-btn cookies-si" data-cookies-respuesta="si">{c.aceptar}</button>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  const CLAVE = 'cookies';
+
+  function leer(): string | null {
+    try { return localStorage.getItem(CLAVE); } catch { return null; }
+  }
+  function guardar(v: string) {
+    try { localStorage.setItem(CLAVE, v); } catch {}
+  }
+
+  /** Carga Google Analytics una sola vez por visita */
+  function cargarAnalytics(id: string) {
+    const w = window as any;
+    if (w.__gaCargado) return;
+    w.__gaCargado = true;
+    w.dataLayer = w.dataLayer || [];
+    w.gtag = function () { w.dataLayer.push(arguments); };
+    w.gtag('js', new Date());
+    w.gtag('config', id, { anonymize_ip: true });
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+    document.head.appendChild(s);
+  }
+
+  function preparar() {
+    const aviso = document.querySelector<HTMLElement>('[data-cookies]');
+    if (!aviso) return;
+    const id = aviso.dataset.ga!;
+    const eleccion = leer();
+
+    if (eleccion === 'si') cargarAnalytics(id);
+    aviso.hidden = eleccion !== null;
+
+    aviso.querySelectorAll<HTMLButtonElement>('[data-cookies-respuesta]').forEach((b) => {
+      b.addEventListener('click', () => {
+        const v = b.dataset.cookiesRespuesta!;
+        guardar(v);
+        aviso.hidden = true;
+        if (v === 'si') {
+          cargarAnalytics(id);
+        } else if ((window as any).__gaCargado) {
+          // Si antes había aceptado y ahora rechaza: se deja de medir y se recarga limpio
+          (window as any)[`ga-disable-${id}`] = true;
+          document.cookie.split(';').forEach((ck) => {
+            const nombre = ck.split('=')[0].trim();
+            if (nombre.startsWith('_ga')) {
+              document.cookie = `${nombre}=; Max-Age=0; path=/; domain=.${location.hostname.replace(/^www\./, '')}`;
+              document.cookie = `${nombre}=; Max-Age=0; path=/`;
+            }
+          });
+        }
+      });
+    });
+
+    document.querySelectorAll<HTMLElement>('[data-cookies-abrir]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        aviso.hidden = false;
+        aviso.querySelector<HTMLButtonElement>('.cookies-si')?.focus();
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', preparar);
+</script>
+
+<style>
+  .cookies {
+    position: fixed;
+    z-index: 90;
+    left: var(--margen);
+    bottom: calc(var(--margen) + var(--seguro-abajo));
+    max-width: 26rem;
+    padding: 1.1rem 1.2rem 1.2rem;
+    background: var(--color-tinta);
+    color: var(--color-fondo);
+    border-radius: 0.9rem;
+    box-shadow: 0 0.6rem 2.4rem rgb(0 0 0 / 0.18);
+    font-size: var(--t-peque);
+    line-height: 1.4;
+    animation: cookies-entra 0.6s var(--ease-ios) both;
+  }
+  .cookies[hidden] { display: none; }
+  .cookies-texto { margin: 0 0 1rem; }
+  .cookies-texto a { color: inherit; text-decoration: underline; text-underline-offset: 0.2em; }
+  .cookies-texto a:hover { color: var(--color-firma); }
+  .cookies-botones { display: flex; gap: 0.5rem; justify-content: flex-end; }
+  .cookies-btn {
+    font: inherit;
+    font-weight: var(--peso-display);
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .cookies-no { background: transparent; color: var(--color-fondo); border: 1px solid rgb(255 255 255 / 0.35); }
+  .cookies-no:hover { border-color: var(--color-fondo); }
+  .cookies-si { background: var(--color-firma); color: #fff; border: 1px solid var(--color-firma); }
+  .cookies-si:hover { background: #fff; color: var(--color-tinta); border-color: #fff; }
+  .cookies-btn:focus-visible { outline: 2px solid var(--color-firma); outline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    .cookies { right: var(--margen); max-width: none; }
+  }
+  @keyframes cookies-entra {
+    from { opacity: 0; transform: translateY(1rem); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cookies { animation: none; }
+  }
+</style>

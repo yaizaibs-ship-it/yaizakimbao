@@ -267,6 +267,18 @@ const en: Textos = {
     },
   },
 
+  /** Cookie notice (Google Analytics) */
+  cookies: {
+    texto: 'I use Google Analytics cookies to see how many people visit and what they look at. Nothing else.',
+    aceptar: 'Accept',
+    rechazar: 'Decline',
+    enlacePie: 'Cookies',
+    masInfo: 'More info',
+    configurar: 'Cookie settings',
+    avisoLegal: 'Legal notice',
+    privacidad: 'Privacy',
+    privacidadForm: 'Privacy policy',
+  },
   pie: {
     cinta: [
       ['Say', 'hola!'],

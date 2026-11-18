@@ -1,0 +1,125 @@
+---
+/**
+ * Páginas legales: Política de cookies, Política de privacidad y Aviso legal.
+ * Los textos están en src/i18n/legal.ts; los datos (NIF, domicilio) en src/i18n/comun.ts → LEGAL.
+ */
+import Base from '../layouts/Base.astro';
+import { url, otroIdioma, type Idioma } from '../i18n';
+import { CONTACTO, LEGAL, ANALYTICS } from '../i18n/comun';
+import { LEGALES, type ClaveLegal } from '../i18n/legal';
+
+interface Props { lang: Idioma; pagina: ClaveLegal }
+const { lang, pagina } = Astro.props;
+const L = LEGALES[lang];
+const p = L[pagina];
+const pendiente = '[PENDIENTE]';
+
+const enlace = (clave: ClaveLegal) => `<a href="${url(lang, clave)}">${L[clave].titulo.toLowerCase()}</a>`;
+const datos: Record<string, string> = {
+  nombre: CONTACTO.nombre,
+  firma: CONTACTO.firma,
+  email: CONTACTO.email,
+  nif: LEGAL.nif || pendiente,
+  domicilio: LEGAL.domicilio || pendiente,
+  ga: ANALYTICS.id.replace(/^G-/, ''),
+  cookies: enlace('cookies'),
+  privacidad: enlace('privacidad'),
+  avisoLegal: enlace('avisoLegal'),
+};
+const rellenar = (s: string) => s.replace(/\{(\w+)\}/g, (m, k) => datos[k] ?? m);
+---
+
+<Base lang={lang} actual={pagina} urlOtroIdioma={url(otroIdioma(lang), pagina)} titulo={p.titulo} descripcion={p.entradilla}>
+  <section class="cab margen">
+    <h1 class="titular cab-h">{p.titulo}</h1>
+    <p class="entradilla">{p.entradilla}</p>
+    <p class="mini gris">{L.actualizado}: {LEGAL.actualizado[lang]}</p>
+  </section>
+
+  <div class="secciones margen">
+    {
+      p.secciones.map((s, i) => (
+        <section class="sec">
+          <div class="sec-cab">
+            <span class="mini gris">({String(i + 1).padStart(2, '0')})</span>
+            <h2 class="sec-h">{s.titulo}</h2>
+          </div>
+          <div class="sec-txt">
+            {s.parrafos?.map((x) => <p set:html={rellenar(x)} />)}
+            {s.lista && (
+              <ul>
+                {s.lista.map((x) => <li set:html={rellenar(x)} />)}
+              </ul>
+            )}
+            {s.tabla && (
+              <div class="tabla-envoltura">
+                <table>
+                  <thead>
+                    <tr>{s.tabla[0].map((c) => <th scope="col">{c}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {s.tabla.slice(1).map((fila) => (
+                      <tr>{fila.map((c, j) => (j === 0 ? <td><code>{rellenar(c)}</code></td> : <td>{c}</td>))}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </section>
+      ))
+    }
+    {
+      pagina === 'cookies' && ANALYTICS.id && (
+        <p class="sec-boton">
+          <a href="#" class="boton-cookies" data-cookies-abrir>{L.cambiarCookies}</a>
+        </p>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .cab { padding-top: calc(var(--cabecera) + 6vh); padding-bottom: calc(var(--seccion) * 0.6); display: grid; gap: 1.6rem; }
+  .cab-h { font-size: var(--t-grande); }
+  .entradilla { font-size: var(--t-medio); font-weight: 500; line-height: 1.1; letter-spacing: -0.025em; max-width: 30ch; }
+
+  .secciones { padding-bottom: var(--seccion); }
+  .sec {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem 2rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--color-linea);
+  }
+  .sec-cab { display: grid; gap: 0.5rem; align-content: start; }
+  .sec-h { font-size: var(--t-medio); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; max-width: 18ch; }
+  .sec-txt { display: grid; gap: 0.9rem; font-size: var(--t-base); line-height: 1.5; max-width: 62ch; }
+  .sec-txt ul { display: grid; gap: 0.45rem; padding-left: 1.1rem; list-style: disc; }
+  .sec-txt :global(a) { color: var(--color-firma-texto); text-decoration: underline; text-underline-offset: 0.2em; }
+  .sec-txt :global(strong) { font-weight: 600; }
+
+  .tabla-envoltura { overflow-x: auto; margin-top: 0.3rem; }
+  table { width: 100%; border-collapse: collapse; font-size: var(--t-peque); }
+  th, td { text-align: left; padding: 0.6rem 0.8rem 0.6rem 0; border-bottom: 1px solid var(--color-linea); vertical-align: top; }
+  th { font-weight: 600; color: var(--color-gris); text-transform: uppercase; font-size: var(--t-mini); letter-spacing: 0.03em; }
+  code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.95em; }
+
+  .sec-boton { padding-top: 1rem; border-top: 1px solid var(--color-linea); }
+  .boton-cookies {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.3rem;
+    border-radius: 999px;
+    background: var(--color-tinta);
+    color: var(--color-fondo);
+    font-weight: 500;
+    font-size: var(--t-peque);
+    transition: background 0.25s;
+  }
+  .boton-cookies:hover { background: var(--color-firma); }
+
+  @media (max-width: 760px) {
+    .sec { grid-template-columns: 1fr; }
+  }
+</style>

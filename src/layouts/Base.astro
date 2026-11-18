@@ -6,6 +6,7 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
+import Cookies from '../components/Cookies.astro';
 import { t, otroIdioma, conBase, url, type Idioma, type ClaveRuta } from '../i18n';
 import { CONTACTO } from '../i18n/comun';
 import retrato from '../assets/personal/retrato.jpg';
@@ -175,6 +176,7 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
       <slot />
     </main>
     <Pie lang={lang} />
+    <Cookies lang={lang} />
     <script>
       import { iniciar, detener } from '../scripts/movimiento';
       document.addEventListener('astro:page-load', iniciar);

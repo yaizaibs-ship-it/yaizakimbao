@@ -12,6 +12,9 @@ export const RUTAS = {
   sobre: { es: 'sobre-mi', en: 'about' },
   contacto: { es: 'contacto', en: 'contact' },
   proyecto: { es: 'proyectos', en: 'projects' },
+  cookies: { es: 'cookies', en: 'cookies' },
+  privacidad: { es: 'privacidad', en: 'privacy' },
+  avisoLegal: { es: 'aviso-legal', en: 'legal-notice' },
 } as const;
 
 export type ClaveRuta = keyof typeof RUTAS;

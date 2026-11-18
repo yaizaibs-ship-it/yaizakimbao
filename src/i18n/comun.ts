@@ -28,6 +28,27 @@ export const FORMULARIO = {
 };
 
 /**
+ * DATOS LEGALES (salen en Aviso legal y Política de privacidad)
+ * La ley (LSSI) pide nombre, NIF y un domicilio de contacto.
+ * Mientras estén vacíos, la web muestra [PENDIENTE].
+ */
+export const LEGAL = {
+  nif: '',
+  domicilio: '',
+  actualizado: { es: 'noviembre de 2026', en: 'November 2026' },
+};
+
+/**
+ * GOOGLE ANALYTICS
+ * ID de medición de tu propiedad (Analytics → Administrar → Flujos de datos).
+ * Solo se activa si la visita pulsa «Aceptar» en el aviso de cookies.
+ * Déjalo en '' para quitar Analytics de la web.
+ */
+export const ANALYTICS = {
+  id: 'G-PX1ETBTNFC',
+};
+
+/**
  * MARCAS CON LAS QUE HE TRABAJADO (muro de la home)
  * - nombre: cómo se ve escrito si no hay logo
  * - web: enlace (déjalo en '' si no hay o no quieres enlazar)

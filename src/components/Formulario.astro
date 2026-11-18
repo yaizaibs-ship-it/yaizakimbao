@@ -6,7 +6,7 @@
  * Sin clave, abre el correo de quien escribe con todo rellenado.
  * Textos en es.ts / en.ts → contacto.formulario
  */
-import { t, type Idioma } from '../i18n';
+import { t, url, type Idioma } from '../i18n';
 import { CONTACTO, FORMULARIO } from '../i18n/comun';
 
 interface Props { lang: Idioma }
@@ -127,7 +127,7 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
       </label>
       <label class="fm-privacidad fm-ancho">
         <input type="checkbox" name="privacidad" value="Aceptada" required />
-        <span>{f.datos.privacidad}</span>
+        <span>{f.datos.privacidad} <a href={url(lang, 'privacidad')} target="_blank" rel="noopener">{t(lang).cookies.privacidadForm} ↗</a></span>
       </label>
     </div>
   </fieldset>
@@ -372,6 +372,7 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
   .fm-campo textarea::placeholder { color: var(--color-gris); opacity: 0.7; }
   .fm-campo input:focus, .fm-campo textarea:focus { outline: none; border-bottom-color: var(--color-firma); border-bottom-width: 2px; }
   .fm-privacidad { display: flex; gap: 0.8rem; align-items: flex-start; max-width: 62ch; color: var(--color-gris); font-size: var(--t-peque); line-height: 1.4; cursor: pointer; }
+  .fm-privacidad a { color: var(--color-firma-texto); text-decoration: underline; text-underline-offset: 0.2em; }
   .fm-privacidad input { flex: none; width: 1.15rem; height: 1.15rem; margin-top: 0.1rem; accent-color: var(--color-firma); }
 
   .fm-aviso { min-height: 1.4em; margin-top: 1rem; color: var(--color-firma-texto); font-size: var(--t-peque); }

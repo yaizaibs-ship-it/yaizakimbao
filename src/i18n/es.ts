@@ -271,6 +271,18 @@ const es = {
     },
   },
 
+  /** Aviso de cookies (Google Analytics) */
+  cookies: {
+    texto: 'Uso cookies de Google Analytics para saber cuánta gente visita la web y qué le interesa. Nada más.',
+    aceptar: 'Aceptar',
+    rechazar: 'Rechazar',
+    enlacePie: 'Cookies',
+    masInfo: 'Más información',
+    configurar: 'Configurar cookies',
+    avisoLegal: 'Aviso legal',
+    privacidad: 'Privacidad',
+    privacidadForm: 'Política de privacidad',
+  },
   pie: {
     cinta: [
       ['Say', 'hola!'],
