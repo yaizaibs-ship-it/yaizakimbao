@@ -23,7 +23,7 @@ export const CONTACTO = {
  * con todo rellenado, así que nunca se pierde un mensaje.
  */
 export const FORMULARIO = {
-  claveWeb3Forms: '',
+  claveWeb3Forms: 'e97eb8b1-b279-49ca-8d34-e591e2b030d3',
 };
 
 /**
