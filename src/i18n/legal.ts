@@ -76,8 +76,6 @@ const es: Record<ClaveLegal, PaginaLegal> & { actualizado: string; cambiarCookie
         titulo: 'Responsable',
         lista: [
           '<strong>Nombre:</strong> {nombre} ({firma})',
-          '<strong>NIF:</strong> {nif}',
-          '<strong>Domicilio:</strong> {domicilio}',
           '<strong>Email:</strong> <a href="mailto:{email}">{email}</a>',
         ],
       },
@@ -248,8 +246,6 @@ const en: typeof es = {
         titulo: 'Data controller',
         lista: [
           '<strong>Name:</strong> {nombre} ({firma})',
-          '<strong>Tax ID (NIF):</strong> {nif}',
-          '<strong>Address:</strong> {domicilio}',
           '<strong>Email:</strong> <a href="mailto:{email}">{email}</a>',
         ],
       },

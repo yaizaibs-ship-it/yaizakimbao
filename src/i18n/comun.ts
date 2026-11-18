@@ -28,9 +28,10 @@ export const FORMULARIO = {
 };
 
 /**
- * DATOS LEGALES (salen en Aviso legal y Política de privacidad)
- * La ley (LSSI) pide nombre, NIF y un domicilio de contacto.
- * Mientras estén vacíos, la web muestra [PENDIENTE].
+ * DATOS LEGALES (solo salen en el Aviso legal)
+ * De momento vacíos: es un portfolio personal, sin alta de autónoma.
+ * Cuando factures (como autónoma o con la cooperativa), rellénalos con
+ * el NIF/CIF y el domicilio de quien factura y aparecerán solos.
  */
 export const LEGAL = {
   nif: '',

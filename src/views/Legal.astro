@@ -1,7 +1,7 @@
 ---
 /**
  * Páginas legales: Política de cookies, Política de privacidad y Aviso legal.
- * Los textos están en src/i18n/legal.ts; los datos (NIF, domicilio) en src/i18n/comun.ts → LEGAL.
+ * Los textos están en src/i18n/legal.ts; NIF y domicilio (opcionales) en src/i18n/comun.ts → LEGAL.
  */
 import Base from '../layouts/Base.astro';
 import { url, otroIdioma, type Idioma } from '../i18n';
@@ -12,15 +12,14 @@ interface Props { lang: Idioma; pagina: ClaveLegal }
 const { lang, pagina } = Astro.props;
 const L = LEGALES[lang];
 const p = L[pagina];
-const pendiente = '[PENDIENTE]';
 
 const enlace = (clave: ClaveLegal) => `<a href="${url(lang, clave)}">${L[clave].titulo.toLowerCase()}</a>`;
 const datos: Record<string, string> = {
   nombre: CONTACTO.nombre,
   firma: CONTACTO.firma,
   email: CONTACTO.email,
-  nif: LEGAL.nif || pendiente,
-  domicilio: LEGAL.domicilio || pendiente,
+  nif: LEGAL.nif,
+  domicilio: LEGAL.domicilio,
   ga: ANALYTICS.id.replace(/^G-/, ''),
   cookies: enlace('cookies'),
   privacidad: enlace('privacidad'),
@@ -48,7 +47,9 @@ const rellenar = (s: string) => s.replace(/\{(\w+)\}/g, (m, k) => datos[k] ?? m)
             {s.parrafos?.map((x) => <p set:html={rellenar(x)} />)}
             {s.lista && (
               <ul>
-                {s.lista.map((x) => <li set:html={rellenar(x)} />)}
+                {s.lista
+                  .filter((x) => !(x.includes('{nif}') && !LEGAL.nif) && !(x.includes('{domicilio}') && !LEGAL.domicilio))
+                  .map((x) => <li set:html={rellenar(x)} />)}
               </ul>
             )}
             {s.tabla && (
