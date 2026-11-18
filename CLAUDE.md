@@ -47,7 +47,7 @@ Estado (nov 2026: **los 5 casos están en `enProceso: true`** mientras Yaiza los
 | Esta web (`esta-web`) | Caso sobre el propio portfolio en 4 actos (proceso, tipografía en negro, animaciones en magenta, móvil), con capturas de la web. No destacado en la home. Falta: resultados; rehacer capturas si cambia mucho el diseño |
 | Día de Tierra Bobal (`tierra-bobal`) | Completo con 4 bloques en mosaico. Falta: resultados; se pueden añadir campaña «Huele a Tierra Bobal», paneles e infografías como bloques nuevos |
 
-Sin Instagram en la web (decisión de Yaiza); ACEROº retirado. Club Bayer, Farline y Alegre Design retirados como casos (sin permiso del cliente): solo se citan en la trayectoria de Sobre mí. CV reales ES/EN en `public/cv/` (nov 2026). Otros pendientes: posible nueva portada de la home (imagen o vídeo de flores generado con IA).
+Instagram @yaizakimbao de vuelta en la web (nov 2026): `CONTACTO.instagram` en comun.ts, enlazado en Contacto, en el pie y en el JSON-LD (sameAs). ACEROº retirado. Club Bayer, Farline y Alegre Design retirados como casos (sin permiso del cliente): solo se citan en la trayectoria de Sobre mí. CV reales ES/EN en `public/cv/` (nov 2026). Otros pendientes: posible nueva portada de la home (imagen o vídeo de flores generado con IA).
 
 ## Cómo trabajar
 1. Clonar, `npm ci`, hacer el cambio, `npx astro check` y `npx astro build`.
