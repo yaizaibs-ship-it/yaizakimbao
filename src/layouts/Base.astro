@@ -117,9 +117,11 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
     <link rel="alternate" hreflang="es" href={urlEs} />
     <link rel="alternate" hreflang="en" href={urlEn} />
     <link rel="alternate" hreflang="x-default" href={urlEs} />
-    <link rel="icon" href={conBase('/favicon.svg')} type="image/svg+xml" />
-    <link rel="icon" href={conBase('/favicon-48.png')} type="image/png" sizes="48x48" />
-    <link rel="apple-touch-icon" href={conBase('/apple-touch-icon.png')} />
+    <!-- ?v=2: obliga a los navegadores (sobre todo Safari) a olvidar el favicon antiguo. Súbelo si lo cambias otra vez -->
+    <link rel="icon" href={conBase('/favicon.ico?v=2')} sizes="32x32" />
+    <link rel="icon" href={conBase('/favicon.svg?v=2')} type="image/svg+xml" />
+    <link rel="icon" href={conBase('/favicon-48.png?v=2')} type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href={conBase('/apple-touch-icon.png?v=2')} />
     <link rel="manifest" href={conBase('/site.webmanifest')} />
     <meta name="author" content={`${CONTACTO.nombre} (${CONTACTO.firma})`} />
     {!noindex && <meta name="robots" content="index, follow, max-image-preview:large" />}
