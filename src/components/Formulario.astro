@@ -334,10 +334,10 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
   .fm-opcion input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
   .fm-opcion span {
     display: inline-block;
-    padding: 0.8em 1.3em 0.85em;
+    padding: 0.7em 1.1em 0.75em;
     border: 1px solid currentColor;
     border-radius: 999px;
-    font-size: var(--t-cuerpo);
+    font-size: 0.9375rem;
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.05;
@@ -376,16 +376,16 @@ const grupos = Object.entries(f.necesidad.opciones) as [string, string[]][];
 
   .fm-aviso { min-height: 1.4em; margin-top: 1rem; color: var(--color-firma-texto); font-size: var(--t-peque); }
   .fm-botones { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 0.6rem; }
-  .fm-atras { font-size: var(--t-cuerpo); font-weight: 500; color: var(--color-gris); letter-spacing: -0.02em; }
+  .fm-atras { font-size: 0.9375rem; font-weight: 500; color: var(--color-gris); letter-spacing: -0.02em; }
   .fm-atras[hidden], .fm-siguiente[hidden] { display: none; }
   @media (hover: hover) { .fm-atras:hover { color: var(--color-tinta); } }
   .fm-siguiente {
     margin-left: auto;
-    padding: 0.85em 1.5em 0.9em;
+    padding: 0.75em 1.25em 0.8em;
     border-radius: 999px;
     background: var(--color-firma);
     color: #fff;
-    font-size: var(--t-cuerpo);
+    font-size: 0.9375rem;
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1;

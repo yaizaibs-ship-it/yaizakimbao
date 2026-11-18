@@ -5,10 +5,31 @@
  */
 const es = {
   meta: {
-    tituloSitio: 'Yaiza Kimbao — Visual Designer',
+    tituloSitio: 'Yaiza Kimbao — Diseñadora visual: branding, campañas, motion',
     descripcion:
-      'Portfolio de Yaiza Ibáñez (Yaiza Kimbao), diseñadora visual y estratega de comunicación: branding, campañas, redes y motion. Barcelona y Utiel-Requena.',
+      'Yaiza Kimbao, diseñadora visual y estratega de comunicación en España. Branding, campañas, redes sociales y motion para negocios locales, marcas y agencias.',
     locale: 'es_ES',
+    /** Título (pestaña y Google) y descripción de cada página. ≤60 y ≤160 caracteres */
+    paginas: {
+      trabajo: {
+        titulo: 'Proyectos de branding, campañas y motion',
+        descripcion: 'Proyectos de Yaiza Kimbao: identidades de marca, brandbooks, campañas, redes y motion para marcas de moda, turismo y cultura.',
+      },
+      sobre: {
+        titulo: 'Sobre mí — Diseñadora visual y estratega',
+        descripcion: 'Soy Yaiza Ibáñez (Yaiza Kimbao): diseñadora visual con rigor de agencia y marcas propias. Trayectoria, herramientas, idiomas y CV.',
+      },
+      contacto: {
+        titulo: 'Contacto — Cuéntame tu proyecto',
+        descripcion: '¿Una marca por construir, una campaña por lanzar o algo por coser? Cuéntamelo en cinco pasos y te respondo en persona.',
+      },
+    },
+    /** Página de error 404 */
+    error404: {
+      titulo: 'Esta página se ha ido de vacaciones',
+      texto: 'O nunca existió. Pasa, que lo demás sigue en su sitio.',
+      volver: 'Volver al inicio',
+    },
   },
 
   ui: {
@@ -53,7 +74,7 @@ const es = {
   },
 
   inicio: {
-    etiquetas: ['Visual Designer', 'Branding · Estrategia · Motion', 'Portfolio 2026', 'Barcelona — Utiel-Requena'],
+    etiquetas: ['Visual Designer', 'Branding · Estrategia · Motion', 'Portfolio 2026', 'España'],
     statementIntro: 'Diseño marcas con cabeza, las cuento con estrategia y las pongo en movimiento.',
     palabras: [
       {
@@ -82,7 +103,7 @@ const es = {
       listaIzquierda: ['Data driven design', 'Paid & orgánico', 'UX/UI', 'Newsletters', 'SEO / SEM'],
       listaDerecha: ['Moda', 'Upcycling', 'Cultura futbolera', 'Artesanía', 'Flores'],
       texto:
-        'Vengo de agencia —VML The Cocktail, Alegre Design— y tengo mis propias marcas: HEAD BUTT BARCELONA y KIMBAO 999. Mido como una data designer y creo como alguien que se cose sus propios bolsos.',
+        'Vengo de agencia (VML The Cocktail, Versión Digital, Alegre Design) y tengo dos marcas propias: HEAD BUTT BARCELONA y KIMBAO 999. Uso los datos para decidir y las manos para todo lo demás. Sí, también me coso los bolsos.',
     },
 
     /** Servicios según quién llega (tarjetas con notita desplegable) */
@@ -257,7 +278,7 @@ const es = {
       ['Say', 'hello!'],
     ],
     letsCreate: 'Let’s create.',
-    lugar: 'Barcelona — Utiel-Requena',
+    lugar: 'España',
     frase: 'Diseño de marca, estrategia y contenido para marcas que quieren moverse.',
     escribeme: 'Escríbeme',
     descarga: 'Descargar',

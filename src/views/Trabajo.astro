@@ -12,7 +12,7 @@ const tx = t(lang);
 const proyectos = await getProyectos(lang);
 ---
 
-<Base lang={lang} actual="trabajo" urlOtroIdioma={url(otroIdioma(lang), 'trabajo')} titulo={tx.ui.nav.trabajo}>
+<Base lang={lang} actual="trabajo" urlOtroIdioma={url(otroIdioma(lang), 'trabajo')} titulo={tx.meta.paginas.trabajo.titulo} descripcion={tx.meta.paginas.trabajo.descripcion}>
   <section class="cab margen">
     <h1 class="titular cab-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.ui.nav.trabajo}.</span></h1>
     <div class="cab-fila">

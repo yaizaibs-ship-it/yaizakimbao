@@ -10,8 +10,9 @@ const en = conBase('/en/');
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yaiza Kimbao</title>
-    <meta name="robots" content="noindex" />
+    <title>Yaiza Kimbao — Diseñadora visual</title>
+    <!-- Para Google, la raíz es una redirección a /es/ (la página principal) -->
+    <link rel="canonical" href={new URL(es, Astro.site ?? 'https://example.com').href} />
     <link rel="alternate" hreflang="es" href={es} />
     <link rel="alternate" hreflang="en" href={en} />
     <script is:inline define:vars={{ es, en }}>
@@ -23,7 +24,7 @@ const en = conBase('/en/');
         location.replace(destino);
       })();
     </script>
-    <meta http-equiv="refresh" content={`1; url=${es}`} />
+    <meta http-equiv="refresh" content={`0; url=${es}`} />
   </head>
   <body>
     <p><a href={es}>Español</a> · <a href={en}>English</a></p>

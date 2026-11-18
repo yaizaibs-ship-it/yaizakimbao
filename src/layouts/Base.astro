@@ -8,6 +8,7 @@ import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
 import { t, otroIdioma, conBase, url, type Idioma, type ClaveRuta } from '../i18n';
 import { CONTACTO } from '../i18n/comun';
+import retrato from '../assets/personal/retrato.jpg';
 
 interface Props {
   lang: Idioma;
@@ -38,18 +39,34 @@ const urlEn = lang === 'en' ? canonica : alterna;
 
 // Ficha para Google y asistentes de IA: quién es Yaiza y dónde encontrarla.
 const urlInicio = new URL(conBase(`/${lang}/`), site).href;
+const fotoRetrato = await getImage({ src: retrato, width: 800, format: 'jpg' });
 const fichaPersona = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': `${site.origin}/#persona`,
   name: CONTACTO.nombre,
   alternateName: CONTACTO.firma,
-  jobTitle: tx.inicio.etiquetas[0],
+  jobTitle: lang === 'es' ? 'Diseñadora visual y estratega de comunicación' : 'Visual designer and communication strategist',
   description: tx.meta.descripcion,
   url: urlInicio,
+  image: new URL(fotoRetrato.src, site).href,
   email: `mailto:${CONTACTO.email}`,
   sameAs: [CONTACTO.linkedin],
-  knowsAbout: ['Branding', 'Visual design', 'Communication strategy', 'Motion graphics', 'Social media', 'UX/UI'],
-  homeLocation: [{ '@type': 'Place', name: 'Barcelona' }, { '@type': 'Place', name: 'Utiel-Requena, Valencia' }],
+  knowsAbout: ['Branding', 'Diseño gráfico', 'Visual design', 'Communication strategy', 'Motion graphics', 'Social media', 'UX/UI', 'Upcycling'],
+  knowsLanguage: ['es', 'en', 'it', 'ca'],
+  homeLocation: { '@type': 'Country', name: lang === 'es' ? 'España' : 'Spain' },
+  address: { '@type': 'PostalAddress', addressCountry: 'ES' },
+};
+// Ficha de la web (nombre del sitio en Google)
+const fichaWeb = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.origin}/#web`,
+  name: CONTACTO.firma,
+  alternateName: ['yaizakimbao.com', CONTACTO.nombre],
+  url: `${site.origin}/`,
+  inLanguage: ['es', 'en'],
+  publisher: { '@id': `${site.origin}/#persona` },
 };
 
 let og = new URL(conBase('/og-default.png'), site).href;
@@ -100,6 +117,11 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
     <link rel="alternate" hreflang="en" href={urlEn} />
     <link rel="alternate" hreflang="x-default" href={urlEs} />
     <link rel="icon" href={conBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={conBase('/favicon-48.png')} type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href={conBase('/apple-touch-icon.png')} />
+    <link rel="manifest" href={conBase('/site.webmanifest')} />
+    <meta name="author" content={`${CONTACTO.nombre} (${CONTACTO.firma})`} />
+    {!noindex && <meta name="robots" content="index, follow, max-image-preview:large" />}
     <link rel="sitemap" href={conBase('/sitemap-index.xml')} />
     <meta name="theme-color" content="#f4f1ec" />
 
@@ -110,10 +132,14 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
     <meta property="og:description" content={descFinal} />
     <meta property="og:url" content={canonica} />
     <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={titulo ?? tx.meta.tituloSitio} />
     <meta property="og:locale" content={tx.meta.locale} />
     <meta property="og:locale:alternate" content={t(otro).meta.locale} />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(fichaPersona)} />
+    {actual === 'inicio' && <script type="application/ld+json" set:html={JSON.stringify(fichaWeb)} />}
     {fichasExtra.map((f) => <script type="application/ld+json" set:html={JSON.stringify(f)} />)}
 
     <!-- Si el visitante elige idioma, se recuerda para la próxima visita -->

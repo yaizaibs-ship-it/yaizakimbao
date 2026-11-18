@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const tx = t(lang);
 ---
 
-<Base lang={lang} actual="contacto" urlOtroIdioma={url(otroIdioma(lang), 'contacto')} titulo={tx.contacto.titulo} descripcion={tx.contacto.texto}>
+<Base lang={lang} actual="contacto" urlOtroIdioma={url(otroIdioma(lang), 'contacto')} titulo={tx.meta.paginas.contacto.titulo} descripcion={tx.meta.paginas.contacto.descripcion}>
   <section class="cont margen">
     <h1 class="titular cont-h"><span data-fit="1" data-fit-max="40vh" data-split="letras">{tx.contacto.titulo}.</span></h1>
 

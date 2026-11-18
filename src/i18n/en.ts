@@ -6,10 +6,29 @@ import type { Textos } from './es';
 
 const en: Textos = {
   meta: {
-    tituloSitio: 'Yaiza Kimbao — Visual Designer',
+    tituloSitio: 'Yaiza Kimbao — Visual Designer: branding, campaigns & motion',
     descripcion:
-      'Portfolio of Yaiza Ibáñez (Yaiza Kimbao), visual designer and communication strategist: branding, campaigns, social media and motion. Barcelona, Spain.',
+      'Yaiza Kimbao, visual designer and communication strategist in Spain. Branding, campaigns, social media and motion for local businesses, brands and agencies.',
     locale: 'en_US',
+    paginas: {
+      trabajo: {
+        titulo: 'Branding, campaign and motion projects',
+        descripcion: 'Work by Yaiza Kimbao: brand identities, brandbooks, campaigns, social media and motion for fashion, tourism and culture brands.',
+      },
+      sobre: {
+        titulo: 'About — Visual designer and strategist',
+        descripcion: 'I’m Yaiza Ibáñez (Yaiza Kimbao): a visual designer with agency rigour and brands of my own. Background, tools, languages and CV.',
+      },
+      contacto: {
+        titulo: 'Contact — Tell me about your project',
+        descripcion: 'A brand to build, a campaign to launch or something to sew? Tell me in five steps and I’ll get back to you personally.',
+      },
+    },
+    error404: {
+      titulo: 'This page has gone on holiday',
+      texto: 'Or it never existed. Come on in, everything else is where you left it.',
+      volver: 'Back to home',
+    },
   },
 
   ui: {
@@ -53,7 +72,7 @@ const en: Textos = {
   },
 
   inicio: {
-    etiquetas: ['Visual Designer', 'Branding · Strategy · Motion', 'Portfolio 2026', 'Barcelona — Utiel-Requena'],
+    etiquetas: ['Visual Designer', 'Branding · Strategy · Motion', 'Portfolio 2026', 'Spain'],
     statementIntro: 'I design brands with a point, tell them with strategy and set them in motion.',
     palabras: [
       {
@@ -82,7 +101,7 @@ const en: Textos = {
       listaIzquierda: ['Data-driven design', 'Paid & organic', 'UX/UI', 'Newsletters', 'SEO / SEM'],
       listaDerecha: ['Fashion', 'Upcycling', 'Football culture', 'Craft', 'Flowers'],
       texto:
-        'I come from agencies —VML The Cocktail, Alegre Design— and I run my own brands: HEAD BUTT BARCELONA and KIMBAO 999. I measure like a data designer and make things like someone who sews her own bags.',
+        'I come from agencies (VML The Cocktail, Versión Digital, Alegre Design) and run two brands of my own: HEAD BUTT BARCELONA and KIMBAO 999. Data to decide, hands for everything else. Yes, I sew my own bags too.',
     },
 
     servicios: {
@@ -255,7 +274,7 @@ const en: Textos = {
       ['Say', 'hello!'],
     ],
     letsCreate: 'Let’s create.',
-    lugar: 'Barcelona — Utiel-Requena, Spain',
+    lugar: 'Spain',
     frase: 'Brand design, strategy and content for brands that want to move.',
     escribeme: 'Write to me',
     descarga: 'Download',
