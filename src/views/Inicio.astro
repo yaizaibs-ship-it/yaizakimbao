@@ -160,7 +160,7 @@ const pf = tx.inicio.perfil;
   }
 
   /* ---------- 3 · Cita ---------- */
-  .cita { padding-block: var(--seccion); }
+  .cita { padding-block: var(--seccion) calc(var(--seccion) * 0.4); }
   .cita-fila { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; }
   .cita-txt {
     max-width: 26ch;
@@ -181,7 +181,7 @@ const pf = tx.inicio.perfil;
   .st-item:nth-child(2) .st-palabra { color: var(--color-firma); }
   .st-texto { max-width: 30ch; margin-top: 1rem; font-size: 1.0625rem; line-height: 1.3; letter-spacing: -0.015em; }
 
-  :global(html.con-movimiento) .statement { height: 280vh; }
+  :global(html.con-movimiento) .statement { height: 230vh; }
   :global(html.con-movimiento) .st-sticky {
     position: sticky;
     top: 0;

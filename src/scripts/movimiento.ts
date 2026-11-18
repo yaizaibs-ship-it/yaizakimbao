@@ -458,8 +458,14 @@ function animaciones(esMovil: boolean) {
       // en móvil sin cambio de peso: solo aparece y crece (más fluido)
       const pesoIn = esMovil ? {} : { '--wght': 150 };
       const pesoOut = esMovil ? {} : { '--wght': 550 };
-      tl.fromTo(p, { autoAlpha: 0, yPercent: 35, scale: 0.85, ...pesoIn }, { autoAlpha: 1, yPercent: 0, scale: 1, ...pesoOut, duration: 0.9 }, t0)
-        .to(textos[i], { autoAlpha: 1, y: 0, duration: 0.4 }, t0 + 0.5);
+      if (i === 0) {
+        // la primera palabra ya está a la vista al llegar: sin pantalla negra vacía
+        gsap.set(p, { autoAlpha: 1, ...pesoOut });
+        gsap.set(textos[i], { autoAlpha: 1, y: 0 });
+      } else {
+        tl.fromTo(p, { autoAlpha: 0, yPercent: 35, scale: 0.85, ...pesoIn }, { autoAlpha: 1, yPercent: 0, scale: 1, ...pesoOut, duration: 0.9 }, t0)
+          .to(textos[i], { autoAlpha: 1, y: 0, duration: 0.4 }, t0 + 0.5);
+      }
       if (i < n - 1) {
         tl.to(p, { autoAlpha: 0, yPercent: -35, scale: 1.08, ...pesoIn, duration: 0.6 }, t0 + 2.4)
           .to(textos[i], { autoAlpha: 0, y: -20, duration: 0.4 }, t0 + 2.4);
