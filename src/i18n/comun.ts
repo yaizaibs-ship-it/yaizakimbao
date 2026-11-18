@@ -9,6 +9,7 @@ export const CONTACTO = {
   firma: 'Yaiza Kimbao',
   email: 'yaizakimbao@gmail.com',
   linkedin: 'https://www.linkedin.com/in/yaizakimbao/',
+  instagram: 'https://www.instagram.com/yaizakimbao/',
   /** Archivos del CV dentro de /public/cv/ */
   cv: {
     es: conBase('/cv/cv-yaiza-ibanez-es.pdf'),
