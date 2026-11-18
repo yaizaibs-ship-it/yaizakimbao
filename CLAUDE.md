@@ -9,9 +9,9 @@ Este archivo resume el proyecto para que cualquier conversación nueva con Claud
 
 ## Dónde está
 - Repositorio: https://github.com/yaizaibs-ship-it/yaizakimbao (rama `main`).
-- Web publicada (GitHub Pages): https://yaizaibs-ship-it.github.io/yaizakimbao/
-- Cada push a `main` publica sola con `.github/workflows/publicar.yml` (`SITE` y `BASE` definidos ahí; ahora `BASE: /yaizakimbao`).
-- Pendiente: comprar dominio propio → cambiar `SITE`/`BASE` en el workflow, añadir `public/CNAME` y DNS (pasos en README).
+- Web publicada (GitHub Pages) con dominio propio: https://yaizakimbao.com (`public/CNAME`). La antigua https://yaizaibs-ship-it.github.io/yaizakimbao/ redirige.
+- Cada push a `main` publica sola con `.github/workflows/publicar.yml` (`SITE: https://yaizakimbao.com`, `BASE: /`).
+- DNS en el proveedor: 4 registros A de GitHub Pages para `@` y CNAME `www` → `yaizaibs-ship-it.github.io` (pasos en README).
 
 ## Cómo está hecha
 - **Astro 7 + TypeScript**, **GSAP + ScrollTrigger + Lenis**. Sin frameworks de UI.

@@ -20,8 +20,8 @@ env:
   # Dirección de la web. Cuando tengas dominio propio:
   #   SITE: https://tudominio.com
   #   BASE: /
-  SITE: https://yaizaibs-ship-it.github.io
-  BASE: /yaizakimbao
+  SITE: https://yaizakimbao.com
+  BASE: /
 
 jobs:
   construir:

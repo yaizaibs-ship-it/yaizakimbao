@@ -125,14 +125,14 @@ npm run build    # genera la web final en /dist (lo mismo que hace Vercel)
 
 ## 7. Dónde está publicada y cómo conectar tu dominio
 
-**Ahora:** la web se publica gratis en **GitHub Pages**:
-https://yaizaibs-ship-it.github.io/yaizakimbao/
+**Ahora:** la web se publica gratis en **GitHub Pages** con tu dominio:
+https://yaizakimbao.com (la dirección antigua https://yaizaibs-ship-it.github.io/yaizakimbao/ redirige a ella).
 
 Cada vez que se guarda un cambio en GitHub, se vuelve a publicar sola en 1–2 minutos (lo hace el archivo `.github/workflows/publicar.yml`). Puedes ver el progreso en la pestaña **Actions** del repositorio: un círculo amarillo significa que está publicando, un check verde que ya está lista y una cruz roja que algo ha fallado (la versión anterior sigue en línea).
 
 **Primera vez (solo una):** en GitHub, ve a **Settings → Pages** y en **Source** elige **GitHub Actions**.
 
-**Cuando compres tu dominio** (por ejemplo `yaizakimbao.com`):
+**Cómo se conectó el dominio** `yaizakimbao.com` (por si hay que repetirlo o cambiarlo):
 1. En `.github/workflows/publicar.yml` cambia:
    - `SITE: https://yaizaibs-ship-it.github.io` → `SITE: https://yaizakimbao.com`
    - `BASE: /yaizakimbao` → `BASE: /`
