@@ -25,6 +25,8 @@ export interface Proyecto {
   colorTexto: string;
   orden: number;
   destacado: boolean;
+  /** Caso aún sin terminar: se muestra como «Work in progress» */
+  enProceso: boolean;
   vertical: boolean;
   portadaPosicion: string;
   enlaces: { texto: string; url: string }[];
@@ -100,6 +102,7 @@ export async function getProyectos(lang: Idioma): Promise<Proyecto[]> {
       colorTexto: d.colorTexto ?? '#ffffff',
       orden: d.orden ?? 999,
       destacado: d.destacado ?? false,
+      enProceso: d.enProceso ?? false,
       vertical: d.vertical ?? false,
       portadaPosicion: d.portadaPosicion ?? 'center',
       enlaces: tx.enlaces ?? d.enlaces ?? [],

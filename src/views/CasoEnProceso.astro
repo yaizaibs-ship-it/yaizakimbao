@@ -1,0 +1,71 @@
+---
+/**
+ * Página de un caso todavía sin terminar («Work in progress»).
+ * Se usa cuando el proyecto tiene `enProceso: true` en su .md español.
+ * Portada desenfocada a pantalla completa, título y botón para escribirme.
+ */
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import Wip from '../components/Wip.astro';
+import BotonProyecto from '../components/BotonProyecto.astro';
+import { t, url, otroIdioma, type Idioma } from '../i18n';
+import { getProyectos } from '../lib/proyectos';
+
+interface Props { lang: Idioma; slug: string }
+const { lang, slug } = Astro.props;
+const tx = t(lang);
+const p = (await getProyectos(lang)).find((x) => x.slug === slug)!;
+---
+
+<Base
+  lang={lang}
+  actual="proyecto"
+  urlOtroIdioma={url(otroIdioma(lang), 'proyecto', p.slug)}
+  titulo={`${p.titulo} — ${tx.ui.enProceso}`}
+  descripcion={p.descripcion}
+  acento={p.color}
+  acentoTexto={p.colorTexto}
+  noindex
+>
+  <article class="enp">
+    <header class="enp-portada">
+      <Wip lang={lang} grande>
+        <Foto
+          carpeta={`proyectos/${p.slug}`}
+          archivo="portada"
+          etiqueta={`Portada ${p.titulo}`}
+          alt=""
+          color={p.color}
+          colorTexto={p.colorTexto}
+          sizes="100vw"
+          ancho={1600}
+          carga="eager"
+          posicion={p.portadaPosicion}
+        />
+      </Wip>
+    </header>
+
+    <section class="enp-txt margen">
+      <p class="mini">{tx.ui.nav.trabajo} — {tx.ui.proximamente}</p>
+      <h1 class="enp-h">{p.titulo}</h1>
+      <p class="enp-p">{tx.ui.wipTexto}</p>
+      <div class="enp-botones">
+        <BotonProyecto lang={lang} />
+        <a class="enlace-color enp-volver" href={url(lang, 'trabajo')}>← {tx.ui.wipVolver}</a>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .enp-portada { position: relative; height: 100vh; height: 100svh; }
+  .enp-portada :global(.wip),
+  .enp-portada :global(.wip-media),
+  .enp-portada :global(.foto) { height: 100%; }
+  .enp-portada :global(.foto img) { width: 100%; height: 100%; object-fit: cover; }
+  .enp-txt { padding-block: var(--seccion); display: grid; gap: 1.4rem; }
+  .enp-h { font-size: var(--t-grande); font-weight: 500; line-height: 0.95; letter-spacing: -0.05em; }
+  .enp-p { max-width: 40ch; font-size: var(--t-medio); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+  .enp-botones { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; margin-top: 0.6rem; }
+  .enp-volver { font-size: var(--t-cuerpo); }
+</style>

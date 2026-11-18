@@ -1,0 +1,88 @@
+---
+/**
+ * Envoltorio «Work in progress»: desenfoca la portada que lleva dentro
+ * y pone encima la etiqueta. Se usa en tarjetas, lista de trabajo y casos sin terminar.
+ * grande = etiqueta enorme (cabecera del caso)
+ */
+import { t, type Idioma } from '../i18n';
+
+interface Props { lang: Idioma; grande?: boolean; activo?: boolean }
+const { lang, grande = false, activo = true } = Astro.props;
+const tx = t(lang);
+---
+
+{
+  activo ? (
+    <span class:list={['wip', { 'wip--grande': grande }]}>
+      <span class="wip-media"><slot /></span>
+      <span class="wip-etiqueta" aria-hidden={grande ? undefined : 'true'}>
+        <span class="wip-punto" aria-hidden="true" />
+        {tx.ui.enProceso}
+      </span>
+    </span>
+  ) : (
+    <slot />
+  )
+}
+
+<style is:global>
+  .wip { position: relative; display: block; overflow: hidden; isolation: isolate; }
+  .wip-media { display: block; }
+  /* Desenfoque: se agranda un poco para que no se vean los bordes borrosos */
+  .wip-media img,
+  .wip-media .ph-arte,
+  .wip-media .ph {
+    filter: blur(18px) saturate(1.15);
+    transform: scale(1.18);
+  }
+  .wip::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(14 13 12 / 0.18);
+    pointer-events: none;
+  }
+  .wip-etiqueta {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.6em 1.05em 0.65em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.92);
+    color: #0e0d0c;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+  }
+  .wip-punto {
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 50%;
+    background: var(--color-firma);
+    animation: wip-latido 1.6s ease-in-out infinite;
+  }
+  @keyframes wip-latido { 50% { opacity: 0.25; } }
+  /* Versión grande (cabecera del caso) */
+  .wip--grande .wip-etiqueta {
+    padding: 0;
+    background: none;
+    color: #fff;
+    font-size: clamp(2.6rem, 1rem + 8vw, 10rem);
+    letter-spacing: -0.055em;
+    line-height: 0.9;
+    gap: 0.25em;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    width: 90%;
+  }
+  .wip--grande .wip-punto { width: 0.18em; height: 0.18em; }
+  @media (prefers-reduced-motion: reduce) { .wip-punto { animation: none; } }
+</style>

@@ -35,8 +35,9 @@ Recursos disponibles en un caso:
 - `videos`: enlaces de TikTok, YouTube o Vimeo.
 - `bloques`: secciones con título, texto y mosaico de piezas (`tamano`: completo, dostercios, mitad, tercio, cuarto, sexto). Opcionales para dirección de arte: `etiqueta` («Acto 01 — Campaña»), `cita` (frase grande), `fondo` + `colorTexto` (sección de color a sangre); `enlace` (texto + url bajo el texto del bloque); en cada pieza `pie` (pie de foto), `desfase: true` (baja la pieza, ritmo de revista) y `video` (TikTok/YouTube/Vimeo dentro del mosaico, sin `archivo`). En inglés se traducen con `bloquesTexto` (`etiqueta`, `cita`, `pies`, `enlace`). Un bloque sin piezas sirve como cierre de texto (p. ej. Resultados).
 - `portadaPosicion`: encuadre de la portada al recortarla.
+- `enProceso: true` (solo en el .md español, arriba del todo): modo «Work in progress». Portada desenfocada con etiqueta (`Wip.astro`) en tarjetas y lista, sin enlace al caso; la página del caso muestra `CasoEnProceso.astro` (noindex y fuera del sitemap). «Cómo la hice» del pie se oculta mientras `esta-web` esté en proceso. Para publicar un caso terminado: borrar esa línea.
 
-Estado:
+Estado (nov 2026: **los 5 casos están en `enProceso: true`** mientras Yaiza los termina):
 | Caso | Estado |
 |---|---|
 | HEAD BUTT BARCELONA | Rediseñado como relato en 4 actos (concepto en negro, marca en verde, sistema en azul noche, calle en crema) + cierre con reseñas. Falta: fotos reales de tienda/aplicaciones y lookbook, animación del logo |

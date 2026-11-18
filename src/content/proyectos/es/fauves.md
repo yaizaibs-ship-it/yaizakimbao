@@ -1,4 +1,6 @@
 ---
+# Work in progress: borra la línea de abajo cuando el caso esté terminado
+enProceso: true
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "FAUVES"
 descripcion: "Identidad y brandbook de una marca de moda sobre la amistad, con un logotipo inspirado en «La danza» de Matisse y dirección de arte."

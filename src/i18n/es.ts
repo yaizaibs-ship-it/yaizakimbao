@@ -46,6 +46,10 @@ const es = {
     /** Botón que se repite por toda la web y lleva al formulario */
     cuentame: 'Cuéntame tu proyecto',
     casoCta: '¿Hacemos algo así para tu marca?',
+    enProceso: 'Work in progress',
+    proximamente: 'Próximamente',
+    wipTexto: 'Estoy dando los últimos retoques a este proyecto. Vuelve pronto o, si te puede la curiosidad, pregúntame y te lo enseño.',
+    wipVolver: 'Ver todo el trabajo',
   },
 
   inicio: {

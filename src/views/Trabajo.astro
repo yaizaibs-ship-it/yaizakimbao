@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Foto from '../components/Foto.astro';
+import Wip from '../components/Wip.astro';
 import { t, url, otroIdioma, type Idioma } from '../i18n';
 import { DISCIPLINAS } from '../content.config';
 import { getProyectos } from '../lib/proyectos';
@@ -26,14 +27,15 @@ const proyectos = await getProyectos(lang);
   <ol class="lista margen" data-lista-trabajo>
     {
       proyectos.map((p, i) => (
-        <li class="fila" data-cursor={tx.ui.ver} data-fila data-disciplinas={p.disciplinas.join(' ')} style={`--accent:${p.color}`} data-reveal>
-          <a href={url(lang, 'proyecto', p.slug)} class="fila-a">
+        <li class:list={['fila', { 'fila--wip': p.enProceso }]} data-cursor={p.enProceso ? tx.ui.proximamente : tx.ui.ver} data-fila data-disciplinas={p.disciplinas.join(' ')} style={`--accent:${p.color}`} data-reveal>
+          <a href={p.enProceso ? undefined : url(lang, 'proyecto', p.slug)} class="fila-a">
             <span class="mini gris fila-n">{String(i + 1).padStart(2, '0')}</span>
-            <span class="fila-titulo">{p.titulo}</span>
+            <span class="fila-titulo">{p.titulo}{p.enProceso && <span class="mini fila-wip">{tx.ui.enProceso}</span>}</span>
             <span class="mini fila-desc">{p.descripcion}</span>
             <span class="mini gris fila-disc">{p.disciplinas.map((d) => tx.ui.disciplinas[d]).join(' · ')}</span>
             <span class="mini fila-anio">{p.anio ?? ''}</span>
             <span class="fila-img" data-fila-img>
+              <Wip lang={lang} activo={p.enProceso}>
               <Foto
                 carpeta={`proyectos/${p.slug}`}
                 archivo="portada"
@@ -46,6 +48,7 @@ const proyectos = await getProyectos(lang);
                 transitionName={`portada-${p.slug}`}
                 posicion={p.portadaPosicion}
               />
+              </Wip>
             </span>
           </a>
         </li>
@@ -105,6 +108,17 @@ const proyectos = await getProyectos(lang);
   
   .fila-desc { text-transform: none; font-size: 0.8125rem; letter-spacing: 0; }
   .fila-anio { text-align: right; }
+  .fila--wip .fila-a { cursor: default; }
+  .fila-wip {
+    display: inline-block;
+    margin-left: 0.8rem;
+    padding: 0.35em 0.7em;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    vertical-align: middle;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
   .fila-img { display: none; }
 
   .preview {

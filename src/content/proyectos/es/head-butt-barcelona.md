@@ -1,4 +1,6 @@
 ---
+# Work in progress: borra la línea de abajo cuando el caso esté terminado
+enProceso: true
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "HEAD BUTT BARCELONA"
 descripcion: "Marca de camisetas de fútbol vintage: identidad, brandbook, tienda Shopify y una tienda física en el Barri Gòtic convertida en vestuario."

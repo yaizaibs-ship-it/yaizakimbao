@@ -1,4 +1,6 @@
 ---
+# Work in progress: borra la línea de abajo cuando el caso esté terminado
+enProceso: true
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "KIMBAO 999"
 descripcion: "Dirección creativa sobre la identidad como proceso: una marca de moda y upcycling que cambia, workshops para transformar ropa y una instalación."

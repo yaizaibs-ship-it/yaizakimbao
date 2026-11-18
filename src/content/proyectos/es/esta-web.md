@@ -1,4 +1,6 @@
 ---
+# Work in progress: borra la línea de abajo cuando el caso esté terminado
+enProceso: true
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "Esta web"
 descripcion: "Mi portfolio, diseñado y construido por mí: una web bilingüe con una sola tipografía, flores que crecen a pantalla completa y una marca que no se queda quieta."

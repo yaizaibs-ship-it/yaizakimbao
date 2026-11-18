@@ -1,13 +1,15 @@
 ---
 // Página de cada caso (es). El diseño está en src/views/Caso.astro
 import Caso from '../../../views/Caso.astro';
+import CasoEnProceso from '../../../views/CasoEnProceso.astro';
 import { getProyectos } from '../../../lib/proyectos';
 
 export async function getStaticPaths() {
   const lista = await getProyectos('es');
-  return lista.map((p) => ({ params: { slug: p.slug } }));
+  return lista.map((p) => ({ params: { slug: p.slug }, props: { enProceso: p.enProceso } }));
 }
 const { slug } = Astro.params;
+const { enProceso } = Astro.props;
 ---
 
-<Caso lang="es" slug={slug} />
+{enProceso ? <CasoEnProceso lang="es" slug={slug} /> : <Caso lang="es" slug={slug} />}

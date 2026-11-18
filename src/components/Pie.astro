@@ -2,11 +2,14 @@
 import { t, url, type Idioma } from '../i18n';
 import { CONTACTO } from '../i18n/comun';
 import BotonProyecto from './BotonProyecto.astro';
+import { getProyectos } from '../lib/proyectos';
 
 interface Props { lang: Idioma }
 const { lang } = Astro.props;
 const tx = t(lang);
 const cinta = tx.pie.cinta;
+/** «Cómo la hice» solo si el caso de esta web ya está terminado */
+const estaWebLista = (await getProyectos(lang)).some((x) => x.slug === 'esta-web' && !x.enProceso);
 ---
 
 <footer class="pie" id="contacto-pie">
@@ -62,7 +65,7 @@ const cinta = tx.pie.cinta;
         <span class="rodillo-fila rodillo-oculta">{tx.pie.quieresUnaHover} <span class="flecha">→</span></span>
       </span>
     </a>
-    <a class="enlace-color" href={url(lang, 'proyecto', 'esta-web')}>{tx.pie.comoLaHice} ↗</a>
+    {estaWebLista && <a class="enlace-color" href={url(lang, 'proyecto', 'esta-web')}>{tx.pie.comoLaHice} ↗</a>}
   </div>
 
   <div class="pie-filas mini margen">

@@ -1,4 +1,6 @@
 ---
+# Work in progress: borra la línea de abajo cuando el caso esté terminado
+enProceso: true
 # Textos en español + datos compartidos (el inglés hereda los datos de aquí)
 titulo: "Día de Tierra Bobal"
 descripcion: "Identidad y campaña del primer Día de Tierra Bobal: 19 experiencias en una semana y una jornada en Requena, Ciudad Española del Vino 2026."

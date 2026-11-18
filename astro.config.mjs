@@ -1,3 +1,4 @@
+import { readdirSync, readFileSync } from 'node:fs';
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
@@ -12,6 +13,11 @@ import sitemap from '@astrojs/sitemap';
  */
 const SITE = process.env.SITE || 'https://yaizaibs-ship-it.github.io';
 const BASE = process.env.BASE || '/';
+
+// Casos marcados como «Work in progress»: fuera del sitemap
+const enProceso = readdirSync(new URL('./src/content/proyectos/es/', import.meta.url))
+  .filter((f) => f.endsWith('.md') && /^enProceso:\s*true/m.test(readFileSync(new URL(`./src/content/proyectos/es/${f}`, import.meta.url), 'utf8')))
+  .map((f) => f.replace(/\.md$/, ''));
 
 export default defineConfig({
   site: SITE,
@@ -29,7 +35,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       // la página raíz solo redirige al idioma: no va en el sitemap
-      filter: (page) => /\/(es|en)\//.test(page),
+      // ni los casos «Work in progress» (enProceso: true)
+      filter: (page) => /\/(es|en)\//.test(page) && !enProceso.some((slug) => page.includes(`/${slug}/`)),
     }),
   ],
 });

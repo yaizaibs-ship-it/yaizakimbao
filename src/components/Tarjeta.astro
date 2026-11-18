@@ -1,5 +1,6 @@
 ---
 import Foto from './Foto.astro';
+import Wip from './Wip.astro';
 import { t, url, type Idioma } from '../i18n';
 import type { Proyecto } from '../lib/proyectos';
 
@@ -10,9 +11,17 @@ interface Props {
 }
 const { p, lang, indice } = Astro.props;
 const tx = t(lang);
+/** Sin terminar: no se puede entrar al caso */
+const Etiqueta = p.enProceso ? 'div' : 'a';
 ---
 
-<a class:list={['tarjeta', { 'tarjeta--vertical': p.vertical }]} href={url(lang, 'proyecto', p.slug)} style={`--accent:${p.color}`} data-cursor={tx.ui.ver}>
+<Etiqueta
+  class:list={['tarjeta', { 'tarjeta--vertical': p.vertical, 'tarjeta--wip': p.enProceso }]}
+  href={p.enProceso ? undefined : url(lang, 'proyecto', p.slug)}
+  style={`--accent:${p.color}`}
+  data-cursor={p.enProceso ? tx.ui.proximamente : tx.ui.ver}
+>
+  <Wip lang={lang} activo={p.enProceso}>
   <Foto
     carpeta={`proyectos/${p.slug}`}
     archivo="portada"
@@ -26,18 +35,20 @@ const tx = t(lang);
     transitionName={`portada-${p.slug}`}
     posicion={p.portadaPosicion}
   />
+  </Wip>
   <span class="tarjeta-pie">
-    <span class="enlace-color">{tx.ui.ver} →</span>
+    <span class="enlace-color">{p.enProceso ? tx.ui.proximamente : `${tx.ui.ver} →`}</span>
     <span class="tarjeta-titulo">{p.titulo} <span class="gris">/ {String(indice + 1).padStart(2, '0')}</span></span>
     <span class="mini gris tarjeta-disc">{p.disciplinas.map((d) => tx.ui.disciplinas[d]).join(' · ')}</span>
   </span>
-</a>
+</Etiqueta>
 
 <style>
   .tarjeta { display: block; }
   .tarjeta :global(.foto img), .tarjeta :global(.ph-arte) { transition: transform 1.1s var(--ease); }
+  .tarjeta--wip { cursor: default; }
   @media (hover: hover) {
-    .tarjeta:hover :global(.foto img), .tarjeta:hover :global(.ph-arte) { transform: scale(1.06); }
+    .tarjeta:not(.tarjeta--wip):hover :global(.foto img), .tarjeta:not(.tarjeta--wip):hover :global(.ph-arte) { transform: scale(1.06); }
   }
   .tarjeta-pie {
     display: grid;

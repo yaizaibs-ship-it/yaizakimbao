@@ -46,6 +46,10 @@ const en: Textos = {
     soloEspanol: 'This project has not been translated yet, so it is shown in Spanish.',
     cuentame: 'Tell me about your project',
     casoCta: 'Shall we make something like this for your brand?',
+    enProceso: 'Work in progress',
+    proximamente: 'Coming soon',
+    wipTexto: 'I’m putting the finishing touches to this project. Come back soon or, if you can’t wait, ask me and I’ll show you.',
+    wipVolver: 'See all work',
   },
 
   inicio: {

@@ -21,9 +21,11 @@ interface Props {
   acentoTexto?: string;
   /** Datos del proyecto para Google (solo en los casos) */
   proyecto?: { anio?: string; cliente?: string; disciplinas?: string[] };
+  /** true = que Google no la indexe (p. ej. casos «Work in progress») */
+  noindex?: boolean;
 }
 
-const { lang, actual, urlOtroIdioma, titulo, descripcion, imagenOG, acento, acentoTexto, proyecto } = Astro.props;
+const { lang, actual, urlOtroIdioma, titulo, descripcion, imagenOG, acento, acentoTexto, proyecto, noindex } = Astro.props;
 const tx = t(lang);
 const otro = otroIdioma(lang);
 const tituloFinal = titulo ? `${titulo} — ${CONTACTO.firma}` : tx.meta.tituloSitio;
@@ -92,6 +94,7 @@ const estiloAcento = acento ? `--accent:${acento};--accent-texto:${acentoTexto ?
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{tituloFinal}</title>
     <meta name="description" content={descFinal} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonica} />
     <link rel="alternate" hreflang="es" href={urlEs} />
     <link rel="alternate" hreflang="en" href={urlEn} />
