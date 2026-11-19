@@ -103,7 +103,7 @@ const es = {
       listaIzquierda: ['Data driven design', 'Paid & orgánico', 'UX/UI', 'Newsletters', 'SEO / SEM'],
       listaDerecha: ['Moda', 'Upcycling', 'Cultura futbolera', 'Artesanía', 'Flores'],
       texto:
-        'Vengo de agencia (VML The Cocktail, Versión Digital, Alegre Design) y tengo dos marcas propias: HEAD BUTT BARCELONA y KIMBAO 999. Uso los datos para decidir y las manos para todo lo demás. Sí, también me coso los bolsos.',
+        'Vengo de agencia y he creado marcas propias. Uso los datos para decidir y las manos para todo lo demás (como coser bolsos).',
     },
 
     /** Servicios según quién llega (tarjetas con notita desplegable) */
