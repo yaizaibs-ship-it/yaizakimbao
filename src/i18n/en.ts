@@ -17,7 +17,7 @@ const en: Textos = {
       },
       sobre: {
         titulo: 'About — Visual designer and strategist',
-        descripcion: 'I’m Yaiza Ibáñez (Yaiza Kimbao): a visual designer with agency rigour and brands of my own. Background, tools, languages and CV.',
+        descripcion: 'I’m Yaiza Ibáñez (Yaiza Kimbao): a visual designer with agency rigour and brands of my own. Background, tools, languages.',
       },
       contacto: {
         titulo: 'Contact — Tell me about your project',

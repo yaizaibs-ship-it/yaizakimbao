@@ -48,10 +48,6 @@ const estaWebLista = (await getProyectos(lang)).some((x) => x.slug === 'esta-web
       <li>
         <a href={CONTACTO.instagram} target="_blank" rel="noopener">Instagram @yaizakimbao</a>
       </li>
-      <li>
-        <a href={CONTACTO.cv[lang]} download>CV (PDF)</a>
-        <span class="enlace-color">{tx.pie.descarga} ↓</span>
-      </li>
       <li class="gris">{tx.pie.lugar}</li>
     </ul>
   </div>

@@ -27,10 +27,6 @@ const s = tx.sobre;
     <span class="mini gris">(01)</span>
     <div class="bio-txt">
       {s.bio.map((parrafo) => <p data-reveal>{parrafo}</p>)}
-      <a class="cv" href={CONTACTO.cv[lang]} download data-reveal>
-        <span>{tx.ui.descargarCV}</span>
-        <span aria-hidden="true">↓</span>
-      </a>
     </div>
   </section>
 
@@ -102,25 +98,6 @@ const s = tx.sobre;
 
   .bio { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; padding-block: var(--seccion); }
   .bio-txt { display: grid; gap: 1rem; font-size: var(--t-cuerpo); line-height: 1.38; letter-spacing: -0.01em; max-width: 56ch; }
-  .cv {
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    width: max-content;
-    margin-top: 1rem;
-    padding: 0.9rem 1.2rem;
-    background: var(--color-tinta);
-    color: var(--color-fondo);
-    font-size: var(--t-mini);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    transition: background 0.3s var(--ease-ios);
-  }
-  @media (hover: hover) {
-    .cv:hover { background: var(--color-firma); }
-  }
 
   .tray-cab { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.4rem; }
   .h2 { font-size: clamp(2.2rem, 5.5vw, 5.5rem); }

@@ -17,7 +17,7 @@ const es = {
       },
       sobre: {
         titulo: 'Sobre mí — Diseñadora visual y estratega',
-        descripcion: 'Soy Yaiza Ibáñez (Yaiza Kimbao): diseñadora visual con rigor de agencia y marcas propias. Trayectoria, herramientas, idiomas y CV.',
+        descripcion: 'Soy Yaiza Ibáñez (Yaiza Kimbao): diseñadora visual con rigor de agencia y marcas propias. Trayectoria, herramientas, idiomas.',
       },
       contacto: {
         titulo: 'Contacto — Cuéntame tu proyecto',
