@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>💌 tienes un mensaje nuevo</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Caveat:wght@500;700&family=Rubik+Bubbles&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa:#ff8fd0; --rosa2:#ffc8ec; --lila:#c9a7ff; --cielo:#9fe3ff; --crema:#fff6fb;
+    --tinta:#5b2a6e; --azul98:#6a7cff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{min-height:100%;background:linear-gradient(160deg,#ffd6f1 0%,#e3d2ff 45%,#c8f0ff 100%) fixed}
+  body{min-height:100vh}
+  body{
+    font-family:'Pixelify Sans',system-ui,sans-serif;color:var(--tinta);
+    background:
+      radial-gradient(circle at 20% 15%,#fff 0 2px,transparent 3px) 0 0/60px 60px,
+      radial-gradient(circle at 70% 60%,#ffffffaa 0 1.5px,transparent 2.5px) 0 0/90px 90px,
+      linear-gradient(160deg,#ffd6f1 0%,#e3d2ff 45%,#c8f0ff 100%);
+    background-attachment:fixed;
+    overflow-x:hidden;cursor:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><text y='22' font-size='22'>💗</text></svg>") 6 6,auto;
+  }
+  /* cinta superior */
+  .cinta{background:var(--tinta);color:#fff;font-size:14px;letter-spacing:.08em;white-space:nowrap;overflow:hidden;padding:6px 0;border-bottom:3px solid var(--rosa)}
+  .cinta span{display:inline-block;animation:correr 22s linear infinite;padding-left:100%}
+  @keyframes correr{to{transform:translateX(-100%)}}
+
+  main{max-width:640px;margin:0 auto;padding:36px 18px 60px;text-align:center;position:relative;z-index:2}
+
+  h1{
+    font-family:'Rubik Bubbles',cursive;font-weight:400;font-size:clamp(44px,11vw,84px);line-height:.95;
+    background:linear-gradient(180deg,#fff 0%,#ffe1f5 30%,#ff8fd0 55%,#b98bff 80%,#fff 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    -webkit-text-stroke:2px var(--tinta);
+    filter:drop-shadow(4px 4px 0 #fff) drop-shadow(6px 6px 0 var(--lila));
+    animation:flotar 3.5s ease-in-out infinite;
+  }
+  @keyframes flotar{50%{transform:translateY(-8px) rotate(-1deg)}}
+  .sub{margin:14px 0 28px;font-size:18px}
+
+  /* ventana estilo 98 */
+  .ventana{background:#f4ecff;border:3px solid var(--tinta);border-radius:14px;box-shadow:8px 8px 0 var(--tinta);overflow:hidden;text-align:left}
+  .barra{background:linear-gradient(90deg,var(--azul98),var(--rosa));color:#fff;display:flex;align-items:center;justify-content:space-between;padding:6px 10px;font-size:15px}
+  .botones{display:flex;gap:5px}
+  .botones i{width:18px;height:18px;border:2px solid var(--tinta);border-radius:5px;background:#fff;display:grid;place-items:center;font-style:normal;font-size:11px;color:var(--tinta);line-height:1}
+  .cuerpo{padding:26px 18px 30px;display:grid;place-items:center}
+
+  /* sobre */
+  .sobre{position:relative;width:min(300px,78vw);aspect-ratio:3/2;cursor:pointer;margin:40px 0 10px;transition:transform .3s}
+  .sobre:hover{transform:scale(1.04) rotate(-2deg)}
+  .sobre .base{position:absolute;inset:0;background:var(--rosa2);border:3px solid var(--tinta);border-radius:10px}
+  .sobre .solapa{position:absolute;left:0;right:0;top:0;height:62%;transform-origin:top;transition:transform .6s ease;z-index:3}
+  .sobre .solapa::before{content:"";position:absolute;inset:0;background:var(--rosa);clip-path:polygon(0 0,100% 0,50% 100%);border-radius:10px 10px 0 0}
+  .sobre .sello{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);font-size:40px;z-index:4;animation:latido 1.1s ease-in-out infinite;transition:opacity .3s}
+  @keyframes latido{50%{transform:translate(-50%,-50%) scale(1.18)}}
+  .sobre .frente{position:absolute;inset:0;z-index:2;clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);background:#ffb3e1;border:3px solid var(--tinta);border-radius:10px}
+  .sobre.abierto .solapa{transform:rotateX(180deg);z-index:1}
+  .sobre.abierto .sello{opacity:0}
+  .pista{font-size:15px;margin-top:8px;animation:parpadeo 1.2s steps(2) infinite}
+  @keyframes parpadeo{50%{opacity:.25}}
+
+  /* carta */
+  .carta{display:none;width:100%;background:
+      repeating-linear-gradient(#fff 0 31px,#ffd3ee 31px 32px);
+    border:3px solid var(--tinta);border-radius:10px;padding:26px 22px 22px;
+    font-family:'Caveat',cursive;font-size:25px;line-height:32px;color:#4a2060;position:relative;
+    box-shadow:4px 4px 0 var(--lila)}
+  .carta.ver{display:block;animation:subir .8s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes subir{from{transform:translateY(60px) scale(.9);opacity:0}}
+  .carta p{margin-bottom:32px}
+  .carta .firma{text-align:right;font-weight:700;font-size:28px;margin:0}
+  .carta .pegatina{position:absolute;font-size:34px}
+  .p1{top:-18px;right:-12px;transform:rotate(15deg)}
+  .p2{bottom:-16px;left:-10px;transform:rotate(-12deg)}
+
+  /* pregunta */
+  .pregunta{display:none;margin-top:26px;text-align:center}
+  .pregunta.ver{display:block;animation:subir .6s ease}
+  .pregunta h2{font-size:24px;margin-bottom:14px}
+  .opciones{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;min-height:56px}
+  button{font-family:'Pixelify Sans',sans-serif;font-size:19px;padding:10px 22px;border:3px solid var(--tinta);border-radius:999px;cursor:pointer;box-shadow:4px 4px 0 var(--tinta);transition:transform .15s}
+  button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--tinta)}
+  .si{background:linear-gradient(180deg,#fff,var(--rosa));color:var(--tinta)}
+  .no{background:#fff;color:var(--tinta);position:relative;transition:left .25s,top .25s}
+  .respuesta{display:none;font-size:22px;margin-top:20px}
+  .respuesta.ver{display:block;animation:subir .6s ease}
+
+  /* contador y pegatinas flotantes */
+  .contador{margin-top:28px;display:inline-block;background:#000;color:#7dff8a;font-size:14px;padding:4px 10px;border:2px solid var(--tinta);border-radius:6px}
+  .flotante{position:fixed;pointer-events:none;z-index:1;font-size:26px;animation:caer linear forwards;opacity:.9}
+  @keyframes caer{to{transform:translateY(110vh) rotate(360deg)}}
+  .chispa{position:fixed;pointer-events:none;z-index:5;font-size:14px;animation:chispa .8s ease-out forwards}
+  @keyframes chispa{to{transform:translateY(-30px) scale(.3);opacity:0}}
+  footer{margin-top:30px;font-size:13px;opacity:.75}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+  <div class="cinta"><span>✧･ﾟ: *✧ eres mi persona favorita del universo ✧ te quiero un montón ✧ 💖 ✧ xoxo ✧ ･ﾟ: *✧ eres mi persona favorita del universo ✧ te quiero un montón ✧ 💖 ✧ xoxo ✧</span></div>
+
+  <main>
+    <h1>para ti<br>♡ ♡ ♡</h1>
+    <p class="sub">˚₊‧꒰ა 1 mensaje nuevo sin leer ໒꒱ ‧₊˚</p>
+
+    <section class="ventana">
+      <div class="barra"><span>💌 carta_de_amor.exe</span><span class="botones"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="cuerpo">
+        <div class="sobre" id="sobre" role="button" tabindex="0" aria-label="Abrir la carta">
+          <div class="base"></div>
+          <div class="solapa"></div>
+          <div class="frente"></div>
+          <div class="sello">💖</div>
+        </div>
+        <p class="pista" id="pista">▶ haz clic para abrir ◀</p>
+
+        <article class="carta" id="carta">
+          <span class="pegatina p1">🎀</span>
+          <span class="pegatina p2">🦋</span>
+          <p>Holi, mi amor:</p>
+          <p>Te he hecho esta web porque una nota normal se me quedaba pequeña. Quería que tuvieras un rinconcito de internet solo para ti, lleno de brillitos y corazones, como lo que siento cuando estoy contigo.</p>
+          <p>Gracias por las risas tontas, por los abrazos que lo arreglan todo y por hacer que los días normales se sientan especiales. Contigo todo es más bonito.</p>
+          <p>Eres mi lugar favorito. Te quiero muchísimo (y un poquito más cada día).</p>
+          <p class="firma">Siempre tuya ♡<br>Yaiza</p>
+        </article>
+
+        <div class="pregunta" id="pregunta">
+          <h2>¿me quieres tú también? 🥺👉👈</h2>
+          <div class="opciones" id="opciones">
+            <button class="si" id="si">¡sííí! 💗</button>
+            <button class="no" id="no">no</button>
+          </div>
+          <p class="respuesta" id="respuesta">✨ lo sabía ✨<br>eres lo mejor que me ha pasado 💞</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="contador">visitas: 000001 ♥ solo tú</div>
+    <footer>hecho con muchísimo amor ⋆｡˚ ☁︎ ˚｡⋆</footer>
+  </main>
+
+<script>
+  const sobre=document.getElementById('sobre'), carta=document.getElementById('carta'),
+        pista=document.getElementById('pista'), pregunta=document.getElementById('pregunta');
+  const emojis=['💖','💗','✨','🎀','💕','⭐','🦋','💌','🌸'];
+  function lluvia(n=30){
+    for(let i=0;i<n;i++){
+      const e=document.createElement('span');e.className='flotante';
+      e.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      e.style.left=Math.random()*100+'vw';e.style.top='-40px';
+      e.style.fontSize=(18+Math.random()*22)+'px';
+      e.style.animationDuration=(3+Math.random()*4)+'s';
+      e.style.animationDelay=(Math.random()*1.5)+'s';
+      document.body.appendChild(e);setTimeout(()=>e.remove(),9000);
+    }
+  }
+  function abrir(){
+    if(sobre.classList.contains('abierto'))return;
+    sobre.classList.add('abierto');pista.style.display='none';lluvia(35);
+    setTimeout(()=>{sobre.style.display='none';carta.classList.add('ver');
+      setTimeout(()=>pregunta.classList.add('ver'),1200);},700);
+  }
+  sobre.addEventListener('click',abrir);
+  sobre.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')abrir()});
+
+  // el botón "no" se escapa
+  const no=document.getElementById('no');
+  function huir(){
+    const x=(Math.random()-.5)*220, y=(Math.random()-.5)*120;
+    no.style.left=x+'px';no.style.top=y+'px';
+  }
+  no.addEventListener('mouseenter',huir);
+  no.addEventListener('touchstart',e=>{e.preventDefault();huir()},{passive:false});
+  no.addEventListener('click',huir);
+
+  document.getElementById('si').addEventListener('click',()=>{
+    document.getElementById('opciones').style.display='none';
+    document.getElementById('respuesta').classList.add('ver');lluvia(60);
+  });
+
+  // estela de brillitos
+  let ultimo=0;
+  addEventListener('pointermove',e=>{
+    const t=Date.now();if(t-ultimo<60)return;ultimo=t;
+    const c=document.createElement('span');c.className='chispa';
+    c.textContent=Math.random()>.5?'✦':'♡';
+    c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';
+    c.style.color=['#ff8fd0','#b98bff','#7fd8ff'][Math.floor(Math.random()*3)];
+    document.body.appendChild(c);setTimeout(()=>c.remove(),800);
+  });
+</script>
+</body>
+</html>
