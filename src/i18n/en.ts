@@ -6,9 +6,9 @@ import type { Textos } from './es';
 
 const en: Textos = {
   meta: {
-    tituloSitio: 'Yaiza Kimbao — Visual Designer: branding, campaigns & motion',
+    tituloSitio: 'Yaiza Kimbao — Visual identity and brand strategy',
     descripcion:
-      'Yaiza Kimbao, visual designer and communication strategist in Spain. Branding, campaigns, social media and motion for local businesses, brands and agencies.',
+      'Yaiza Kimbao, designer in Spain: visual identities, communication strategy and creative projects for wineries, brands and local businesses.',
     locale: 'en_US',
     paginas: {
       trabajo: {
@@ -73,7 +73,18 @@ const en: Textos = {
 
   inicio: {
     etiquetas: ['Visual Designer', 'Branding · Strategy · Motion', 'Portfolio 2026', 'Spain'],
-    statementIntro: 'I design brands with a point, tell them with strategy and set them in motion.',
+    hero: {
+      titular: 'Ideas with identity. Creativity with strategy.',
+      subtitulo:
+        'I’m Yaiza Kimbao, a designer specialised in digital marketing. I build visual identities, communication strategies and creative projects that bring brands and people together.',
+      /**
+       * Short line for wineries. Empty = hidden. Matches the Spanish options:
+       *   1. 'Specialist in wine and territory brands.'
+       *   2. 'I work with wineries that want to tell their story well.'
+       *   3. 'From Utiel-Requena, for wineries with something to say.'
+       */
+      lineaBodegas: '',
+    },
     palabras: [
       {
         palabra: 'Brand',

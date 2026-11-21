@@ -5,9 +5,9 @@
  */
 const es = {
   meta: {
-    tituloSitio: 'Yaiza Kimbao — Diseñadora visual: branding, campañas, motion',
+    tituloSitio: 'Yaiza Kimbao — Identidad visual y estrategia de marca',
     descripcion:
-      'Yaiza Kimbao, diseñadora visual y estratega de comunicación en España. Branding, campañas, redes sociales y motion para negocios locales, marcas y agencias.',
+      'Yaiza Kimbao, diseñadora en España: identidades visuales, estrategia de comunicación y proyectos creativos para bodegas, marcas y negocios locales.',
     locale: 'es_ES',
     /** Título (pestaña y Google) y descripción de cada página. ≤60 y ≤160 caracteres */
     paginas: {
@@ -75,7 +75,20 @@ const es = {
 
   inicio: {
     etiquetas: ['Visual Designer', 'Branding · Estrategia · Motion', 'Portfolio 2026', 'España'],
-    statementIntro: 'Diseño marcas con cabeza, las cuento con estrategia y las pongo en movimiento.',
+    /** Hero de la home: frase grande bajo el nombre, subtítulo y línea para bodegas */
+    hero: {
+      titular: 'Ideas con identidad. Creatividad con estrategia.',
+      subtitulo:
+        'Soy Yaiza Kimbao, diseñadora especializada en marketing digital. Desarrollo identidades visuales, estrategias de comunicación y proyectos creativos que conectan marcas con personas.',
+      /**
+       * Línea corta para bodegas, debajo del subtítulo. Vacía = no se muestra.
+       * Opciones propuestas (elige una y pégala entre las comillas):
+       *   1. 'Especialista en marcas de vino y territorio.'
+       *   2. 'Trabajo con bodegas que quieren contar bien lo que hacen.'
+       *   3. 'Desde Utiel-Requena, para bodegas con algo que contar.'
+       */
+      lineaBodegas: '',
+    },
     palabras: [
       {
         palabra: 'Marca',
